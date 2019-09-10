@@ -26,13 +26,13 @@ namespace Lab1
                 for (var j = 0; j < matrix.GetLength(1); j++)
                     matrix[i, j] = random.Next(100);
 
-            Arrays.PrintMatrix(matrix);
+            ArrayOperations.PrintMatrix(matrix);
 
             WriteLine("\nAverages:\n");
             foreach (var item in matrix.GetColumns().Select(x => Enumerable.Average(x)))
                 Write($"{item} ");
 
-            WriteLine($"\nColumn with maximal average: {Arrays.GetMaximalAverageColumn(matrix)}");
+            WriteLine($"\nColumn with maximal average: {ArrayOperations.GetMaximalAverageColumn(matrix)}");
         }
 
         public static void CheckStrings()
@@ -43,7 +43,7 @@ namespace Lab1
             var str = ReadLine();
 
             WriteLine("Words starting and ending with the same letter:");
-            foreach (var word in Strings.GetWordsStartingAndEndingTheSameLetter(str))
+            foreach (var word in StringOperations.GetWordsStartingAndEndingTheSameLetter(str))
                 Write($"{word} ");
         }
 
@@ -55,10 +55,10 @@ namespace Lab1
             var notEnglishText = "Текст не на английском. Всякие знаки препинания:.?,!";
 
             WriteLine(englishText);
-            WriteLine(Regexes.IsInEnglish(englishText));
+            WriteLine(RegexOperations.IsInEnglish(englishText));
 
             WriteLine(notEnglishText);
-            WriteLine(Regexes.IsInEnglish(notEnglishText));
+            WriteLine(RegexOperations.IsInEnglish(notEnglishText));
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Lab1
 {
-    public static class Regexes
+    public static class RegexOperations
     {
         private static string englishRegexTemplate = @"^[A-Za-z0-9 .,!?:;()]+$";
 

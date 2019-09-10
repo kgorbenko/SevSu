@@ -14,10 +14,11 @@
 \usepackage{indentfirst}
 \usepackage{graphicx}
 \usepackage{float}
-\usepackage{caption}
+\usepackage[labelsep=endash]{caption}
 \usepackage{listings}
 \usepackage{color}
 \usepackage{enumitem}
+\usepackage[font=normalsize]{subfig}
 
 \graphicspath{ {./images/} }
 
@@ -179,28 +180,205 @@
         \item Задан текст. Определить, является ли он текстом на английском языке.
 
     \end{enumerate}
+
+    \pagebreak
     
     \section{Ход работы}
 
     \subsection{Примеры программ на C\#}
 
-    \subsubsection{Hello, World!}
+    \subsubsection{Пример № 1}
+
+    Результат работы программы № 1:
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.4\textwidth]{Example1}
+        \caption{Результат работы программы из примера № 1}
+    \end{figure}
+
+    В примере № 1 демонстрируются статические методы Reverse и Clear
+    класса Array.
+
+    \subsubsection{Пример № 2}
+
+    Результат работы программы № 2:
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.4\textwidth]{Example2}
+        \caption{Результат работы программы из примера № 2}
+    \end{figure}
+
+    В программе демонстрируется возможность передать любой массив
+    в функцию с помощью абстрактного класса Array. При этом индексирование
+    массива происходит с помощью методов GetValue.
+
+    \subsubsection{Пример № 3}
+
+    Результат работы программы № 3:
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.4\textwidth]{Example3}
+        \caption{Результат работы программы из примера № 3}
+    \end{figure}
+
+    В данной программе исследуется тип данных char и возможность
+    перехода от массива символов к строке и наоборот. Для перевода
+    строки в массив символов используется метод класса String ToCharArray.
+    Для обратной операции используется цикл for. Однако лучше это сделать 
+    с помощью конструктора класса String, принимающего массив символов.
+
+    \subsubsection{Пример № 4}
+
+    Результат работы программы № 4:
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.4\textwidth]{Example4}
+        \caption{Результат работы программы из примера № 4}
+    \end{figure}
+
+    В данной программе демонстрируется класс StringBuilder, который
+    используется для увеличения производительности при работе со строками.
+    Основные методы: Append, Remove, Insert.
+
+    \subsubsection{Примеры № 5, № 6, № 7}
+
+    В программах № 5, № 6 и № 7 исследуются способы использования регулярных выражений
+    для поиска соответствий в строке. Для данной цели могут использоваться 
+    статические методы Matches и Match, принимающие как строку, так и 
+    шаблон, а также те же методы класса Regex, инициализированного с 
+    шаблоном в конструкторе.
+
+    \subsubsection{Пример № 8}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.4\textwidth]{Example8}
+        \caption{Результат работы программы из примера № 4}
+    \end{figure}
+
+    В данной программе в шаблон регулярного выражения включаются именованные группы.
+
+    \subsection{Индивидуальное задание для работы над массивами}
+
+    Была написана следующая программа:
 
     \begin{lstlisting}[language={[Sharp]C}]
-        namespace ConsoleHello
-        { 
-            class Program
-            {	
-                static void Main(string[] args)
-                { 
-                    Console.WriteLine("Enter your name"); 
-                    string name;
-                    name = Console.ReadLine();
-                    if (name == "") Console.WriteLine("Hello, world!"); 
-                    else Console.WriteLine("Hello, " + name + "!");
+        public static class ArrayOperations
+        {
+            public static int GetMaximalAverageColumn(int[,] matrix)
+            {
+                if (matrix == null) 
+                    throw new ArgumentNullException($"{nameof(matrix)} instance was null");
+
+                var columnsAverages = matrix
+                                        .GetColumns()
+                                        .Select(x => Enumerable.Average(x))
+                                        .ToArray();
+
+                return Array.IndexOf(columnsAverages, Enumerable.Max(columnsAverages));
+            }
+
+            public static void PrintMatrix(int[,] matrix)
+            {
+                if (matrix == null) 
+                    throw new ArgumentNullException($"{nameof(matrix)} instance was null");
+
+                for (var i = 0; i < matrix.GetLength(0); i++)
+                {
+                    for (var j = 0; j < matrix.GetLength(1); j++)
+                        Console.Write($"{matrix[i, j]} ");
+
+                    Console.WriteLine();
+                }
+            }
+        }
+
+        public static class ExtensionMethods
+        {
+            public static IEnumerable<int[]> GetColumns(this int[,] array)
+            {
+                if (array == null) 
+                    throw new ArgumentNullException($"{nameof(array)} instance was null");
+
+                for (var j = 0; j < array.GetLength(1); j++)
+                {
+                    var column = new int[array.GetLength(0)];
+                    
+                    for (var i = 0; i < array.GetLength(0); i++)
+                        column[i] = array[i, j];
+
+                    yield return column;
                 }
             }
         }
     \end{lstlisting}
+
+    В данной программе активно используется библиотека System.Linq для операций
+    над коллекциями. Также был написан extension-метод для извлечения столбцов
+    матрицы. Для определения позиции с наибольшим средним столбцом в строке
+    использовался статический метод IndexOf класса Array.
+
+    \subsection{Индивидуальное задание для работы над строками}
+
+    Была написана следующая программа:
+
+    \begin{lstlisting}[language={[Sharp]C}]
+        public static class StringOperations
+        {
+            public static IEnumerable<string> GetWordsStartingAndEndingTheSameLetter(string line)
+                => line.Split(" ").Where(x => x.First() == x.Last());
+        }
+    \end{lstlisting}
+
+    В данной программе используется метод Split класса String для разделения
+    строки на подстроки, а также библиотека System.Linq для фильтрации 
+    полученной коллекции. Условием для фильтра является равенство результатов
+    выполнения методов First и Last класса String, возвращающих соответственно
+    первый и последний символы строки.
+
+    \subsection{Индивидуальное задание для работы с регулярными выражениями}
+
+    Была написана следующая программа:
+
+    \begin{lstlisting}[language={[Sharp]C}]
+        public static class RegexOperations
+        {
+            private static string englishRegexTemplate = @"^[A-Za-z0-9 .,!?:;()]+$";
+
+            public static bool IsInEnglish(string test)
+                => Regex.IsMatch(test, englishRegexTemplate);
+        }
+    \end{lstlisting}
+
+    В данной программе создан класс, полем которого является шаблон регулярного
+    выражения, осуществляющего проверку того, что все встреченные в строке символы
+    являются либо буквами английскго алфавита, либо арабскими цифрами, либо пробелами,
+    либо знаками пунктуации. 
+
+    Для вызова регулярного выражения использовался статический метод Regex.IsMatch,
+    который принимает как входную строку, так и сам шаблон регулярного выражения.
+
+    \section{Вывод}
+
+    В ходе лабораторной работы были изучены массивы, строки и регулярные выражения
+    языка C\#, а также встроенные средства для работы с ними. 
+    
+    Все массивы в среде .NET являются наследниками абстрактного класса Array,
+    что позволяет передавать в одну и ту же функцию любой массив. Кроме того,
+    класс Array предоставляет множество статических методов и методов экземпляра
+    для эффективной работы с массивами.
+
+    Строки в платформе .NET являются неизменяемыми, что приводит к просадкам в
+    производительности при выполении множества операций над ними. Для избежания
+    проблем с производительность в таких случаях используют класс StringBuilder.
+    Класс String также содержит множество методов для работы со строками.
+
+    Регулярные выражения - мощный инструмент для работы со строками. Он позволяет
+    проверять строку на соответствие шаблону и производить поиск подстрок в строке.
+    Соответствующие операции обычными методами требуют намного большего времени и усилий.
 
 \end{document}
