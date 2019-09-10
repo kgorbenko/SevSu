@@ -14,10 +14,11 @@
 \usepackage{indentfirst}
 \usepackage{graphicx}
 \usepackage{float}
-\usepackage{caption}
+\usepackage[labelsep=endash]{caption}
 \usepackage{listings}
 \usepackage{color}
 \usepackage{enumitem}
+\usepackage{subfig}
 
 \graphicspath{ {./images/} }
 
@@ -152,6 +153,16 @@
     contain all letters of the alphabet and it should be written in of the
     original language.There is no need for special content, but the length of
     words should match the language.
+
+    \begin{figure}[H]
+        \centering
+        \subfloat[fig1]{\includegraphics[width=.4\linewidth]{Points}}\hspace{.15\linewidth}
+        \subfloat[fig2]{\includegraphics[width=.4\linewidth]{Points}}
+        \\
+        \subfloat[fig3]{\includegraphics[width=.4\linewidth]{Points}}\hspace{.15\linewidth}
+        \subfloat[fig4]{\includegraphics[width=.4\linewidth]{Points}}
+        \caption{Результат работы программы "Hello, World!"}
+    \end{figure}
 
     \subsection{First section first subsection}
 
