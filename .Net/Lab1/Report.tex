@@ -1,0 +1,179 @@
+\documentclass[a4paper,14pt]{extarticle}
+
+\usepackage{ucs}                                                                                                                   
+\usepackage[utf8x]{inputenc}                                                                                                       
+\usepackage[english,russian]{babel}
+\usepackage[T2A]{fontenc}
+\usepackage{extsizes}
+\usepackage{tempora}
+\usepackage[left=30mm, top=20mm, right=15mm, bottom=20mm, headheight=5pt]{geometry}
+\usepackage{fancyhdr}
+\usepackage{titling}
+\usepackage{titlesec}
+\usepackage{textcase}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{enumitem}
+
+\definecolor{cyan}{rgb}{0.0,0.6,0.6} % colors defined for listings with "listings" package
+\definecolor{red}{rgb}{0.6,0,0}
+\definecolor{green}{rgb}{0,0.8,0}
+
+\graphicspath{ {./images/} }
+
+\newcommand{\mylabnumber}{1}
+\newcommand{\mylabtitle}{Встроенные типы данных в C\#. Массивы. Строки. Регулярные выражения}
+\newcommand{\mysubject}{Платформа .NET}
+\newcommand{\mylecturer}{ст. преп. Забаштанский А.К.}
+
+\renewcommand{\baselinestretch}{1.25} % Sets basic line stretch
+\renewcommand{\headrulewidth}{0pt} % Remove horizontal line below header in fancyhdr
+
+\addto\captionsrussian{
+    \renewcommand{\figurename}{Рисунок} % Set a default picture caption
+    \renewcommand{\tablename}{Таблица} % Set a default table caption
+}
+
+\captionsetup[table]{singlelinecheck=false} % To make a table caption appear left-aligned
+
+\pagestyle{fancy}
+\lhead{} \rhead{} \cfoot{} % Setting empty headers
+\chead{\thepage} % Sets central header page numbering
+
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{8pt}
+
+\titleformat{\section}[hang]{\large \centering \bfseries}{\thesection}{0.5em}{\MakeTextUppercase} % Format section style
+\titlespacing{\section}{\parindent}{1em}{0em}
+
+\titleformat{\subsection}[hang]{\bfseries}{\thesubsection}{0.5em}{} % Format subsection style
+\titlespacing{\subsection}{\parindent}{1em}{0em} % Format subsection indentations
+
+\titleformat{\subsubsection}[hang]{\normalfont}{\thesubsubsection}{0.5em}{} % Format subsubsection style
+\titlespacing{\subsubsection}{\parindent}{1em}{0em} % Format subsubsection indentations
+
+\setlist[enumerate]{wide=\parindent, leftmargin=0pt, topsep=0pt, itemsep=0pt, partopsep=0pt, parsep=0pt} % Format enumerate style
+\setlist[itemize]{wide=\parindent, leftmargin=0pt, topsep=0pt, itemsep=0pt, partopsep=0pt, parsep=0pt} % Format itemize style
+
+\begin{document}
+
+    \lstset{ % "listings package configuration"
+        basicstyle=\footnotesize\ttfamily,
+        numbersep=5pt,
+        tabsize=4,
+        gobble=8,
+        extendedchars=\true,
+        keepspaces=\true,
+        numbers=left,
+        keywordstyle=\color{cyan},
+        stringstyle=\color{red}\ttfamily,
+        commentstyle=\color{green},
+        showstringspaces=\false
+    }
+
+    \begin{titlepage}
+        
+        \thispagestyle{empty}
+        
+        \begin{center}
+            
+            Министерство науки и высшего образования Российской Федерации \\
+            Севастопольский государственный университет \\
+            Кафедра ИС
+            
+            \vfill
+            \large{
+                Отчет \\
+                по лабораторной работе №\mylabnumber \\
+                "\mylabtitle" \\
+                по дисциплине \\
+                \MakeTextUppercase{\mysubject}
+            }
+
+        \end{center}
+
+        \vspace{1cm}
+
+        \noindent\hspace{7.5cm} Выполнил студент группы ИС/б-22о \\
+        \null\hspace{7.5cm} Горбенко К. Н. \\
+        \null\hspace{7.5cm} Проверил \\
+        \null\hspace{7.5cm} \mylecturer
+
+        \vfill
+
+        \begin{center}
+            Севастополь \\
+            2019
+        \end{center}
+
+    \end{titlepage}
+
+    % ############################################################################
+    % ------------------------------ Document start ------------------------------
+    % ############################################################################
+
+    \section{Цель работы}
+
+    \begin{itemize}
+        
+        \item изучить классификацию типов данных и отличительные 
+              особенности синтаксических конструкций языка C\# от C++;
+
+        \item изучить базовые типы: Array, String, StringBuilder, а также
+              средства стандартного ввода/вывода и возможности форматирования
+              вывода;
+
+        \item получить понятие о регулярных выражениях и их применении
+              для поиска, замены и разбиения текста на синтаксические лексемы.
+
+    \end{itemize}
+
+    \section{Задание к лабораторной работе}
+
+    Для \textbf{варианта № 3} заданы следующие задания:
+    
+    \begin{enumerate}
+        
+        \item Проработать примеры программ 1-8, данные в теоретических сведениях.
+              Создать на их основе программы. Получить результаты работы программ
+              и уметь их объяснить. Внести их в отчет по работе с комментариями.
+
+        \item Найти номер столбца двухмерного массива целых чисел, для которого
+              среднеарифметическое его элементов максимально.
+              
+        \item Создать программу, которая будет вводить строку в переменную String.
+              Найти в ней те слова, которые начинаются и заканчиваются одной и 
+              той же буквой.
+
+        \item Задан текст. Определить, является ли он текстом на английском языке.
+
+    \end{enumerate}
+    
+    \section{Ход работы}
+
+    \subsection{Примеры программ на C\#}
+
+    \subsubsection{Hello, World!}
+
+    \begin{lstlisting}[language={[Sharp]C}]
+        namespace ConsoleHello
+        { 
+            class Program
+            {	
+                static void Main(string[] args)
+                { 
+                    Console.WriteLine("Enter your name"); 
+                    string name;
+                    name = Console.ReadLine();
+                    if (name == "") Console.WriteLine("Hello, world!"); 
+                    else Console.WriteLine("Hello, " + name + "!");
+                }
+            }
+        }
+    \end{lstlisting}
+
+\end{document}
