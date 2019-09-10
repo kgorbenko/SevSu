@@ -15,6 +15,13 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{caption}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{enumitem}
+
+\definecolor{cyan}{rgb}{0.0,0.6,0.6} % colors defined for listings with "listings" package
+\definecolor{red}{rgb}{0.6,0,0}
+\definecolor{green}{rgb}{0,0.8,0}
 
 \graphicspath{ {./images/} }
 
@@ -41,14 +48,32 @@
 \setlength{\parskip}{8pt}
 
 \titleformat{\section}[hang]{\large \centering \bfseries}{\thesection}{0.5em}{\MakeTextUppercase} % Format section style
+\titlespacing{\section}{\parindent}{1em}{0em}
 
 \titleformat{\subsection}[hang]{\bfseries}{\thesubsection}{0.5em}{} % Format subsection style
-\titlespacing{\subsection}{\parindent}{1em}{1em} % Format subsection indentations
+\titlespacing{\subsection}{\parindent}{1em}{0em} % Format subsection indentations
 
 \titleformat{\subsubsection}[hang]{\normalfont}{\thesubsubsection}{0.5em}{} % Format subsubsection style
-\titlespacing{\subsubsection}{\parindent}{1em}{1em} % Format subsubsection indentations
+\titlespacing{\subsubsection}{\parindent}{1em}{0em} % Format subsubsection indentations
+
+\setlist[enumerate]{wide=\parindent, leftmargin=0pt, topsep=0pt, itemsep=0pt, partopsep=0pt, parsep=0pt} % Format enumerate style
+\setlist[itemize]{wide=\parindent, leftmargin=0pt, topsep=0pt, itemsep=0pt, partopsep=0pt, parsep=0pt} % Format itemize style
 
 \begin{document}
+
+    \lstset{ % "listings package configuration"
+        basicstyle=\footnotesize\ttfamily,
+        numbersep=5pt,
+        tabsize=4,
+        gobble=8,
+        extendedchars=\true,
+        keepspaces=\true,
+        numbers=left,
+        keywordstyle=\color{cyan},
+        stringstyle=\color{red}\ttfamily,
+        commentstyle=\color{green},
+        showstringspaces=\false
+    }
 
     \begin{titlepage}
         
@@ -75,8 +100,8 @@
 
         \noindent\hspace{7.5cm} Выполнил студент группы ИС/б-22о \\
         \null\hspace{7.5cm} Горбенко К. Н. \\
-        \null\hspace{7.5cm} Проверил: \\
-        \null\hspace{7.5cm} Захаров В. В.
+        \null\hspace{7.5cm} Проверил \\
+        \null\hspace{7.5cm} \mylecturer
 
         \vfill
 
@@ -111,6 +136,20 @@
     original language.There is no need for special content, but the length of
     words should match the language.
 
+    \begin{itemize}
+        
+        \item изучить классификацию типов данных и отличительные 
+              особенности синтаксических конструкций языка C\# от C++;
+
+        \item изучить базовые типы: Array, String, StringBuilder, а также
+              средства стандартного ввода/вывода и возможности форматирования
+              вывода;
+
+        \item получить понятие о регулярных выражениях и их применении для поиска,
+              замены и разбиения текста на синтаксические лексемы.
+
+    \end{itemize}
+
     \subsubsection{First section first subsection first subsubsection}
 
     Hello, here is some text without a meaning.  This text should show what 
@@ -123,6 +162,23 @@
     original language.There is no need for special content, but the length of
     words should match the language.
 
+    \begin{enumerate}
+        
+        \item Проработать примеры программ 1-8, данные в теоретических сведениях.
+              Создать на их основе программы. Получить результаты работы программ
+              и уметь их объяснить. Внести их в отчет по работе с комментариями.
+
+        \item Найти номер столбца двухмерного массива целых чисел, для которого
+              среднеарифметическое его элементов максимально.
+              
+        \item Создать программу, которая будет вводить строку в переменную String.
+              Найти в ней те слова, которые начинаются и заканчиваются одной и той же
+              буквой.
+
+        \item Задан текст. Определить, является ли он текстом на английском языке.
+
+    \end{enumerate}
+
     \subsubsection{First section first subsection second subsubsection}
 
     Hello, here is some text without a meaning.  This text should show what 
@@ -134,6 +190,23 @@
     contain all letters of the alphabet and it should be written in of the
     original language.There is no need for special content, but the length of
     words should match the language.
+
+    \begin{lstlisting}[language={[Sharp]C}]
+        namespace ConsoleHello
+        { 
+            class Program
+            {	
+                static void Main(string[] args)
+                { 
+                    Console.WriteLine("Enter your name"); 
+                    string name;
+                    name = Console.ReadLine();
+                    if (name == "") Console.WriteLine("Hello, world!"); 
+                    else Console.WriteLine("Hello, " + name + "!");
+                }
+            }
+        }
+    \end{lstlisting}
 
     \subsection{First section second subsection}
 
