@@ -19,10 +19,6 @@
 \usepackage{color}
 \usepackage{enumitem}
 
-\definecolor{cyan}{rgb}{0.0,0.6,0.6} % colors defined for listings with "listings" package
-\definecolor{red}{rgb}{0.6,0,0}
-\definecolor{green}{rgb}{0,0.8,0}
-
 \graphicspath{ {./images/} }
 
 \newcommand{\mylabnumber}{1}
@@ -47,17 +43,48 @@
 \setlength{\parindent}{1.25cm}
 \setlength{\parskip}{8pt}
 
-\titleformat{\section}[hang]{\large \centering \bfseries}{\thesection}{0.5em}{\MakeTextUppercase} % Format section style
+ % Format section style and indentations
+\titleformat{\section}[hang]
+    {\large \centering \bfseries}
+    {\thesection}
+    {0.5em}
+    {\MakeTextUppercase}
 \titlespacing{\section}{\parindent}{1em}{0em}
 
-\titleformat{\subsection}[hang]{\bfseries}{\thesubsection}{0.5em}{} % Format subsection style
-\titlespacing{\subsection}{\parindent}{1em}{0em} % Format subsection indentations
+% Format subsection style and indentations
+\titleformat{\subsection}[hang]
+    {\bfseries}
+    {\thesubsection}
+    {0.5em}{}
+\titlespacing{\subsection}{\parindent}{1em}{0em}
 
-\titleformat{\subsubsection}[hang]{\normalfont}{\thesubsubsection}{0.5em}{} % Format subsubsection style
-\titlespacing{\subsubsection}{\parindent}{1em}{0em} % Format subsubsection indentations
+% Format subsubsection style and indentations
+\titleformat{\subsubsection}[hang]
+    {\normalfont}
+    {\thesubsubsection}
+    {0.5em}
+    {}
+\titlespacing{\subsubsection}{\parindent}{1em}{0em}
 
-\setlist[enumerate]{wide=\parindent, leftmargin=0pt, topsep=0pt, itemsep=0pt, partopsep=0pt, parsep=0pt} % Format enumerate style
-\setlist[itemize]{wide=\parindent, leftmargin=0pt, topsep=0pt, itemsep=0pt, partopsep=0pt, parsep=0pt} % Format itemize style
+% Format enumerate style with "enumitem" package
+\setlist[enumerate]{
+    wide=\parindent,
+    leftmargin=0pt,
+    topsep=0pt,
+    itemsep=0pt,
+    partopsep=0pt,
+    parsep=0pt
+}
+
+% Format itemize style with "enumitem" package
+\setlist[itemize]{
+    wide=\parindent,
+    leftmargin=0pt,
+    topsep=0pt,
+    itemsep=0pt,
+    partopsep=0pt,
+    parsep=0pt
+}
 
 \begin{document}
 
