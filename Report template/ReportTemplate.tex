@@ -87,6 +87,10 @@
     parsep=0pt
 }
 
+\captionsetup[figure]{
+    justification=centering
+}
+
 \begin{document}
 
     \lstset{ % "listings package configuration"
@@ -100,6 +104,10 @@
         stringstyle=\ttfamily,
         showstringspaces=\false
     }
+
+    % ############################################################################
+    % -------------------------------- Title page --------------------------------
+    % ############################################################################
 
     \begin{titlepage}
         
@@ -266,7 +274,8 @@
 
     \begin{figure}[H]
         \includegraphics{Points}
-        \caption{Какий-та точки}
+        \caption{Какий-та точки в оооооочень длинной подписи к картинке.
+            Посмотрим как латек сможет центрировать вторую строку}
     \end{figure}
 
     \section{Second section}
