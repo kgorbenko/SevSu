@@ -8,8 +8,8 @@ namespace Lab1
     {
         public static void Main(string[] args)
         {
-            CheckArrays();
-            CheckStrings();
+            //CheckArrays();
+            //CheckStrings();
             CheckRegexes();
         }
 

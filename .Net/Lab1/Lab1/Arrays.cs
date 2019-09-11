@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Lab1
 {
-    public class ArrayOperations
+    public static class ArrayOperations
     {
         public static int GetMaximalAverageColumn(int[,] matrix)
         {
@@ -11,10 +11,10 @@ namespace Lab1
 
             var columnsAverages = matrix
                                     .GetColumns()
-                                    .Select(x => Enumerable.Average(x))
+                                    .Select(x => x.Average())
                                     .ToArray();
 
-            return Array.IndexOf(columnsAverages, Enumerable.Max(columnsAverages));
+            return Array.IndexOf(columnsAverages, columnsAverages.Max());
         }
 
         public static void PrintMatrix(int[,] matrix)
