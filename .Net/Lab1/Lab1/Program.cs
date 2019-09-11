@@ -29,7 +29,7 @@ namespace Lab1
             ArrayOperations.PrintMatrix(matrix);
 
             WriteLine("\nAverages:\n");
-            foreach (var item in matrix.GetColumns().Select(x => Enumerable.Average(x)))
+            foreach (var item in matrix.GetColumns().Select(x => x.Average()))
                 Write($"{item} ");
 
             WriteLine($"\nColumn with maximal average: {ArrayOperations.GetMaximalAverageColumn(matrix)}");
