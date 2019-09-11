@@ -19,6 +19,7 @@
 \usepackage{color}
 \usepackage{enumitem}
 \usepackage[font=normalsize]{subfig}
+\usepackage{csquotes}
 
 \graphicspath{ {./images/} }
 
@@ -87,6 +88,10 @@
     parsep=0pt
 }
 
+\captionsetup[figure]{
+    justification=centering
+}
+
 \begin{document}
 
     \lstset{ % "listings package configuration"
@@ -103,6 +108,10 @@
         showstringspaces=\false
     }
 
+    % ############################################################################
+    % -------------------------------- Title page --------------------------------
+    % ############################################################################
+
     \begin{titlepage}
         
         \thispagestyle{empty}
@@ -114,13 +123,12 @@
             Кафедра ИС
             
             \vfill
-            \large{
-                Отчет \\
-                по лабораторной работе №\mylabnumber \\
-                "\mylabtitle" \\
-                по дисциплине \\
-                \MakeTextUppercase{\mysubject}
-            }
+
+            Отчет \\
+            по лабораторной работе №\mylabnumber \\
+            \enquote{\mylabtitle"} \\
+            по дисциплине \\
+            \enquote{\MakeTextUppercase{\mysubject}}
 
         \end{center}
 
