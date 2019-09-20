@@ -4,12 +4,12 @@ using System.Linq;
 
 namespace TestingLab1
 {
-    public class FileOperations
+    public class TextOperations
     {
         private readonly StreamReader streamReader;
         private readonly string[] delimiters = { " ", ".", ",", "?", "!", "(", ")", ":", ";", Environment.NewLine };
 
-        public FileOperations(StreamReader streamReader)
+        public TextOperations(StreamReader streamReader)
             => this.streamReader = streamReader ?? throw new ArgumentNullException($"{nameof(streamReader)} instance was null");
 
         public string ReverseEveryTwoWords()
@@ -20,7 +20,7 @@ namespace TestingLab1
                                         .Split(delimiters, StringSplitOptions.RemoveEmptyEntries)
                                         .Select((word, i) => new { Value = word, Index = i })
                                         .GroupBy(x => x.Index / 2)
-                                        .Select(group => group.Select(x => x.Value).Reverse().ToArray())
+                                        .Select(group => group.Select(x => x.Value).Reverse())
                                         .SelectMany(x => x)
                 );
         }
