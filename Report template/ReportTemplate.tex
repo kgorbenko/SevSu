@@ -47,47 +47,32 @@
 \setlength{\parskip}{8pt}
 
  % Format section style and indentations
-\titleformat{\section}[hang]
-    {\large \centering \bfseries}
-    {\thesection}
-    {0.5em}
-    {\MakeTextUppercase}
+\titleformat{\section}[hang]{\large \centering \bfseries}{\thesection}{0.5em}{\MakeTextUppercase}
 \titlespacing{\section}{\parindent}{1em}{0em}
 
 % Format subsection style and indentations
-\titleformat{\subsection}[hang]
-    {\bfseries}
-    {\thesubsection}
-    {0.5em}{}
+\titleformat{\subsection}[hang]{\bfseries}{\thesubsection}{0.5em}{}
 \titlespacing{\subsection}{\parindent}{1em}{0em}
 
 % Format subsubsection style and indentations
-\titleformat{\subsubsection}[hang]
-    {\normalfont}
-    {\thesubsubsection}
-    {0.5em}
-    {}
+\titleformat{\subsubsection}[hang]{\normalfont}{\thesubsubsection}{0.5em}{}
 \titlespacing{\subsubsection}{\parindent}{1em}{0em}
 
 % Format enumerate style with "enumitem" package
-\setlist[enumerate]{
-    wide=\parindent,
-    leftmargin=0pt,
-    topsep=0pt,
-    itemsep=0pt,
-    partopsep=0pt,
-    parsep=0pt
-}
+\setlist[enumerate, 1]{wide=\parindent,leftmargin=0pt,topsep=0pt,
+    itemsep=0pt,partopsep=0pt,parsep=0pt}
+\setlist[enumerate, 2]{wide=2\parindent,label=\alph*.,leftmargin=1.25cm,topsep=0pt,
+    itemsep=0pt,partopsep=0pt,parsep=0pt}
+\setlist[enumerate, 3]{wide=3\parindent,label=\alph*.,leftmargin=2.5cm,topsep=0pt,
+    itemsep=0pt,partopsep=0pt,parsep=0pt}
 
 % Format itemize style with "enumitem" package
-\setlist[itemize]{
-    wide=\parindent,
-    leftmargin=0pt,
-    topsep=0pt,
-    itemsep=0pt,
-    partopsep=0pt,
-    parsep=0pt
-}
+\setlist[itemize, 1]{wide=\parindent,leftmargin=0pt,topsep=0pt,itemsep=0pt,
+    partopsep=0pt,parsep=0pt}
+\setlist[itemize, 2]{wide=2\parindent,leftmargin=1.25cm,topsep=0pt,itemsep=0pt,
+    partopsep=0pt,parsep=0pt}
+\setlist[itemize, 3]{wide=3\parindent,leftmargin=2.5cm,topsep=0pt,itemsep=0pt,
+    partopsep=0pt,parsep=0pt}
 
 \captionsetup[figure]{
     justification=centering
@@ -324,5 +309,23 @@
     contain all letters of the alphabet and it should be written in of the
     original language.There is no need for special content, but the length of
     words should match the language.
+
+    \begin{itemize}
+        \item First item. ello, here is some text without a meaning.  This text should show what 
+              a printed text will look like at this place.  If you read this text, 
+              you will get no information.  Really?  Is there no information?  Is there 
+              a difference between this text and some nonsense like not at all!
+        \item First item. ello, here is some text without a meaning.  This text should show what 
+               printed text will look like at this place.  If you read this text, 
+              you will get no information.  Really?  Is there no information?  Is there 
+              a difference between this text and some nonsense like not at all!
+        \begin{itemize}
+            \item First item first subitem. Hello, here is some text without a meaning.  This text should show what 
+                  a printed text will look like at this place.  If you read this text, 
+                  you will get no information.  Really?  Is there no information?  Is there 
+                  a difference between this text and some nonsense like not at all!
+            \item First item second subitem            
+        \end{itemize}
+    \end{itemize}
 
 \end{document}
