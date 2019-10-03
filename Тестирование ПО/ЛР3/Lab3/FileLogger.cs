@@ -5,7 +5,7 @@ namespace Lab3
 {
     public class FileLogger : ILogger
     {
-        private StreamWriter streamWriter;
+        private readonly StreamWriter streamWriter;
         
         public FileLogger(StreamWriter writer)
         {

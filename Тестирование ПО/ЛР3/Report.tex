@@ -1,0 +1,377 @@
+\documentclass[a4paper,14pt]{extarticle}
+
+\usepackage{ucs}                                                                                                                   
+\usepackage[utf8x]{inputenc}                                                                                                       
+\usepackage[english,russian]{babel}
+\usepackage[T2A]{fontenc}
+\usepackage{extsizes}
+\usepackage{tempora}
+\usepackage[left=25mm, top=20mm, right=10mm, bottom=20mm, headheight=5pt]{geometry}
+\usepackage{fancyhdr}
+\usepackage{titling}
+\usepackage{titlesec}
+\usepackage{textcase}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[labelsep=endash]{caption}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage[font=normalsize]{subfig}
+\usepackage{csquotes}
+\usepackage{amsmath}
+
+\graphicspath{ {./images/} }
+
+\newcommand{\mylabnumber}{3}
+\newcommand{\mylabtitle}{Исследование способов 
+                            модульного тестирования программного обеспечения}
+\newcommand{\mysubject}{Тестирование ПО}
+\newcommand{\mylecturer}{Тлуховская Н.П.}
+
+\renewcommand{\baselinestretch}{1.25} % Sets basic line stretch
+\renewcommand{\headrulewidth}{0pt} % Remove horizontal line below header in fancyhdr
+
+\addto\captionsrussian{
+    \renewcommand{\figurename}{Рисунок} % Set a default picture caption
+    \renewcommand{\tablename}{Таблица} % Set a default table caption
+}
+
+\captionsetup[table]{singlelinecheck=false} % To make a table caption appear left-aligned
+
+\pagestyle{fancy}
+\lhead{} \rhead{} \cfoot{} % Setting empty headers
+\chead{\thepage} % Sets central header page numbering
+
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{8pt}
+
+ % Format section style and indentations
+\titleformat{\section}[hang]{\large \centering \bfseries}{\thesection}{0.5em}{\MakeTextUppercase}
+\titlespacing{\section}{\parindent}{1em}{0em}
+
+% Format subsection style and indentations
+\titleformat{\subsection}[hang]{\bfseries}{\thesubsection}{0.5em}{}
+\titlespacing{\subsection}{\parindent}{1em}{0em}
+
+% Format subsubsection style and indentations
+\titleformat{\subsubsection}[hang]{\normalfont}{\thesubsubsection}{0.5em}{}
+\titlespacing{\subsubsection}{\parindent}{1em}{0em}
+
+% Format enumerate style with "enumitem" package
+\setlist[enumerate, 1]{wide=\parindent,leftmargin=0pt,topsep=0pt,
+    itemsep=0pt,partopsep=0pt,parsep=0pt}
+\setlist[enumerate, 2]{wide=2\parindent,label=\alph*.,leftmargin=1.25cm,topsep=0pt,
+    itemsep=0pt,partopsep=0pt,parsep=0pt}
+\setlist[enumerate, 3]{wide=3\parindent,label=\alph*.,leftmargin=2.5cm,topsep=0pt,
+    itemsep=0pt,partopsep=0pt,parsep=0pt}
+
+% Format itemize style with "enumitem" package
+\setlist[itemize, 1]{wide=\parindent,leftmargin=0pt,topsep=0pt,itemsep=0pt,
+    partopsep=0pt,parsep=0pt}
+\setlist[itemize, 2]{wide=2\parindent,leftmargin=1.25cm,topsep=0pt,itemsep=0pt,
+    partopsep=0pt,parsep=0pt}
+\setlist[itemize, 3]{wide=3\parindent,leftmargin=2.5cm,topsep=0pt,itemsep=0pt,
+    partopsep=0pt,parsep=0pt}
+
+\captionsetup[figure]{justification=centering}
+
+\begin{document}
+
+    \lstset{ % "listings package configuration"
+        basicstyle=\footnotesize\ttfamily,
+        breaklines=true,
+        numbersep=5pt,
+        tabsize=4,
+        gobble=8,
+        extendedchars=\true,
+        keepspaces=\true,
+        numbers=left,
+        stringstyle=\ttfamily,
+        showstringspaces=\false
+    }
+
+    % ############################################################################
+    % -------------------------------- Title page --------------------------------
+    % ############################################################################
+
+    \begin{titlepage}
+        
+        \thispagestyle{empty}
+        
+        \begin{center}
+            
+            Министерство науки и высшего образования Российской Федерации \\
+            Севастопольский государственный университет \\
+            Кафедра ИС
+            
+            \vfill
+
+            Отчет \\
+            по лабораторной работе №\mylabnumber \\
+            \enquote{\mylabtitle} \\
+            по дисциплине \\
+            \enquote{\MakeTextUppercase{\mysubject}}
+
+        \end{center}
+
+        \vspace{1cm}
+
+        \noindent\hspace{7.5cm} Выполнил студент группы ИС/б-17-2-о \\
+        \null\hspace{7.5cm} Горбенко К. Н. \\
+        \null\hspace{7.5cm} Проверил \\
+        \null\hspace{7.5cm} \mylecturer
+
+        \vfill
+
+        \begin{center}
+            Севастополь \\
+            2019
+        \end{center}
+
+    \end{titlepage}
+
+    % ############################################################################
+    % ------------------------------ Document start ------------------------------
+    % ############################################################################
+
+    \section{Цель работы}
+
+    Исследовать основные подходы к модульному тестированию программного
+    обеспечения. Приобрести практические навыки составления модульных тестов
+    для объектно-ориентированных программ.
+
+    \section{Постановка задачи}
+
+    Выполнить модульное тестиование одного из классов, созданных в ходе ЛР № 1.
+    Для этого:
+    \begin{enumerate}
+        \item Cоздать спецификацию тестового случая для одного из методов выбранного
+              класса.
+        \item Реализовать тестируемый класс и необходимое тестовое
+              окружение на языке C\#.
+        \item Выполнить тестирование с выводом результатов на экран и сохранением 
+              в log-файл.
+        \item Проанализировать результаты тестирования, сделать вывод.
+    \end{enumerate}
+
+    \section{Ход работы}
+
+    Для модульного тестирования выберем класс ExtensionMethods:
+
+    \begin{lstlisting}[language={[Sharp]C}]
+        public static class ExtensionMethods
+        {
+            public static IEnumerable<int[]> GetColumns(this int[,] array)
+            {
+                if (array == null)
+                {
+                    throw new ArgumentNullException($"{nameof(array)} instance was null");
+                }
+
+                for (var j = 0; j < array.GetLength(1); j++)
+                {
+                    var column = new int[array.GetLength(0)];
+
+                    for (var i = 0; i < array.GetLength(0); i++)
+                        column[i] = array[i, j];
+
+                    yield return column;
+                }
+            }
+        }
+    \end{lstlisting}
+
+    Для реализации тестов создадим класс, представляющий один тестовый случай:
+
+    \begin{lstlisting}[language={[Sharp]C}]
+        public class Test
+        {
+            public string Name                 { get; set; }
+            public int[,] Input                { get; set; }
+            public IEnumerable<int[]> Expected { get; set; }
+        }
+    \end{lstlisting}
+
+    Теперь создадим тестовое окружение:
+
+    \begin{lstlisting}[language={[Sharp]C}]
+        public class TestEngine
+        {
+            private ILogger           Logger    { get; set; }
+            private IEnumerable<Test> TestSuite { get; set; }
+
+            public TestEngine(ILogger logger, IEnumerable<Test> testSuite)
+            {
+                Logger    = logger    ?? throw new ArgumentNullException("Logger instance was null");
+                TestSuite = testSuite ?? throw new ArgumentNullException("Test suite was null");
+            }
+
+            public void TestEquality()
+            {
+                foreach (var test in TestSuite)
+                {
+                    try
+                    {
+                        var actual = test.Input.GetColumns();
+                        var result = actual.SequenceEqual(test.Expected, new Int32ArrayEqualityComparer());
+
+                        Logger.Log($"Test {test.Name}," + 
+                                $"result:{result}" + 
+                                $"{(result ? "" : $",expected: {PrintArrayCollection(test.Expected)} actual:{PrintArrayCollection(actual)}")}");
+                    }
+                    catch (Exception e)
+                    {
+                        Logger.Log($"Test {test.Name}," +
+                                $"result:{false}," +
+                                $"Exception: {e.Message}");
+                    }
+                }
+            }
+
+            private string PrintArrayCollection(IEnumerable<int[]> collection)
+            {
+                var stringBuilder = new StringBuilder("{ ");
+
+                foreach (var array in collection)
+                {
+                    stringBuilder.Append("[ ");
+                    foreach (var item in array)
+                    {
+                        stringBuilder.Append($"{item} ");
+                    }
+                    stringBuilder.Append("] ");
+                }
+                stringBuilder.Append("}");
+                return stringBuilder.ToString();
+            }
+        }
+    \end{lstlisting}
+
+    В этом классе:
+
+    \begin{enumerate}
+        \item Содержится поле, содержащее экземпляр файлового логгера.
+        \item Содержится коллекция экземпляров тестов, представляющая
+              набор тестовых случаев данного класса.
+        \item Содержится метод, выполняющий непосредственно тестирование
+              согласно спецификации, предоставленной набором тестовых случаев.
+              При этом сравнивается ожидаемое значение метода с текущим.
+        \item При провале теста для текущего тестового случая выводится ожидаемое
+              значение результата выполнения метода и текущее значение для
+              создания возможности проследить ошибки.
+    \end{enumerate}
+
+    Класс файл-логгера:
+
+    \begin{lstlisting}[language={[Sharp]C}]
+        public interface ILogger
+        {
+            void Log(string message);
+        }
+        
+        public class FileLogger : ILogger
+        {
+            private readonly StreamWriter streamWriter;
+            
+            public FileLogger(StreamWriter writer)
+            {
+                streamWriter = writer ?? throw new ArgumentNullException("StreamWriter instance was null");
+            }
+
+            public void Log(string message)
+            {
+                if (message != null && !string.IsNullOrWhiteSpace(message))
+                {
+                    streamWriter.WriteLine(message);
+                    streamWriter.Flush();
+                }
+            }
+        }
+    \end{lstlisting}
+
+    Этот класс не позволяет записывать пустые сообщения в файл.
+
+    Основная программа, запускающая тестовое окружение:
+
+    \begin{lstlisting}[language={[Sharp]C}]
+        public static class Program
+        {
+            static void Main(string[] args)
+            {
+                var fileLogger = new FileLogger(new StreamWriter(path, append:true));
+                var testEngine = new TestEngine(fileLogger, TestSuite);
+                testEngine.TestEquality();
+            }
+
+            private static string path = "file.txt";
+
+            private static IEnumerable<Test> TestSuite = new[]
+            {
+                new Test {
+                    Name     = "Single item",
+                    Input    = new[,] { { 3 } },
+                    Expected = new[] { new[] { 3 } }.AsEnumerable()
+                },
+                new Test {
+                    Name = "Multiple items in square matrix",
+                    Input = new[,]
+                    {
+                        { 15, 10, 36 },
+                        { 23,  0, 14 },
+                        { 62, 15, 35 }
+                    },
+                    Expected = new[]
+                    {
+                        new[] { 15, 23, 62 },
+                        new[] { 10,  0, 15 },
+                        new[] { 36, 14, 35 }
+                    }.AsEnumerable()
+                },
+                new Test {
+                    Name = "Multiple items in non-square matrix",
+                    Input = new[,]
+                    {
+                        { 13,  2, 14, 16,  46 },
+                        {  0, 54, -2,  9, -14 },
+                        { 62,  0, 21, 15,   2 },
+                        { 64,  0, 11,  2, 523 }
+                    },
+                    Expected = new[]
+                    {
+                        new[] { 13,   0, 62,  64 },
+                        new[] {  2,  54, -2,   9 },
+                        new[] { 14,  -2, 21,  11 },
+                        new[] { 16,   9, 15,   2 },
+                        new[] { 46, -14,  2, 523 }
+                    }.AsEnumerable()
+                },
+            };
+        }
+    \end{lstlisting}
+
+    В этом классе происходит создание экземпляров логгера и тестового окружения
+    и запуск тестового окружения. При этом, класс соддержит коллекцию тестов,
+    которую передает в тестовое окружение. 
+
+    Результат работы программы(содержимое файла). В программе специально один из 
+    тестовых примеров провален для демонстрации:
+
+    \begin{lstlisting}[language={[Sharp]C}]
+        Test Single item,result:True
+        Test Multiple items in square matrix,result:True
+        Test Multiple items in non-square matrix,result:False,expected: { [ 13 0 62 64 ] [ 2 54 -2 9 ] [ 14 -2 21 11 ] [ 16 9 15 2 ] [ 46 -14 2 523 ] } actual:{ [ 13 0 62 64 ] [ 2 54 0 0 ] [ 14 -2 21 11 ] [ 16 9 15 2 ] [ 46 -14 2 523 ] }
+    \end{lstlisting}
+
+    \section{Выводы}
+
+    В ходе лабораторной работы было проведено модульное тестирование класса,
+    включающее в себя создание тестового окружения. Результат тестирования был
+    записан в файл. Преимуществом данного метода является возможность автоматизации
+    процесса тестирования ПО. Недостатком является сложность реализации, при которой
+    для каждого класса необходимо создавать тестовое окружение. Кроме того,
+    при таком подходе существуют особенные сложности тестирования исключительных 
+    случаев. 
+
+\end{document}
