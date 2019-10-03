@@ -1,0 +1,15 @@
+.photo-wrapper {
+    display: inline-block;
+    width: 30%;
+    margin: 1.5%;
+    padding: 0px;
+}
+
+.photo-wrapper > img {
+    width: 100%;
+}
+
+#sidebar {
+    position: relative;
+    top: -905px;
+}

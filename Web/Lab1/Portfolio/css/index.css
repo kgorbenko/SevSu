@@ -1,0 +1,10 @@
+#avatar {
+    width: 30%;
+    float: left;
+    margin-right: 20px;
+}
+
+#sidebar {
+    position: relative;
+    top: -650px;
+}

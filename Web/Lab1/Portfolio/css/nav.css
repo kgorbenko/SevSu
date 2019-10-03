@@ -1,0 +1,26 @@
+#nav {
+    padding: 0px 10px;
+}
+
+#site-title {
+    display: inline-block;
+    width: 12%;
+    height: 100%;
+    font-weight: bold;
+    text-align: center;
+}
+
+.nav-link {
+    display: inline-block;
+    width: 12%;
+    height: 100%;
+    line-height: 50px;
+    vertical-align: center;
+    text-decoration: none;
+    text-align: center;
+    color: #5c5c5c;
+}
+
+.nav-link:hover {
+    background-color: #bababa;
+}
