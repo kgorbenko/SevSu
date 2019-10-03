@@ -6,7 +6,7 @@
 \usepackage[T2A]{fontenc}
 \usepackage{extsizes}
 \usepackage{tempora}
-\usepackage[left=30mm, top=20mm, right=15mm, bottom=20mm, headheight=5pt]{geometry}
+\usepackage[left=25mm, top=20mm, right=10mm, bottom=20mm, headheight=5pt]{geometry}
 \usepackage{fancyhdr}
 \usepackage{titling}
 \usepackage{titlesec}
@@ -20,6 +20,7 @@
 \usepackage{enumitem}
 \usepackage[font=normalsize]{subfig}
 \usepackage{csquotes}
+\usepackage{amsmath}
 
 \graphicspath{ {./images/} }
 
@@ -46,51 +47,34 @@
 \setlength{\parskip}{8pt}
 
  % Format section style and indentations
-\titleformat{\section}[hang]
-    {\large \centering \bfseries}
-    {\thesection}
-    {0.5em}
-    {\MakeTextUppercase}
+\titleformat{\section}[hang]{\large \centering \bfseries}{\thesection}{0.5em}{\MakeTextUppercase}
 \titlespacing{\section}{\parindent}{1em}{0em}
 
 % Format subsection style and indentations
-\titleformat{\subsection}[hang]
-    {\bfseries}
-    {\thesubsection}
-    {0.5em}{}
+\titleformat{\subsection}[hang]{\bfseries}{\thesubsection}{0.5em}{}
 \titlespacing{\subsection}{\parindent}{1em}{0em}
 
 % Format subsubsection style and indentations
-\titleformat{\subsubsection}[hang]
-    {\normalfont}
-    {\thesubsubsection}
-    {0.5em}
-    {}
+\titleformat{\subsubsection}[hang]{\normalfont}{\thesubsubsection}{0.5em}{}
 \titlespacing{\subsubsection}{\parindent}{1em}{0em}
 
 % Format enumerate style with "enumitem" package
-\setlist[enumerate]{
-    wide=\parindent,
-    leftmargin=0pt,
-    topsep=0pt,
-    itemsep=0pt,
-    partopsep=0pt,
-    parsep=0pt
-}
+\setlist[enumerate, 1]{wide=\parindent,leftmargin=0pt,topsep=0pt,
+    itemsep=0pt,partopsep=0pt,parsep=0pt}
+\setlist[enumerate, 2]{wide=2\parindent,label=\alph*.,leftmargin=1.25cm,topsep=0pt,
+    itemsep=0pt,partopsep=0pt,parsep=0pt}
+\setlist[enumerate, 3]{wide=3\parindent,label=\alph*.,leftmargin=2.5cm,topsep=0pt,
+    itemsep=0pt,partopsep=0pt,parsep=0pt}
 
 % Format itemize style with "enumitem" package
-\setlist[itemize]{
-    wide=\parindent,
-    leftmargin=0pt,
-    topsep=0pt,
-    itemsep=0pt,
-    partopsep=0pt,
-    parsep=0pt
-}
+\setlist[itemize, 1]{wide=\parindent,leftmargin=0pt,topsep=0pt,itemsep=0pt,
+    partopsep=0pt,parsep=0pt}
+\setlist[itemize, 2]{wide=2\parindent,leftmargin=1.25cm,topsep=0pt,itemsep=0pt,
+    partopsep=0pt,parsep=0pt}
+\setlist[itemize, 3]{wide=3\parindent,leftmargin=2.5cm,topsep=0pt,itemsep=0pt,
+    partopsep=0pt,parsep=0pt}
 
-\captionsetup[figure]{
-    justification=centering
-}
+\captionsetup[figure]{justification=centering}
 
 \begin{document}
 
@@ -103,9 +87,7 @@
         extendedchars=\true,
         keepspaces=\true,
         numbers=left,
-        keywordstyle=\color{cyan},
-        stringstyle=\color{red}\ttfamily,
-        commentstyle=\color{green},
+        stringstyle=\ttfamily,
         showstringspaces=\false
     }
 
