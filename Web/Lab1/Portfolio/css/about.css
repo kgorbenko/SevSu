@@ -8,8 +8,3 @@
 .photo-wrapper > img {
     width: 100%;
 }
-
-#sidebar {
-    position: relative;
-    top: -905px;
-}

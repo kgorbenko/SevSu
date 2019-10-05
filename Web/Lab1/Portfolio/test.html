@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <link href="css/nav.css" rel="stylesheet" type="text/css" />
+    <link href="css/shared.css" rel="stylesheet" type="text/css" />
+    <link href="css/index.css" rel="stylesheet" type="text/css" />
+    <title>Homepage</title>
+</head>
+<body>
+    <div class="sidebar wrapper">
+        <header><h1>Contents</h1></header>
+        <ul>
+            <a href="#test" class="contents">Test</a>
+            <a href="#footer" class="contents">Footer</a>
+        </ul>
+    </div>
+    <div class="main-content-container">
+        <nav id="nav" class="container wrapper">
+            <span id="site-title">Web lab1</span>
+            <a href="index.html"     class="nav-link">Home</a>
+            <a href="about.html"     class="nav-link">About</a>
+            <a href="interests.html" class="nav-link">My interests</a>
+            <a href="learning.html"  class="nav-link">Learning</a>
+            <a href="photos.html"    class="nav-link">Photos</a>
+            <a href="contact.html"   class="nav-link">Contact</a>
+            <a href="test.html"      class="nav-link">Test</a>
+        </nav>
+        <div class="container wrapper">
+            <header>
+                <h1>Тест по инженерной графике</h1>
+            </header>
+
+            <section id="test">
+                <form class="center-form" method="POST" action="mailto:mymail@your.email.address">
+                    <div class="form-unit">
+                        <p>
+                            В каком случее допускается заменять стрелки на размерных линиях 
+                            засечками или точками? 
+                        </p>
+                        <div class="form-unit">
+                            <label class="inline" for="ans1">При большом количестве размеров на чертеже</label>
+                            <input class="inline" id="ans1" type="radio">
+                        </div>
+                        <div class="form-unit">
+                            <label class="inline" for="ans2">Для выделения стандартных размеров</label>
+                            <input class="inline" id="ans2" type="radio">
+                        </div>
+                        <div class="form-unit">
+                            <label class="inline" for="ans2">При недостатке места для стрелок</label>
+                            <input class="inline" id="ans2" type="radio">
+                        </div>
+                    </div>
+
+                    <div class="form-unit">
+                        <label class="inline">Gender:</label>
+                        <label class="inline" for="male">Male</label>
+                        <input class="inline" id="male" type="radio" value="Male">
+                        <label class="inline" for="female">Female</label>
+                        <input class="inline" id="female" type="radio" value="Female">
+                    </div>
+                    
+                    <div class="form-unit">
+                        <label class="block" for="text">Birth date:</label>
+                        <textarea class="block" id="text" type="date">
+                    </div>
+
+                    
+                    <div class="form-unit">
+                        <div class="button">
+                            <label for="submit"></label>
+                            <input id="submit" type="submit">
+                        </div>
+                        <div class="button">
+                            <label for="reset"></label>
+                            <input id="reset" type="reset">
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+        <footer id="footer" class="container wrapper">
+            <header><h1>Footer</h1></header>
+            <p>Some useful links here.</p>
+        </footer>
+    </div>
+</body>
+</html>

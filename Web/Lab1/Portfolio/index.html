@@ -10,7 +10,14 @@
     <title>Homepage</title>
 </head>
 <body>
-    <div class="main-container"></div>
+    <div class="sidebar wrapper">
+        <header><h1>Contents</h1></header>
+        <ul>
+            <a href="#section1" class="contents">Раздел 1</a>
+            <a href="#footer" class="contents">Footer</a>
+        </ul>
+    </div>
+    <div class="main-content-container">
         <nav id="nav" class="container wrapper">
             <span id="site-title">Web lab1</span>
             <a href="index.html"     class="nav-link">Home</a>
@@ -26,15 +33,16 @@
                 <h1>Портфолио Горбенко Кирилла Николаевича. Главная страница</h1>
             </header>
 
-            <img id="avatar" src="images/avatar.jpg" alt="author's avatar" title="that's me!">
-            
-            <p>
-                <i>Горбенко Кирилл Николаевич.</i> Группа ИС-17-2-о. Исследование возможностей
-                языка разметки гипертекстов HTML и каскадных таблиц стилей CSS. 
-                <strong>Вариант № 3</strong>.
-            </p>
-
             <section id="section1">
+
+                <img id="avatar" src="images/avatar.jpg" alt="author's avatar" title="that's me!">
+            
+                <p>
+                    <i>Горбенко Кирилл Николаевич.</i> Группа ИС-17-2-о. Исследование возможностей
+                    языка разметки гипертекстов HTML и каскадных таблиц стилей CSS. 
+                    <strong>Вариант № 3</strong>.
+                </p>
+
                 <header><h2>Раздел 1</h2></header>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida
@@ -69,13 +77,6 @@
             <header><h1>Footer</h1></header>
             <p>Some useful links here.</p>
         </footer>
-        <div id="sidebar" class="sidebar wrapper right">
-                <header><h1>Contents</h1></header>
-                <ul>
-                    <a href="#section1" class="contents">Раздел 1</a>
-                    <a href="footer" class="contents">Footer</a>
-                </ul>
-        </div>
     </div>
 </body>
 </html>

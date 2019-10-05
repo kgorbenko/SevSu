@@ -6,11 +6,18 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <link href="css/nav.css" rel="stylesheet" type="text/css" />
     <link href="css/shared.css" rel="stylesheet" type="text/css" />
-    <link href="css/about.css" rel="stylesheet" type="text/css" />
+    <link href="css/learning.css" rel="stylesheet" type="text/css" />
     <title>Learning</title>
 </head>
 <body>
-    <div class="main-container"></div>
+    <div class="sidebar wrapper">
+        <header><h1>Contents</h1></header>
+        <ul>
+            <a href="#section1" class="contents">Дисциплины</a>
+            <a href="#footer" class="contents">Footer</a>
+        </ul>
+    </div>
+    <div class="main-content-container">
         <nav id="nav" class="container wrapper">
             <span id="site-title">Web lab1</span>
             <a href="index.html"     class="nav-link">Home</a>
@@ -29,39 +36,56 @@
             <p>Кафедра информационных систем</p>
 
             <table class="table">
-                <tr class="table-row-odd">
-                    <th scope="row" class="th">1 курс</td>
-                    <td class="td">Экология</td>
-                    <td class="td">Информатика</td>
+                <tr class="table-row odd">
+                    <th scope="row" class="th">1 семестр</td>
                     <td class="td">Высшая математика</td>
                     <td class="td">Алгоритмизация и программирование</td>
+                    <td class="td">Информатика</td>
+                    <td class="td">История</td>
                     <td class="td">Физика</td>
+                    <td class="td">Экология</td>
                     <td class="td">Дискретная математика</td>
                     <td class="td">Английский язык</td>
                 </tr>
-                <tr class="table-row-even">
-                    <th scope="row" class="th">2 курс</td>
-                    <td class="td">Философия</td>
-                    <td class="td">Архитектура компьютерных систем</td>
-                    <td class="td">Теория баз данных</td>
+                <tr class="table-row even">
+                    <th scope="row" class="th">2 семестр</td>
                     <td class="td">Высшая математика</td>
+                    <td class="td">Алгоритмизация и программирование</td>
+                    <td class="td">Физика</td>
+                    <td class="td">Философия</td>
+                    <td class="td">Основы теории права</td>
+                    <td class="td">Экономика</td>
+                    <td class="td">БЖД</td>
+                    <td class="td">Английский язык</td>
+                </tr>
+                <tr class="table-row odd">
+                    <th scope="row" class="th">3 семестр</td>
+                    <td class="td">Архитектура компьютерных систем</td>
+                    <td class="td">Высшая математика</td>
+                    <td class="td">Дискретная математика</td>
+                    <td class="td">ООП</td>
+                    <td class="td">ТЭЦ</td>
+                    <td class="td">Экономика предприятия</td>
+                    <td class="td">Компьютерная графика</td>
+                    <td class="td">Английский язык</td>
+                </tr>
+                <tr class="table-row even">
+                    <th scope="row" class="th">4 семестр</td>
                     <td class="td">Электроника</td>
                     <td class="td">Основы теории алгоритмов</td>
                     <td class="td">Теория вероятностей и математическая статистика</td>
+                    <td class="td">Английский язык</td>
+                    <td class="td">Системный анализ</td>
+                    <td class="td">Теория баз данных</td>
+                    <td class="td">ТСПП</td>
+                    <td class="td">ОС</td>
                 </tr>
             </table>
         </div>
-    </div>
-    <footer id="footer" class="container wrapper">
+        <footer id="footer" class="container wrapper">
             <header><h1>Footer</h1></header>
             <p>Еще ссылочки.</p>
         </footer>
-        <div id="sidebar" class="sidebar wrapper right">
-                <header><h1>Contents</h1></header>
-                <ul>
-                    <a href="#section1" class="contents">Раздел 1</a>
-                    <a href="#footer" class="contents">Footer</a>
-                </ul>
-        </div>
+    </div>
 </body>
 </html>
