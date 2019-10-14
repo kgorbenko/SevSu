@@ -14,15 +14,28 @@ public abstract class PrintedEdition
     } 
     public PrintedEdition(string name, string author, double price, IDictionary<string, string> contents)
     {
-        Name = name ?? throw new ArgumentNullException("name was null.");
-        Author = author ?? throw new ArgumentNullException("author was null.");
-        Contents = contents ?? throw new ArgumentNullException("contents was null");
+        Name = name ?? throw new ArgumentNullException(nameof(name));
+        Author = author ?? throw new ArgumentNullException(nameof(author));
+        Contents = contents ?? throw new ArgumentNullException(nameof(contents));
         Price = price;
     }
     public string this[string chapter]
     {
-        get => Contents.ContainsKey(chapter) ? Contents[chapter] : throw new ChapterNotFoundExeption($"The key \"{chapter}\" was not found");
-        set => Contents[chapter] = value;
+        get 
+        {
+            if (chapter == null)
+            {
+                throw new ArgumentNullException(nameof(chapter));
+            }
+            return Contents.ContainsKey(chapter) ? Contents[chapter] : throw new ChapterNotFoundExeption($"The key \"{chapter}\" was not found");
+        }
+        set
+        {
+            if (value != null)
+            {
+                Contents[chapter] = value;
+            }
+        }
     }
 
     public abstract string Print();

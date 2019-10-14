@@ -7,10 +7,9 @@ public class Book : PrintedEdition, IPublishable, INewPubishable
     public string TitleImage { get; set; }
     public Book() { }
     public Book(string name) : base(name) { } 
-
     public Book(string name, string author, double price, IDictionary<string, string> contents, string titleImage) : base(name, author, price, contents) 
     {
-        TitleImage = titleImage ?? throw new ArgumentNullException("titleImage was null");
+        TitleImage = titleImage ?? throw new ArgumentNullException(nameof(titleImage));
     }
     public override string Print()
     {
@@ -34,11 +33,15 @@ public class Book : PrintedEdition, IPublishable, INewPubishable
 
     Book IPublishable.RePublish()
     {
-        throw new NotImplementedException();
+        return new Book() {
+            Name = "IPublishable"
+        };
     }
 
     Book INewPubishable.RePublish()
     {
-        throw new NotImplementedException();
+        return new Book() {
+            Name = "INewPublishable"
+        };
     }
 }

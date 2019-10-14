@@ -1,0 +1,353 @@
+\documentclass[a4paper,14pt]{extarticle}
+
+\usepackage{ucs}                                                                                                                   
+\usepackage[utf8x]{inputenc}                                                                                                       
+\usepackage[english,russian]{babel}
+\usepackage[T2A]{fontenc}
+\usepackage{extsizes}
+\usepackage{tempora}
+\usepackage[left=25mm, top=20mm, right=10mm, bottom=20mm, headheight=5pt]{geometry}
+\usepackage{fancyhdr}
+\usepackage{titling}
+\usepackage{titlesec}
+\usepackage{textcase}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[labelsep=endash]{caption}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage[font=normalsize]{subfig}
+\usepackage{csquotes}
+\usepackage{amsmath}
+
+\graphicspath{ {./images/} }
+
+\newcommand{\mylabnumber}{2}
+\newcommand{\mylabtitle}{Исследование типов данных, определяемые пользователем. Наследование. Обработка исключений в C\#}
+\newcommand{\mysubject}{Платформа .NET}
+\newcommand{\mylecturer}{Забаштанский А.К.}
+
+\renewcommand{\baselinestretch}{1.25} % Sets basic line stretch
+\renewcommand{\headrulewidth}{0pt} % Remove horizontal line below header in fancyhdr
+
+\addto\captionsrussian{
+    \renewcommand{\figurename}{Рисунок} % Set a default picture caption
+    \renewcommand{\tablename}{Таблица} % Set a default table caption
+}
+
+\captionsetup[table]{singlelinecheck=false} % To make a table caption appear left-aligned
+
+\pagestyle{fancy}
+\lhead{} \rhead{} \cfoot{} % Setting empty headers
+\chead{\thepage} % Sets central header page numbering
+
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{8pt}
+
+ % Format section style and indentations
+\titleformat{\section}[hang]{\large \centering \bfseries}{\thesection}{0.5em}{\MakeTextUppercase}
+\titlespacing{\section}{\parindent}{1em}{0em}
+
+% Format subsection style and indentations
+\titleformat{\subsection}[hang]{\bfseries}{\thesubsection}{0.5em}{}
+\titlespacing{\subsection}{\parindent}{1em}{0em}
+
+% Format subsubsection style and indentations
+\titleformat{\subsubsection}[hang]{\normalfont}{\thesubsubsection}{0.5em}{}
+\titlespacing{\subsubsection}{\parindent}{1em}{0em}
+
+% Format enumerate style with "enumitem" package
+\setlist[enumerate, 1]{wide=\parindent,leftmargin=0pt,topsep=0pt,
+    itemsep=0pt,partopsep=0pt,parsep=0pt}
+\setlist[enumerate, 2]{wide=2\parindent,label=\alph*.,leftmargin=1.25cm,topsep=0pt,
+    itemsep=0pt,partopsep=0pt,parsep=0pt}
+\setlist[enumerate, 3]{wide=3\parindent,label=\alph*.,leftmargin=2.5cm,topsep=0pt,
+    itemsep=0pt,partopsep=0pt,parsep=0pt}
+
+% Format itemize style with "enumitem" package
+\setlist[itemize, 1]{wide=\parindent,leftmargin=0pt,topsep=0pt,itemsep=0pt,
+    partopsep=0pt,parsep=0pt}
+\setlist[itemize, 2]{wide=2\parindent,leftmargin=1.25cm,topsep=0pt,itemsep=0pt,
+    partopsep=0pt,parsep=0pt}
+\setlist[itemize, 3]{wide=3\parindent,leftmargin=2.5cm,topsep=0pt,itemsep=0pt,
+    partopsep=0pt,parsep=0pt}
+
+\captionsetup[figure]{justification=centering}
+
+\begin{document}
+
+    \lstset{ % "listings package configuration"
+        basicstyle=\footnotesize\ttfamily,
+        breaklines=true,
+        numbersep=5pt,
+        tabsize=4,
+        gobble=8,
+        extendedchars=\true,
+        keepspaces=\true,
+        numbers=left,
+        stringstyle=\ttfamily,
+        showstringspaces=\false
+    }
+
+    % ############################################################################
+    % -------------------------------- Title page --------------------------------
+    % ############################################################################
+
+    \begin{titlepage}
+        
+        \thispagestyle{empty}
+        
+        \begin{center}
+            
+            Министерство науки и высшего образования Российской Федерации \\
+            Севастопольский государственный университет \\
+            Кафедра ИС
+            
+            \vfill
+
+            Отчет \\
+            по лабораторной работе №\mylabnumber \\
+            \enquote{\mylabtitle} \\
+            по дисциплине \\
+            \enquote{\MakeTextUppercase{\mysubject}}
+
+        \end{center}
+
+        \vspace{1cm}
+
+        \noindent\hspace{7.5cm} Выполнил студент группы ИС/б-17-2-о \\
+        \null\hspace{7.5cm} Горбенко К. Н. \\
+        \null\hspace{7.5cm} Проверил \\
+        \null\hspace{7.5cm} \mylecturer
+
+        \vfill
+
+        \begin{center}
+            Севастополь \\
+            2019
+        \end{center}
+
+    \end{titlepage}
+
+    % ############################################################################
+    % ------------------------------ Document start ------------------------------
+    % ############################################################################
+
+    \section{Цель работы}
+    \begin{enumerate}
+        \item Познакомиться с пользовательскими типами данных в языке С\#:
+              структура и перечисление.
+        \item Ознакомиться со структурой класса, его созданием и использованием,
+              описанием членов класса: полей, свойств, инициализации объектов
+              класса с помощью конструкторов.
+        \item Изучить механизм создания иерархий классов в С\# и применение
+              интерфейсов при наследовании.
+        \item Изучить механизм генерации и обработки исключений.
+    \end{enumerate}
+
+    \section{Задание на лабораторную работу}
+    \begin{enumerate}
+        \item Проработать примеры программ 1-6, данные в теоретических сведениях.
+              Создать на их основе программы. Получить результаты работы программ
+              и уметь их объяснить. Внести в отчет с комментариями.
+        \item Для заданной структуры данных разработать абстрактный класс и класс-наследник.
+              В классе реализовать несколько конструкторов. Создать методы, работающие с
+              полями класса. Часть из них должны быть виртуальными. Добавить методы-свойства
+              и индексаторы.
+        \item Разработать интерфейсные классы, добавляющие некоторые методы в класс-потомок.
+              Изучить причины возникновения коллизий имен при наследовании и способы их устранения.
+        \item Разработать классы исключительных ситуаций и применить их для обработки возникающих исключений.
+        \item Написать демонстрационную программу.
+    \end{enumerate}
+
+    Описание данных пользовательских типов:
+
+    \textbf{ПЕЧАТНОЕ ИЗДАНИЕ}: название, ФИО автора, стоимость, оглавление.
+    
+    \section{Ход работы}
+    Рассмотрим примеры программ 1-5.
+    \subsection{Программы}
+    \begin{enumerate}
+        \item Программа демонстрирует использование перечислений со значениями по умолчанию
+              и установленными значениями. Кроме того, программа демонстрирует использование
+              структур. При этом, не показано свойство структур как значимых классов, что, по
+              моему мнению, является более важным свойством, чем наличие конструкторов, о чем
+              говорят методические указания.
+        \item Программа показывает возможности использования свойств как способа доступа к полям
+              класса. При этом упрощается регулирование доступа и уменьшается количество 
+              необходимого для этого программного кода.
+        \item Программа демонстрирует использование индексаторов для созданных классов. При этом
+              возможно добавление дополнительной логики к уже существующим классам с индексаторами.
+        \item Программа демонстрирует возможности объектного программирования в языке C\#. Метод
+              базового класса переопределяется методом класса-наследника. Кроме того, класс-наследник
+              добавляет свои собственные методы к уже унаследованным.
+        \item Программа показывает способы устранения коллизий имен при наследовании и реализации
+              интерфейсов. Для устранения коллизий необходимо явно указывать интерфейс, для которого
+              определяется метод.
+    \end{enumerate}
+    
+    \subsection{Реализация программ в соответствии с вариантом}
+    Напишем класс, соответствующий печатному изданию:
+    \begin{lstlisting}[language={[Sharp]C}]
+        public abstract class PrintedEdition
+        {
+            public string Name   { get; set; }
+            public string Author { get; set; }
+            public double Price  { get; set; }
+            public IDictionary<string, string> Contents { get; set; }
+            public PrintedEdition() { }
+            public PrintedEdition(string name)
+            {
+                Name = name ?? throw new ArgumentNullException("name was null.");
+            } 
+            public PrintedEdition(string name, string author, double price, IDictionary<string, string> contents)
+            {
+                Name = name ?? throw new ArgumentNullException(nameof(name));
+                Author = author ?? throw new ArgumentNullException(nameof(author));
+                Contents = contents ?? throw new ArgumentNullException(nameof(contents));
+                Price = price;
+            }
+            public string this[string chapter]
+            {
+                get 
+                {
+                    if (chapter == null)
+                    {
+                        throw new ArgumentNullException(nameof(chapter));
+                    }
+                    return Contents.ContainsKey(chapter) ? Contents[chapter] : throw new ChapterNotFoundExeption($"The key \"{chapter}\" was not found");
+                }
+                set
+                {
+                    if (value != null)
+                    {
+                        Contents[chapter] = value;
+                    }
+                }
+            }
+
+            public abstract string Print();
+        }       
+    \end{lstlisting}
+    Абстрактный класс содержит свойства, конструкторы, индексатор и абстрактный метод.
+    Кроме того, его индексатор выбрасывает объявленное исключение, представленное ниже:
+
+    \begin{lstlisting}[language={[Sharp]C}]
+        public class ChapterNotFoundExeption : KeyNotFoundException
+        {
+            public ChapterNotFoundExeption() { }
+            public ChapterNotFoundExeption(string name) : base(name) { }
+            public ChapterNotFoundExeption(string name, Exception inner) { }
+        }
+    \end{lstlisting}
+
+    Напишем теперь его наследника:
+
+    \begin{lstlisting}[language={[Sharp]C}]
+        public class Book : PrintedEdition, IPublishable, INewPubishable
+        {
+            public string TitleImage { get; set; }
+            public Book() { }
+            public Book(string name) : base(name) { } 
+
+            public Book(string name, string author, double price, IDictionary<string, string> contents, string titleImage) : base(name, author, price, contents) 
+            {
+                TitleImage = titleImage ?? throw new ArgumentNullException(nameof(titleImage));
+            }
+            public override string Print()
+            {
+                var builder = new StringBuilder();
+                foreach (var chapter in Contents)
+                    builder.Append($"Chapter {chapter.Key}\n\n{chapter.Value}\n\n");
+                return builder.ToString();
+            }
+
+            public Book RePublish()
+            {
+                return new Book()
+                {
+                    Name = this.Name + "new edition",
+                    Author = this.Author,
+                    Price = this.Price,
+                    Contents = this.Contents,
+                    TitleImage = this.TitleImage
+                };
+            }
+
+            Book IPublishable.RePublish()
+            {
+                return new Book() {
+                    Name = "IPublishable"
+                };
+            }
+
+            Book INewPubishable.RePublish()
+            {
+                return new Book() {
+                    Name = "INewPublishable"
+                };
+            }
+        }
+    \end{lstlisting}
+    Данный класс является наследником класса PrintedEdition и реализует интерфейсы
+    IPublishable и INewPubishable, приведенные далее. Его конструкторы вызывают
+    конструкторы базового класса, а метод Print определяет данный метод базового
+    класса.
+
+    Кроме того, метод RePublish реализуется для разных интерфейсов по-разному.
+
+    Интерфейсы IPublishable и INewPubishable:
+
+    \begin{lstlisting}[language={[Sharp]C}]
+        public interface IPublishable
+        {
+            Book RePublish();
+        }
+
+        public interface INewPubishable
+        {
+            Book RePublish();
+        }
+    \end{lstlisting}
+
+    Демонстрационная программа:
+
+    \begin{lstlisting}[language={[Sharp]C}]
+        public class Program
+        {
+            public static void Main(string[] args)
+            {
+                var contents = new Dictionary<string, string>()
+                {
+                    { "First", "Some content here" } 
+                };
+                var book = new Book("name", "me", 500, contents, "image.jpg");
+
+                try 
+                {
+                    Console.WriteLine(book.RePublish().Name);
+                    Console.WriteLine((book as IPublishable).RePublish().Name);
+                    Console.WriteLine((book as INewPubishable).RePublish().Name);
+                    var chapter = book["not existing chapter"];
+                }
+                catch (ChapterNotFoundExeption e) 
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+    \end{lstlisting}
+
+    \section{Выводы}
+
+    В ходе лабораторной работы были рассмотрены механизмы ООП в языке C\#.
+    Поблемы, возникающие наследовании и реализации интерфейсов - коллизии имен, 
+    решаются явным указанием интерфейса. Собственные исключения описываются
+    как классы, унаследованные от любого другого класса исключения.
+
+    Классы от структур отличаются тем, что классы передаются по значению,
+    а структуры по ссылке.
+
+\end{document}
