@@ -1,133 +1,129 @@
 body {
+    margin: 0px;
     font-family: Arial, Helvetica, sans-serif;
-    margin: 0px auto 0px auto;
-    padding: 15px;
-    font-size: 0px;
     width: 100%;
-    min-width: 1000px;
+    background-color: #f2f2f2;
 }
 
-.main-content-container {
-    width: 78%;
-    float: right;
+.portrait {
+    max-width: 100%;
 }
 
-.container {
-    display: inline-block;
-    font-size: 16px;
-    width: 90%;
-    min-width: 800px;
-    overflow: hidden;
-    margin: 12px 0px;
-}
-
-.wrapper {
-    background-color: #ededed;
-    border: 1px solid #bfbfbf;
-    border-radius: 5px;
-    padding: 10px;
+.main-content {
+    position: relative;
+    top: -100px;
+    width: 60%;
+    margin: 0px auto;
+    padding: 50px 100px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     overflow: hidden;
 }
 
-.sidebar {
-    position: fixed;
-    float: left;
-    font-size: 16px;
-    width: 20%;
-    padding: 0px;
-    margin: 12px 0px;
+footer {
+    width: 100%;
+    background-color: #e6e6e6;
 }
 
-header h1, header h2, header h3, header h4 {
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    margin: 20px;
+footer > section {
+    width: 60%;
+    margin: 0px auto;
+    padding: 50px 100px;
 }
 
 p {
-    text-indent: 1.25cm;
+    text-align: justify;
 }
 
-ul, ol {
-    width: 100%;
-    padding: 0px;
-    margin: 0px;
+header > * {
+    font-weight: 100;
 }
 
-.contents {
-    display: block;
-    text-decoration: none;
-    color: black;
-    width: 100%;
-    line-height: 40px;
-    text-indent: 10px;
+h1 {
+    font-size: 40px;
 }
 
-.contents:hover {
-    background-color: #bababa;
+h2 {
+    font-size: 32px;
 }
 
-#footer {
-    padding: 0px 10px;
+.form-container {
+	margin:10px auto;
+	max-width: 400px;
+    padding: 20px 12px 10px 20px;
+    font-weight: 100;
+}
+.form-container li {
+	padding: 0;
+	display: block;
+	list-style: none;
+	margin: 10px 0 0 0;
+}
+.form-container label {
+	margin:0 0 3px 0;
+	padding:0px;
+	display:block;
+	font-weight: bold;
 }
 
-.th {
-    font-weight: bold;
-    background-color: lightgrey;
-}
-
-.table-row {
-    background-color: #e3e3e3;
-    height: 60px;
-    text-align: center;
-}
-
-.td {
-    width: 11%;
-}
-
-.center-form { 
-    width: 50%;
-    margin: 5px auto 5px auto;
-}
-
-.form-unit {
-    display: block;
-    margin: 10px;
-    padding: 5px;
-}
-
-#submit, #submit {
-    display: inline;
-}
-
-.button {
+.form-container .inline {
     display: inline-block;
-    float: right;
-    width: 100px;
-    height: 30px;
-    margin-right: 0px;
-    margin-left: 30px;
 }
 
-#submit, #reset {
-    border-radius: 2px;
-    width: 100%;
-    height: 100%;
-    background-color: lightgrey;
+.form-container input[type=text], 
+.form-container input[type=date],
+.form-container input[type=datetime],
+.form-container input[type=number],
+.form-container input[type=search],
+.form-container input[type=time],
+.form-container input[type=url],
+.form-container input[type=email],
+textarea, 
+select {
+	box-sizing: border-box;
+	border:1px solid #BEBEBE;
+	padding: 7px;
+	margin:0px;
+	outline: none;	
+}
+.form-container input[type=text]:focus, 
+.form-container input[type=date]:focus,
+.form-container input[type=datetime]:focus,
+.form-container input[type=number]:focus,
+.form-container input[type=search]:focus,
+.form-container input[type=time]:focus,
+.form-container input[type=url]:focus,
+.form-container input[type=email]:focus,
+.form-container textarea:focus, 
+.form-container select:focus {
+	box-shadow: 0 0 8px #88D5E9;
+	border: 1px solid #88D5E9;
+}
+.form-container .field-divided {
+	width: 49%;
 }
 
-.inline {
-    display: inline;
+.form-container .field-long {
+	width: 100%;
+}
+.form-container .field-select {
+	width: 100%;
+}
+.form-container .field-textarea {
+	height: 100px;
 }
 
-.block {
-    margin: 5px 0px;
-    display: block;
+.form-container input[type=submit],
+.form-container input[type=button] {
+	background: #4B99AD;
+	padding: 8px 15px 8px 15px;
+	border: none;
+	color: #fff;
 }
 
-.fill {
-    width: 99%;
-    line-height: 24px;
+.form-container input[type=submit]:hover,
+.form-container input[type=button]:hover {
+	background: #4691A4;
+	box-shadow:none;
 }

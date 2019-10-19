@@ -10,81 +10,61 @@
     <title>Homepage</title>
 </head>
 <body>
-    <div class="sidebar wrapper">
-        <header><h1>Contents</h1></header>
-        <ul>
-            <a href="#test" class="contents">Test</a>
-            <a href="#footer" class="contents">Footer</a>
+    <nav>
+        <ul class="nav-container">
+            <li class="nav-item"><span                   >Web lab1</span></li>
+            <li class="nav-item"><a href="index.html"    >Home</a></li>
+            <li class="nav-item"><a href="about.html"    >About</a></li>
+            <li class="nav-item"><a href="interests.html">My interests</a></li>
+            <li class="nav-item"><a href="learning.html" >Learning</a></li>
+            <li class="nav-item"><a href="photos.html"   >Photos</a></li>
+            <li class="nav-item"><a href="contact.html"  >Contact</a></li>
+            <li class="nav-item"><a href="test.html"     >Test</a></li>
         </ul>
-    </div>
-    <div class="main-content-container">
-        <nav id="nav" class="container wrapper">
-            <span id="site-title">Web lab1</span>
-            <a href="index.html"     class="nav-link">Home</a>
-            <a href="about.html"     class="nav-link">About</a>
-            <a href="interests.html" class="nav-link">My interests</a>
-            <a href="learning.html"  class="nav-link">Learning</a>
-            <a href="photos.html"    class="nav-link">Photos</a>
-            <a href="contact.html"   class="nav-link">Contact</a>
-            <a href="test.html"      class="nav-link">Test</a>
-        </nav>
-        <div class="container wrapper">
+    </nav>
+    <img src="images/portrait.jpg" class="portrait">
+    <div class="main-content">
+        <section>   
             <header>
                 <h1>Тест по инженерной графике</h1>
             </header>
 
-            <section id="test">
-                <form class="center-form" method="POST" action="mailto:mymail@your.email.address">
-                    <div class="form-unit">
-                        <p>
-                            В каком случее допускается заменять стрелки на размерных линиях 
-                            засечками или точками? 
-                        </p>
-                        <div class="form-unit">
-                            <label class="inline" for="ans1">При большом количестве размеров на чертеже</label>
-                            <input class="inline" id="ans1" type="radio">
-                        </div>
-                        <div class="form-unit">
-                            <label class="inline" for="ans2">Для выделения стандартных размеров</label>
-                            <input class="inline" id="ans2" type="radio">
-                        </div>
-                        <div class="form-unit">
-                            <label class="inline" for="ans2">При недостатке места для стрелок</label>
-                            <input class="inline" id="ans2" type="radio">
-                        </div>
-                    </div>
-
-                    <div class="form-unit">
-                        <label class="inline">Gender:</label>
-                        <label class="inline" for="male">Male</label>
-                        <input class="inline" id="male" type="radio" value="Male">
-                        <label class="inline" for="female">Female</label>
-                        <input class="inline" id="female" type="radio" value="Female">
-                    </div>
-                    
-                    <div class="form-unit">
-                        <label class="block" for="text">Birth date:</label>
-                        <textarea class="block" id="text" type="date">
-                    </div>
-
-                    
-                    <div class="form-unit">
-                        <div class="button">
-                            <label for="submit"></label>
-                            <input id="submit" type="submit">
-                        </div>
-                        <div class="button">
-                            <label for="reset"></label>
-                            <input id="reset" type="reset">
-                        </div>
-                    </div>
-                </form>
-            </section>
-        </div>
-        <footer id="footer" class="container wrapper">
+            <form method="POST" action="someaction">
+                <ul class="form-container">
+                    <li>
+                        <label>От чего зависит величина стрелок размерной линии?</label>
+                        <label class="inline">От длины размерной линии</label>
+                        <input type="radio" id="1" value="1">
+                        <label class="inline">От толщины линии контура изображения</label>
+                        <input type="radio" id="2" value="2">
+                        <label class="inline">От масштаба изображения</label>
+                        <input type="radio" id="3" value="3">
+                        <label class="inline">От размера формата</label>
+                        <input type="radio" id="4" value="4">
+                    <li>
+                        <label>Какое назначение имеет тонкая сплошная линия?</label>
+                        <select name="question2">
+                            <option value="1">Линии разграничения вида и разреза.</option>
+                            <option value="2">Линии сечений.</option>
+                            <option value="3">Линии штриховки.</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label>Какие размеры являются рабочими? </label>
+                        <textarea name="question3" id="field5" class="field-long field-textarea"></textarea>
+                    </li>
+                    <li>
+                        <input type="submit" value="Submit" />
+                    </li>
+                </ul>
+            </form>
+        </section>
+    </div>
+    <footer>
+        <section>
             <header><h1>Footer</h1></header>
             <p>Some useful links here.</p>
-        </footer>
-    </div>
+        </section>
+    </footer>
 </body>
 </html>

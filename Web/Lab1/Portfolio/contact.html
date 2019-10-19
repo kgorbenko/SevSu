@@ -10,71 +10,49 @@
     <title>Contact page</title>
 </head>
 <body>
-    <div class="sidebar wrapper">
-        <header><h1>Contents</h1></header>
-        <ul>
-            <a href="#mailme" class="contents">Mail Me!</a>
-            <a href="#footer" class="contents">Footer</a>
+    <nav>
+        <ul class="nav-container">
+            <li class="nav-item"><span                   >Web lab1</span></li>
+            <li class="nav-item"><a href="index.html"    >Home</a></li>
+            <li class="nav-item"><a href="about.html"    >About</a></li>
+            <li class="nav-item"><a href="interests.html">My interests</a></li>
+            <li class="nav-item"><a href="learning.html" >Learning</a></li>
+            <li class="nav-item"><a href="photos.html"   >Photos</a></li>
+            <li class="nav-item"><a href="contact.html"  >Contact</a></li>
+            <li class="nav-item"><a href="test.html"     >Test</a></li>
         </ul>
+    </nav>
+    <img src="images/portrait.jpg" class="portrait">
+    <div class="main-content">
+        <section>
+            <header>
+                <h1>Mail Me!</h1>
+            </header>
+
+            <form>
+                <ul class="form-container">
+                    <li><label>Full Name</label><input type="text" name="field1" class="field-divided" placeholder="First" />
+                        <input type="text" name="field2" class="field-divided" placeholder="Last" /></li>
+                    <li>
+                        <label>Email</label>
+                        <input type="email" name="field3" class="field-long" />
+                    </li>
+                    <li>
+                        <label>Your Message</label>
+                        <textarea name="field5" id="field5" class="field-long field-textarea"></textarea>
+                    </li>
+                    <li>
+                        <input type="submit" value="Submit" />
+                    </li>
+                </ul>
+            </form>
+        </section>
     </div>
-    <div class="main-content-container">
-        <nav id="nav" class="container wrapper">
-            <span id="site-title">Web lab1</span>
-            <a href="index.html"     class="nav-link">Home</a>
-            <a href="about.html"     class="nav-link">About</a>
-            <a href="interests.html" class="nav-link">My interests</a>
-            <a href="learning.html"  class="nav-link">Learning</a>
-            <a href="photos.html"    class="nav-link">Photos</a>
-            <a href="contact.html"   class="nav-link">Contact</a>
-            <a href="test.html"      class="nav-link">Test</a>
-        </nav>
-        <div class="container wrapper">
-                <section id="mailme">
-                    <header>
-                        <h1>Mail Me!</h1>
-                    </header>
-
-                    <form class="center-form" method="POST" action="mailto:mymail@your.email.address">
-                        <div class="form-unit">
-                            <label class="block" for="name">Your name:</label>
-                            <input class="block fill" id="name" type="text">
-                        </div>
-
-                        <div class="form-unit">
-                            <label class="inline">Gender:</label>
-                            <label class="inline" for="male">Male</label>
-                            <input class="inline" id="male" type="radio" value="Male">
-                            <label class="inline" for="female">Female</label>
-                            <input class="inline" id="female" type="radio" value="Female">
-                        </div>
-                        
-                        <div class="form-unit">
-                            <label class="inline" for="birth">Birth date:</label>
-                            <input class="inline" id="birth" type="date">
-                        </div>
-
-                        <div class="form-unit">
-                            <label class="block" for="email">Email:</label>
-                            <input class="block fill" id="email" type="email">
-                        </div>
-                        
-                        <div class="form-unit">
-                            <div class="button">
-                                <label for="submit"></label>
-                                <input id="submit" type="submit">
-                            </div>
-                            <div class="button">
-                                <label for="reset"></label>
-                                <input id="reset" type="reset">
-                            </div>
-                        </div>
-                    </form>
-                </section>
-        </div>
-        <footer id="footer" class="container wrapper">
+    <footer>
+        <section>
             <header><h1>Footer</h1></header>
             <p>Some useful links here.</p>
-        </footer>
-    </div>
+        </section>
+    </footer>
 </body>
 </html>
