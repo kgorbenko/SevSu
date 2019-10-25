@@ -1,9 +1,3 @@
-.photoalbum td {
-    display: inline-block;
-    width: 23.5%;
-    margin: 0.5%;
-}
-
-.photoalbum td > img {
-    width: 100%;
+.photo-wrapper {
+    height: 1800px;
 }
