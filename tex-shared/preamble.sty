@@ -35,6 +35,7 @@
 }
 
 \captionsetup[table]{singlelinecheck=false} % To make a table caption appear left-aligned
+\captionsetup[figure]{justification=centering}
 
 \pagestyle{fancy}
 \lhead{} \rhead{} \cfoot{} % Setting empty headers
@@ -71,11 +72,7 @@
 \setlist[itemize, 3]{wide=3\parindent,leftmargin=2.5cm,topsep=0pt,itemsep=0pt,
     partopsep=0pt,parsep=0pt}
 
-\captionsetup[figure]{justification=centering}
-
 \newcommand{\code}{\texttt}
-
-
 
 \lstset{
     literate={Ö}{{\"O}}1
@@ -167,7 +164,7 @@
     breaklines=true,
     numbersep=5pt,
     tabsize=4,
-    gobble=8,
+    gobble=0,
     extendedchars=\true,
     keepspaces=\true,
     numbers=left,
