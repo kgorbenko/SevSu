@@ -1,0 +1,153 @@
+\documentclass[a4paper,14pt]{extarticle}
+\usepackage{../../tex-shared/preamble}
+
+\renewcommand{\mylabnumber}{1}
+\renewcommand{\mylabtitle}{Исследование возможностей языка разметки гипертекстов
+                           HTML и каскадных таблиц стилей CSS}
+\renewcommand{\mysubject}{Веб-технологии}
+\renewcommand{\mylecturer}{Дрозин А.Ю.}
+
+\begin{document}
+\input{../../tex-shared/title-page.tex}
+\lstset{ % "listings package configuration"
+    basicstyle=\tiny\ttfamily,
+}
+
+\section{Цель работы}
+Изучить основные понятия языка разметки гипертекстов HTML и
+каскадных таблиц стилей CSS, исследовать структуру HTML-документа,
+приобрести практические навыки реализации Web-страниц c
+использованием гиперссылок, нумерованных и маркированных списков,
+графических элементов, таблиц и форм ввода.
+
+\section{Задание на работу}
+В процессе выполнения лабораторной работы необходимо реализовать 
+персональный Web-сайт. Рекомендуется наличие следующих веб-страниц
+\begin{enumerate}
+    \item Главная страница.
+    \item Обо мне.
+    \item Мои интересы.
+    \item Учеба.
+    \item Фотоальбом.
+    \item Контакт.
+    \item Тест по дисциплине.
+\end{enumerate}
+
+Задание для варианта №3. Тест по инженерной графике.
+\begin{itemize}
+    \item Radio2;
+    \item Select4;
+    \item Textarea.
+\end{itemize}
+
+\section{Ход работы}
+\subsection{Результат}
+Созданные HTML-страницы приведены в приложении.
+
+Веб-страницы изображены на рисунках \ref{fig:homepage} - \ref{fig:test}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{homepage}
+    \caption{Домашняя страница}
+    \label{fig:homepage}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{about}
+    \caption{Страница "Обо мне"}
+    \label{fig:about}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{interests}
+    \caption{Страница "Мои интересы"}
+    \label{fig:interests}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{learning}
+    \caption{Страница "Учеба"}
+    \label{fig:learning}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{photos}
+    \caption{Фотоальбом}
+    \label{fig:photos}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{contact}
+    \caption{Страница "Контакт"}
+    \label{fig:contact}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{test}
+    \caption{Страница "Тест"}
+    \label{fig:test}
+\end{figure}
+
+\subsection{Содержание страниц}
+\subsubsection{Общее}
+Все стриницы выполнены в одном стиле. Сверху находится
+навигационная панель с названием сайта и ссылками на
+все его страницы. Навигационная панель выполнена в
+элементе \code{nav}, который является flex-контейнером.
+Ссылки центрируются в зависимости от доступного места.
+За навигационной панелью находится изображение, занимающее
+всю ширину экрана.
+
+Элемент, представляющий из себя содержание страницы, заступает
+на картинку. Это выполнено при помощи свойства \code{top}.
+Содержание выполнено при помощи элементов \code{section},
+\code{p} и \code{h}.
+
+Под содержанием находится футер. В нем можно расположить
+некоторые ссылки или описания.
+
+Общие стили задаются в файле \code{shared.css}.
+
+\subsubsection{Главная страница}
+На главной странице для фото задано свойство \code{float: left}
+для обтекания ее текстом. При этом, чтобы контейнер, содержащий
+картинку, не оказывался нулевой высоты, для него задано свойство
+\code{overflow: hidden}.
+
+\subsubsection{Страница \enquote{Обо мне}}
+На странице присутствует нумерованный список и фотографии.
+
+\subsubsection{Страница \enquote{Мои интересы}}
+На странице в списке присутствуют ссылки с якорями для навигации.
+
+\subsubsection{Страница \enquote{Учеба}}
+На странице присутствует таблица. При этом шапка таблицы растянута
+с помощью свойства \code{colspan}.
+
+\subsubsection{Фотоальбом}
+На странице расположен flex-контейнер, внутри которого фото
+располагаются по столбцам.
+
+\subsubsection{Странице \enquote{Контакт}}
+На странице расположена форма для ввода данных пользователя.
+Она содержит следующие элементы: \code{input type=text}, 
+\code{input type=email}, \code{textfield} и кнопку подтверждения.
+
+\subsubsection{Страница \enquote{Тест}}
+На странице находится фома, состоящая из 2 элементов \code{radio},
+элемента \code{select} с 3 опциями выбора и элемента \code{textfield}
+для развернутого ответа. Кроме того, на странице находится стандартная
+форма ввода данных пользователя со страницы "Контакт".
+
+\section*{Выводы}
+В ходе лабораторной работы был создан сайт-портфолио. Для этого
+был применен язык разметки гипертекста HTML и каскадные таблицы
+стилей CSS. Были применены семантические элементы HTML 5.
+
+Для реализации некоторых элементов использовались flex-контейнеры,
+но такое решение может не работать на более старых браузерах.
+Кроме того, сайт не масштабируется для слишком узких экранов.
+\section*{Приложение}
+\input{appendix}
+\end{document}
