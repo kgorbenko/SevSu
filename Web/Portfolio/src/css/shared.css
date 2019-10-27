@@ -51,19 +51,24 @@ h2 {
 .contents {
 	display: block;
 	color: black;
-	text-decoration: none;
+	text-decoration: underline;
+}
+
+.contents:hover {
+	color: #bfbfbf;
+	cursor: pointer;
 }
 
 .photo-wrapper {
     display: flex;
 	width: 100%;
     flex-flow: column wrap;
-	align-content: flex-start;
-	justify-content: baseline;
+	align-content: space-around;
 }
 
 .photo-wrapper > img {
 	max-width: 300px;
+	max-height: 400px;
 	flex: 2 2 auto;
 	margin: 10px;
 }
