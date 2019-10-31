@@ -45,7 +45,7 @@ h1 {
 }
 
 h2 {
-    font-size: 32px;
+	font-size: 32px;
 }
 
 .contents {
@@ -139,4 +139,8 @@ h2 {
 .form-container input[type=button]:hover {
 	background: #4691A4;
 	box-shadow:none;
+}
+
+.form-container .input-error {
+	border-color: red;
 }
