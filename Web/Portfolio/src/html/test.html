@@ -29,35 +29,43 @@
                 <h1>Тест по инженерной графике</h1>
             </header>
 
+            <p>All fields are required!</p>
+
             <form method="POST" action="someaction">
                 <ol class="form-container">
                     <li>
                         <label>От чего зависит величина стрелок размерной линии?</label>
-                        <label class="inline">От длины размерной линии</label>
+                        <label for="1" class="inline">От длины размерной линии</label>
                         <input type="radio" id="1" value="1" checked="true" name="question1">
-                        <label class="inline">От толщины линии  контура изображения</label>
+                        <label for="2" class="inline">От толщины линии  контура изображения</label>
                         <input type="radio" id="2" value="2" name="question1">
                     <li>
-                        <label>Какое назначение имеет тонкая сплошная линия?</label>
-                        <select name="question2">
+                        <label for="select-input">Какое назначение имеет тонкая сплошная линия?</label>
+                        <select name="question2" id="select-input">
                             <option value="1">Линии разграничения вида и разреза.</option>
                             <option value="2">Линии сечений.</option>
                             <option value="3">Линии штриховки.</option>
                         </select>
                     </li>
                     <li>
-                        <label>Какие размеры являются рабочими? </label>
-                        <textarea name="question3" id="field5" class="field-long field-textarea"></textarea>
-                    </li>
-                    <li><label>Full Name</label><input type="text" name="field1" class="field-divided" placeholder="First" />
-                        <input type="text" name="field2" class="field-divided" placeholder="Last" /></li>
-                    <li>
-                        <label>Email</label>
-                        <input type="email" name="field3" class="field-long" />
+                        <label for="question3">Какие размеры являются рабочими? </label>
+                        <textarea name="question3" id="question3" class="field-long field-textarea"></textarea>
                     </li>
                     <li>
-                        <label>Your Message</label>
-                        <textarea name="field5" id="field5" class="field-long field-textarea"></textarea>
+                        <label for="full-name-input">Full Name</label>
+                        <input type="text" name="full-name" id="full-name-input" class="field-long" placeholder="First" />
+                    </li>
+                    <li>
+                        <label for="email-input">Email</label>
+                        <input type="email" name="email" id="email-input" class="field-long" />
+                    </li>
+                    <li>
+                        <label for="phone-input">Phone number</label>
+                        <input type="text" name="phone" id="phone-input" class="field-long" />
+                    </li>
+                    <li>
+                        <label for="message-input">Your Message</label>
+                        <textarea name="field5" id="message-input" class="field-long field-textarea"></textarea>
                     </li>
                     <li>
                         <input type="submit" value="Submit" />

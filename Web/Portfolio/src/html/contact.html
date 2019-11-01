@@ -28,17 +28,25 @@
                 <h1>Mail Me!</h1>
             </header>
 
-            <form>
+            <p>All fields are required!</p>
+
+            <form method="POST" action="someaction">
                 <ul class="form-container">
-                    <li><label>Full Name</label><input type="text" name="field1" class="field-divided" placeholder="First" />
-                        <input type="text" name="field2" class="field-divided" placeholder="Last" /></li>
                     <li>
-                        <label>Email</label>
-                        <input type="email" name="field3" class="field-long" />
+                        <label for="full-name-input">Full Name</label>
+                        <input type="text" name="full-name" id="full-name-input" class="field-long" placeholder="First" />
                     </li>
                     <li>
-                        <label>Your Message</label>
-                        <textarea name="field5" id="field5" class="field-long field-textarea"></textarea>
+                        <label for="email-input">Email</label>
+                        <input type="email" name="email" id="email-input" class="field-long" />
+                    </li>
+                    <li>
+                        <label for="phone-input">Phone number</label>
+                        <input type="text" name="phone" id="phone-input" class="field-long" />
+                    </li>
+                    <li>
+                        <label for="message-input">Your Message</label>
+                        <textarea name="field4" id="message-input" class="field-long field-textarea"></textarea>
                     </li>
                     <li>
                         <input type="submit" value="Submit" />
