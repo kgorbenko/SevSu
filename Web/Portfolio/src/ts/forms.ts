@@ -1,19 +1,21 @@
 window.onload = () => {
     const form = document.forms.item(0);
-    form.addEventListener('change', () => { return validate(Array.from(form.querySelectorAll('input'))) } );
+    form.addEventListener('submit', validate);
 };
 
-const validate = (inputElements: HTMLInputElement[]) : Boolean => {
-    inputElements.forEach(input => {
-        input.value === '' ? showMessage(input) : removeMessage(input);
+const validate = () => {
+    const form = document.forms.item(0);
+    const formElements = <HTMLFormElement[]>Array.from(form.elements);
+
+    formElements.forEach(element => {
+        validateTextField(element) ?
+            element.classList.remove('input-error') :
+            element.classList.add('input-error');
     });
-    return inputElements.some(element => element.value === '');
+
+    if (formElements.some(x => x.classList.contains('input-error'))) {
+        event.preventDefault();
+    }
 };
 
-const showMessage = (input : HTMLInputElement) => {
-    input.classList.add('input-error');
-};
-
-const removeMessage = (input : HTMLInputElement) => {
-    input.classList.remove('input-error');
-};
+const validateTextField = (formElement : HTMLFormElement) : Boolean => formElement.value !== '';
