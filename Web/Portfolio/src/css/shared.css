@@ -36,7 +36,7 @@ p {
 	text-align: justify;
 }
 
-header > * {
+header * {
     font-weight: 100;
 }
 
@@ -62,85 +62,99 @@ h2 {
 .photo-wrapper {
     display: flex;
 	width: 100%;
-    flex-flow: column wrap;
-	align-content: space-around;
+    flex-flow: row wrap;
+	align-content: flex-start;
+	justify-content: left;
 }
 
 .photo-wrapper > img {
-	max-width: 300px;
-	max-height: 400px;
+	width: 30%;
+	max-height: 300px;
 	flex: 2 2 auto;
 	margin: 10px;
 }
 
-.form-container {
+form ol {
 	margin:10px auto;
 	max-width: 400px;
     padding: 20px 12px 10px 20px;
     font-weight: 100;
 }
 
-.form-container li {
+form ol li {
 	padding: 0;
 	display: block;
 	list-style: none;
 	margin: 10px 0 0 0;
 }
 
-.form-container label {
-	margin:0 0 3px 0;
-	padding:0px;
-	display:block;
+form ol label {
+	margin: 0 0 3px 0;
+	padding: 0px;
+	display: block;
 	font-weight: bold;
 }
 
-.form-container .inline {
+form ol .inline {
     display: inline-block;
 }
 
-.form-container input, textarea, select {
+form ol input, textarea, select {
 	box-sizing: border-box;
 	border:1px solid #BEBEBE;
 	padding: 7px;
-	margin:0px;
+	margin: 0px;
 	outline: none;	
 }
 
-.form-container input:focus {
+form ol input:focus {
 	box-shadow: 0 0 8px #88D5E9;
 	border: 1px solid #88D5E9;
 }
 
-.form-container .field-divided {
-	width: 49%;
-}
-
-.form-container .field-long {
+form ol .field-long {
 	width: 100%;
 }
 
-.form-container .field-select {
+form ol select {
 	width: 100%;
 }
 
-.form-container .field-textarea {
+form ol textarea {
 	height: 100px;
 }
 
-.form-container input[type=submit],
-.form-container input[type=button] {
+form ol input[type=submit],
+form ol input[type=button] {
 	background: #4B99AD;
 	padding: 8px 15px 8px 15px;
 	border: none;
 	color: #fff;
 }
 
-.form-container input[type=submit]:hover,
-.form-container input[type=button]:hover {
+form ol input[type=submit]:hover,
+form ol input[type=button]:hover {
 	background: #4691A4;
 	box-shadow:none;
 }
 
-.form-container .input-error {
-	border-color: red;
+.avatar {
+    width: 30%;
+    float: left;
+    margin: 0% 2% 2% 0%;
+}
+
+th {
+    font-weight: bold;
+    background-color: lightgrey;
+}
+
+tr {
+    background-color: #e3e3e3;
+    height: 60px;
+    text-align: center;
+}
+
+td {
+    width: 11%;
 }
