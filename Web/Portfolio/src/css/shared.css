@@ -143,17 +143,25 @@ form ol input[type=button]:hover {
     margin: 0% 2% 2% 0%;
 }
 
-.th {
+.photo-wrapper {
+    height: 500px;
+}
+
+th {
     font-weight: bold;
     background-color: lightgrey;
 }
 
-.table-row {
+tr {
     background-color: #e3e3e3;
     height: 60px;
     text-align: center;
 }
 
-.td {
+td {
     width: 11%;
+}
+
+.photo-wrapper {
+    max-height: 1500px;
 }
