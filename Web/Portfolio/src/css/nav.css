@@ -3,7 +3,7 @@ nav {
     height: 60px;
 }
 
-.nav-container {
+nav > ul {
     display: flex;
     list-style: none;
     flex-flow: row nowrap;
@@ -15,12 +15,12 @@ nav {
     height: 100%;
 }
 
-.nav-item {
+nav ul > li {
     flex: 3 3 auto;
     text-align: center;
 }
 
-.nav-item > a, .nav-item > span {
+nav ul li > a, nav ul li > span {
     text-decoration: none;
     text-transform: none;
     font-size: 16px;
@@ -28,6 +28,6 @@ nav {
     line-height: 60px;
 }
 
-.nav-item > a:hover {
+nav ul li > a:hover {
     color: #bfbfbf;
 }
