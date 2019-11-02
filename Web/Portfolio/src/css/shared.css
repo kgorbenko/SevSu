@@ -144,3 +144,28 @@ h2 {
 .form-container .input-error {
 	border-color: red;
 }
+
+.avatar {
+    width: 30%;
+    float: left;
+    margin: 0% 2% 2% 0%;
+}
+
+.photo-wrapper {
+    height: 500px;
+}
+
+.th {
+    font-weight: bold;
+    background-color: lightgrey;
+}
+
+.table-row {
+    background-color: #e3e3e3;
+    height: 60px;
+    text-align: center;
+}
+
+.td {
+    width: 11%;
+}
