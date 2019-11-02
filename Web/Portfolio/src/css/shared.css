@@ -169,3 +169,7 @@ h2 {
 .td {
     width: 11%;
 }
+
+.photo-wrapper {
+    max-height: 1500px;
+}
