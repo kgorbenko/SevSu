@@ -2,7 +2,7 @@ window.onload = () => {
     let photoWrapper = document.getElementsByClassName('photo-wrapper').item(0);
     photos.forEach(photo => {
         let img = document.createElement('img');
-        img.setAttribute('src', photos[index]);
+        img.setAttribute('src', photo);
         img.setAttribute('alt', 'photoalbum photo');
         photoWrapper.appendChild(img);
     });
