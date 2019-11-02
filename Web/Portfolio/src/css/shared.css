@@ -88,9 +88,9 @@ form ol li {
 }
 
 form ol label {
-	margin:0 0 3px 0;
-	padding:0px;
-	display:block;
+	margin: 0 0 3px 0;
+	padding: 0px;
+	display: block;
 	font-weight: bold;
 }
 
@@ -102,7 +102,7 @@ form ol input, textarea, select {
 	box-sizing: border-box;
 	border:1px solid #BEBEBE;
 	padding: 7px;
-	margin:0px;
+	margin: 0px;
 	outline: none;	
 }
 
@@ -111,19 +111,15 @@ form ol input:focus {
 	border: 1px solid #88D5E9;
 }
 
-form ol .field-divided {
-	width: 49%;
-}
-
 form ol .field-long {
 	width: 100%;
 }
 
-form ol .field-select {
+form ol select {
 	width: 100%;
 }
 
-form ol .field-textarea {
+form ol textarea {
 	height: 100px;
 }
 
@@ -141,18 +137,10 @@ form ol input[type=button]:hover {
 	box-shadow:none;
 }
 
-form ol .input-error {
-	border-color: red;
-}
-
 .avatar {
     width: 30%;
     float: left;
     margin: 0% 2% 2% 0%;
-}
-
-.photo-wrapper {
-    height: 500px;
 }
 
 .th {
@@ -168,8 +156,4 @@ form ol .input-error {
 
 .td {
     width: 11%;
-}
-
-.photo-wrapper {
-    max-height: 1500px;
 }
