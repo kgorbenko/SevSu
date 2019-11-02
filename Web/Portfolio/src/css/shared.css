@@ -62,13 +62,14 @@ h2 {
 .photo-wrapper {
     display: flex;
 	width: 100%;
-    flex-flow: column wrap;
-	align-content: space-around;
+    flex-flow: row wrap;
+	align-content: flex-start;
+	justify-content: left;
 }
 
 .photo-wrapper > img {
-	max-width: 300px;
-	max-height: 400px;
+	width: 30%;
+	max-height: 300px;
 	flex: 2 2 auto;
 	margin: 10px;
 }
@@ -143,10 +144,6 @@ form ol input[type=button]:hover {
     margin: 0% 2% 2% 0%;
 }
 
-.photo-wrapper {
-    height: 500px;
-}
-
 th {
     font-weight: bold;
     background-color: lightgrey;
@@ -160,8 +157,4 @@ tr {
 
 td {
     width: 11%;
-}
-
-.photo-wrapper {
-    max-height: 1500px;
 }
