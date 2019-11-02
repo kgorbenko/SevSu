@@ -412,9 +412,8 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <link href="css/nav.css" rel="stylesheet" type="text/css" />
-    <link href="css/shared.css" rel="stylesheet" type="text/css" />
-    <link href="css/contact.css" rel="stylesheet" type="text/css" />
+    <link href="../css/nav.css" rel="stylesheet" type="text/css" />
+    <link href="../css/shared.css" rel="stylesheet" type="text/css" />
     <title>Contact page</title>
 </head>
 <body>
@@ -430,24 +429,32 @@
             <li class="nav-item"><a href="test.html"     >Test</a></li>
         </ul>
     </nav>
-    <img src="images/portrait.jpg" class="portrait">
+    <img src="../images/portrait.jpg" class="portrait">
     <div class="main-content">
         <section>
             <header>
                 <h1>Mail Me!</h1>
             </header>
 
-            <form>
+            <p>All fields are required!</p>
+
+            <form method="POST" action="someaction">
                 <ul class="form-container">
-                    <li><label>Full Name</label><input type="text" name="field1" class="field-divided" placeholder="First" />
-                        <input type="text" name="field2" class="field-divided" placeholder="Last" /></li>
                     <li>
-                        <label>Email</label>
-                        <input type="email" name="field3" class="field-long" />
+                        <label for="full-name-input">Full Name</label>
+                        <input type="text" name="full-name" id="full-name-input" class="field-long" placeholder="First" />
                     </li>
                     <li>
-                        <label>Your Message</label>
-                        <textarea name="field5" id="field5" class="field-long field-textarea"></textarea>
+                        <label for="email-input">Email</label>
+                        <input type="email" name="email" id="email-input" class="field-long" />
+                    </li>
+                    <li>
+                        <label for="phone-input">Phone number</label>
+                        <input type="text" name="phone" id="phone-input" class="field-long" />
+                    </li>
+                    <li>
+                        <label for="message-input">Your Message</label>
+                        <textarea name="field4" id="message-input" class="field-long field-textarea"></textarea>
                     </li>
                     <li>
                         <input type="submit" value="Submit" />
@@ -465,7 +472,12 @@
                 <li>Another link</li>
             </ul>
             <p>
-                ...
+                And some info as well: Nunc eget viverra neque, non ullamcorper odio. Integer dolor sem, ultrices eu
+                tempus dapibus, sagittis ac lacus. Duis rutrum turpis eu lectus imperdiet, ac
+                sagittis orci faucibus. Vestibulum volutpat fringilla turpis vehicula lobortis.
+                Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam posuere 
+                tempor enim, et tempus tellus commodo mattis. Sed sollicitudin mauris vitae 
+                vestibulum malesuada. 
             </p>
         </section>
     </footer>
@@ -481,10 +493,10 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <link href="css/nav.css" rel="stylesheet" type="text/css" />
-    <link href="css/shared.css" rel="stylesheet" type="text/css" />
-    <link href="css/index.css" rel="stylesheet" type="text/css" />
-    <title>Homepage</title>
+    <link href="../css/nav.css" rel="stylesheet" type="text/css" />
+    <link href="../css/shared.css" rel="stylesheet" type="text/css" />
+    <link href="../css/index.css" rel="stylesheet" type="text/css" />
+    <title>Test page</title>
 </head>
 <body>
     <nav>
@@ -499,42 +511,50 @@
             <li class="nav-item"><a href="test.html"     >Test</a></li>
         </ul>
     </nav>
-    <img src="images/portrait.jpg" class="portrait">
+    <img src="../images/portrait.jpg" class="portrait">
     <div class="main-content">
         <section>   
             <header>
                 <h1>Тест по инженерной графике</h1>
             </header>
 
+            <p>All fields are required!</p>
+
             <form method="POST" action="someaction">
                 <ol class="form-container">
                     <li>
                         <label>От чего зависит величина стрелок размерной линии?</label>
-                        <label class="inline">От длины размерной линии</label>
-                        <input type="radio" id="1" value="1" name="question1">
-                        <label class="inline">От толщины линии  контура изображения</label>
+                        <label for="1" class="inline">От длины размерной линии</label>
+                        <input type="radio" id="1" value="1" checked="true" name="question1">
+                        <label for="2" class="inline">От толщины линии  контура изображения</label>
                         <input type="radio" id="2" value="2" name="question1">
                     <li>
-                        <label>Какое назначение имеет тонкая сплошная линия?</label>
-                        <select name="question2">
+                        <label for="select-input">Какое назначение имеет тонкая сплошная линия?</label>
+                        <select name="question2" id="select-input">
                             <option value="1">Линии разграничения вида и разреза.</option>
                             <option value="2">Линии сечений.</option>
                             <option value="3">Линии штриховки.</option>
                         </select>
                     </li>
                     <li>
-                        <label>Какие размеры являются рабочими? </label>
-                        <textarea name="question3" id="field5" class="field-long field-textarea"></textarea>
-                    </li>
-                    <li><label>Full Name</label><input type="text" name="field1" class="field-divided" placeholder="First" />
-                        <input type="text" name="field2" class="field-divided" placeholder="Last" /></li>
-                    <li>
-                        <label>Email</label>
-                        <input type="email" name="field3" class="field-long" />
+                        <label for="question3">Какие размеры являются рабочими? </label>
+                        <textarea name="question3" id="question3" class="field-long field-textarea"></textarea>
                     </li>
                     <li>
-                        <label>Your Message</label>
-                        <textarea name="field5" id="field5" class="field-long field-textarea"></textarea>
+                        <label for="full-name-input">Full Name</label>
+                        <input type="text" name="full-name" id="full-name-input" class="field-long" placeholder="First" />
+                    </li>
+                    <li>
+                        <label for="email-input">Email</label>
+                        <input type="email" name="email" id="email-input" class="field-long" />
+                    </li>
+                    <li>
+                        <label for="phone-input">Phone number</label>
+                        <input type="text" name="phone" id="phone-input" class="field-long" />
+                    </li>
+                    <li>
+                        <label for="message-input">Your Message</label>
+                        <textarea name="field5" id="message-input" class="field-long field-textarea"></textarea>
                     </li>
                     <li>
                         <input type="submit" value="Submit" />
@@ -552,7 +572,12 @@
                 <li>Another link</li>
             </ul>
             <p>
-                ...
+                And some info as well: Nunc eget viverra neque, non ullamcorper odio. Integer dolor sem, ultrices eu
+                tempus dapibus, sagittis ac lacus. Duis rutrum turpis eu lectus imperdiet, ac
+                sagittis orci faucibus. Vestibulum volutpat fringilla turpis vehicula lobortis.
+                Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam posuere 
+                tempor enim, et tempus tellus commodo mattis. Sed sollicitudin mauris vitae 
+                vestibulum malesuada. 
             </p>
         </section>
     </footer>
