@@ -36,7 +36,7 @@ p {
 	text-align: justify;
 }
 
-header > * {
+header * {
     font-weight: 100;
 }
 
