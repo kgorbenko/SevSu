@@ -89,6 +89,7 @@ form ol li {
 }
 
 form ol label {
+	text-align: center;
 	margin: 0 0 3px 0;
 	padding: 0px;
 	display: block;
@@ -158,3 +159,8 @@ tr {
 td {
     width: 11%;
 }
+
+.error-messages {
+	color: red;
+	margin-bottom: 5px;
+};
