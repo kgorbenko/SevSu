@@ -109,6 +109,9 @@ const validateForm = () => {
     let firstError : FormComponent;
     fields.forEach(field => {
         validateField(field);
+        if (!firstError && field.errorMessages.length > 0) {
+            firstError = field;
+        }
     });
     if (firstError) {
         document.getElementById(firstError.componentId).focus();

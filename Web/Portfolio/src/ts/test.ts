@@ -27,7 +27,7 @@ class NameValidator implements FormFilledValidator {
 }
 
 class DetailedAnswerValidator implements FormFilledValidator {
-    errorMessage: 'Too many letters';
+    errorMessage = 'Too many words. Should be less than 30';
     validate = (value: string) : Boolean => {
         return value.split(' ').length <= 30;
     };
@@ -49,7 +49,9 @@ class FormComponent {
         this.validators.forEach(validator => {
             const message = validator.errorMessage;
             if (validator.validate(this.value)) {
-                this.errorMessages.splice(this.errorMessages.indexOf(message), 1);
+                if (this.errorMessages.includes(message)) {
+                    this.errorMessages.splice(this.errorMessages.indexOf(message), 1);
+                }
             }
             else {
                 if (!this.errorMessages.includes(message)) {
@@ -121,6 +123,9 @@ const validateForm = () => {
     let firstError : FormComponent;
     fields.forEach(field => {
         validateField(field);
+        if (!firstError && field.errorMessages.length > 0) {
+            firstError = field;
+        }
     });
     if (firstError) {
         document.getElementById(firstError.componentId).focus();
