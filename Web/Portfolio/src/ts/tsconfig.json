@@ -14,7 +14,7 @@
       "photos.ts",
       "interests.ts",
       "contact.ts",
-      "shared.ts",
+      "test.ts",
   ],
   "scripts": {
       "tsbuild": "tsc --build tsconfig.json",

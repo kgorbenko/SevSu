@@ -1,5 +1,3 @@
-export {}
-
 interface FormFilledValidator {
     errorMessage: string;
     validate(value: string): Boolean;
@@ -25,6 +23,13 @@ class NameValidator implements FormFilledValidator {
     validate = (value: string) : Boolean => {
         const pattern = /[A-Za-z]+ [A-Za-z]+ [A-Za-z]+/
         return pattern.test(value);
+    };
+}
+
+class DetailedAnswerValidator implements FormFilledValidator {
+    errorMessage: 'Too many letters';
+    validate = (value: string) : Boolean => {
+        return value.split(' ').length <= 30;
     };
 }
 
@@ -56,6 +61,13 @@ class FormComponent {
 }
 
 const fields: FormComponent[] = [
+    new FormComponent(
+        'question3',
+        [
+            new FieldFilledValidator(),
+            new DetailedAnswerValidator()
+        ]
+    ),
     new FormComponent(
         'full-name-input', 
         [
