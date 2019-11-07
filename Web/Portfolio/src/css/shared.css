@@ -108,7 +108,8 @@ form ol input, textarea, select {
 	outline: none;	
 }
 
-form ol input:focus {
+form ol input:focus,
+form ol textarea:focus {
 	box-shadow: 0 0 8px #88D5E9;
 	border: 1px solid #88D5E9;
 }
