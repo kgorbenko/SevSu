@@ -220,18 +220,17 @@ class FormComponent {
         this.componentId = componentId;
         this.validators = validators;
         this.errorMessages = [];
-    };
+    }
+    ;
 }
 const fields = [
     new FormComponent('full-name-input', [
-        new FieldFilledValidator(),
         new NameValidator(),
     ]),
     new FormComponent('email-input', [
         new FieldFilledValidator(),
     ]),
     new FormComponent('phone-input', [
-        new FieldFilledValidator(),
         new PhoneNumberValidator(),
     ]),
     new FormComponent('message-input', [
@@ -287,12 +286,12 @@ const showMessages = (field) => {
 };
 \end{lstlisting}
 
-На рисунке изображены сообщения при нажатии на кнопку \enquote{Submit}
-при пустой форме.
+На рисунке \ref{fig:contact-validation} изображены сообщения
+при нажатии на кнопку \enquote{Submit} при пустой форме.
 \begin{figure}[H]
     \centering
-    
-    \caption{}
-    \label{}
+    \includegraphics[width=8.\linewidth]{}
+    \caption{Тексты сообщений при ошибке валидации}
+    \label{fig:contact-validation}
 \end{figure}
 \end{document}
