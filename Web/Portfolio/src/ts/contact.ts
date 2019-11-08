@@ -15,7 +15,7 @@ class FieldFilledValidator implements FormFilledValidator {
 class PhoneNumberValidator implements FormFilledValidator {
     errorMessage = 'Entered number is in incorrect format';
     validate = (value: string) : Boolean => {
-        const pattern = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/g;
+        const pattern = /^[+][7|3]\d{9,11}$/g;
         return pattern.test(value);
     };
 }
