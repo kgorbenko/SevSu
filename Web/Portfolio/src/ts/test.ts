@@ -73,7 +73,6 @@ const fields: FormComponent[] = [
     new FormComponent(
         'full-name-input', 
         [
-            new FieldFilledValidator(),
             new NameValidator(),
         ],
     ),
@@ -86,7 +85,6 @@ const fields: FormComponent[] = [
     new FormComponent(
         'phone-input',
         [
-            new FieldFilledValidator(),
             new PhoneNumberValidator(),
         ]
     ),
