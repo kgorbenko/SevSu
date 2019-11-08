@@ -101,12 +101,13 @@ const photos = [
 \begin{lstlisting}
 window.onload = () => {
     let links = document.getElementsByClassName('contents');
-    loadInterests(Object.keys(interests));
+    const interestsKeys = Object.keys(interests);
+    loadInterests(interestsKeys[0], interestsKeys[1], interestsKeys[2], interestsKeys[3]);
 };
 
 const loadInterests = (...interestsIds) => {
     const interestsList = document.getElementById('interests');
-    interestsIds[0].forEach(interestId => {
+    interestsIds.forEach(interestId => {
         const content = interests[interestId];
         let interestWrapper = document.createElement('div');
         interestWrapper.setAttribute('id', interestId);
@@ -167,5 +168,131 @@ const interests = {
 };
 \end{lstlisting}
 
-Списки 
+Списки хранятся в объекте \code{interests}, выводятся с помощью
+функции с одним rest-параметром, в которую передаются элементы массива.
+
+\subsection{Страница \enquote{Контакт}}
+На данной странице добавлено поле \enquote{Номер телефона}. На все поля
+добавлена валидация с выводом сообщений и установкой фокуса на
+неправильно введенных полях. Текст программы представлен далее:
+\begin{lstlisting}
+class FieldFilledValidator {
+    constructor() {
+        this.errorMessage = 'This field should be filled';
+        this.validate = (value) => {
+            return value !== '';
+        };
+    }
+}
+class PhoneNumberValidator {
+    constructor() {
+        this.errorMessage = 'Entered number is in incorrect format';
+        this.validate = (value) => {
+            const pattern = /^[+][7|3]\d{8,10}$/g;
+            return pattern.test(value);
+        };
+    }
+}
+class NameValidator {
+    constructor() {
+        this.errorMessage = 'Enter three space-separated words';
+        this.validate = (value) => {
+            const pattern = /[A-Za-z]+ [A-Za-z]+ [A-Za-z]+/;
+            return pattern.test(value);
+        };
+    }
+}
+class FormComponent {
+    constructor(componentId, validators) {
+        this.validate = () => {
+            this.validators.forEach(validator => {
+                const message = validator.errorMessage;
+                if (validator.validate(this.value)) {
+                    this.errorMessages.splice(this.errorMessages.indexOf(message), 1);
+                }
+                else {
+                    if (!this.errorMessages.includes(message)) {
+                        this.errorMessages.push(message);
+                    }
+                }
+            });
+        };
+        this.componentId = componentId;
+        this.validators = validators;
+        this.errorMessages = [];
+    };
+}
+const fields = [
+    new FormComponent('full-name-input', [
+        new FieldFilledValidator(),
+        new NameValidator(),
+    ]),
+    new FormComponent('email-input', [
+        new FieldFilledValidator(),
+    ]),
+    new FormComponent('phone-input', [
+        new FieldFilledValidator(),
+        new PhoneNumberValidator(),
+    ]),
+    new FormComponent('message-input', [
+        new FieldFilledValidator(),
+    ]),
+];
+window.onload = () => {
+    const form = document.forms.item(0);
+    form.addEventListener('submit', validateForm);
+    fields.forEach(field => {
+        const fieldElement = document.getElementById(field.componentId);
+        fieldElement.addEventListener('change', () => validateField(field));
+    });
+};
+const validateField = (field) => {
+    const errorsMessages = document.getElementById(`${field.componentId}-errors`);
+    if (errorsMessages !== null) {
+        errorsMessages.remove();
+    }
+    field.value = document.getElementById(field.componentId).value;
+    field.validate();
+    if (field.errorMessages.length > 0) {
+        showMessages(field);
+    }
+};
+const validateForm = () => {
+    let firstError;
+    fields.forEach(field => {
+        validateField(field);
+        if (!firstError && field.errorMessages.length > 0) {
+            firstError = field;
+        }
+    });
+    if (firstError) {
+        document.getElementById(firstError.componentId).focus();
+    }
+    if (fields.some(field => field.errorMessages.length > 0)) {
+        event.preventDefault();
+    }
+};
+const showMessages = (field) => {
+    const targetElement = document.getElementById(field.componentId);
+    const parentElement = targetElement.parentElement;
+    let contentWrapper = document.createElement('div');
+    contentWrapper.setAttribute('id', `${field.componentId}-errors`);
+    contentWrapper.setAttribute('class', 'error-messages');
+    field.errorMessages.forEach(message => {
+        let messageListItem = document.createElement('li');
+        messageListItem.innerHTML = message;
+        contentWrapper.appendChild(messageListItem);
+    });
+    parentElement.insertBefore(contentWrapper, targetElement);
+};
+\end{lstlisting}
+
+На рисунке изображены сообщения при нажатии на кнопку \enquote{Submit}
+при пустой форме.
+\begin{figure}[H]
+    \centering
+    
+    \caption{}
+    \label{}
+\end{figure}
 \end{document}
