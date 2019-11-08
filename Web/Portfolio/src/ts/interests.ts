@@ -45,17 +45,17 @@ enum InterestIds {
     Books   = 'Books', 
     Music   = 'Music', 
     Films   = 'Films'
-};
+}
 
 type InterestsNode = {
     [key in keyof typeof InterestIds]: InterestsNodeContent
-};
+}
 
 interface InterestsNodeContent {
     header: string;
     values: string[];
     isHidden: boolean;
-};
+}
 
 const interestContent: string =
     `Lorem ipsum dolor sit amet, consecteturadipiscing elit. Sed gravida
