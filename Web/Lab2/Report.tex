@@ -171,10 +171,11 @@ const interests = {
 Списки хранятся в объекте \code{interests}, выводятся с помощью
 функции с одним rest-параметром, в которую передаются элементы массива.
 
-\subsection{Страница \enquote{Контакт}}
-На данной странице добавлено поле \enquote{Номер телефона}. На все поля
+\subsection{Страницы \enquote{Контакт} и \enquote{Тест}}
+На данных страницах добавлено поле \enquote{Номер телефона}. На все поля
 добавлена валидация с выводом сообщений и установкой фокуса на
-неправильно введенных полях. Текст программы представлен далее:
+неправильно введенных полях. Тексты программ представлены далее.
+Текст файла \code{contact.js}:
 \begin{lstlisting}
 class FieldFilledValidator {
     constructor() {
@@ -286,12 +287,148 @@ const showMessages = (field) => {
 };
 \end{lstlisting}
 
-На рисунке \ref{fig:contact-validation} изображены сообщения
-при нажатии на кнопку \enquote{Submit} при пустой форме.
+Текст файла \code{test.js}:
+\begin{lstlisting}
+class FieldFilledValidator {
+    constructor() {
+        this.errorMessage = 'This field should be filled';
+        this.validate = (value) => {
+            return value !== '';
+        };
+    }
+}
+class PhoneNumberValidator {
+    constructor() {
+        this.errorMessage = 'Entered number is in incorrect format';
+        this.validate = (value) => {
+            const pattern = /^[+][7|3]\d{8,10}$/g;
+            return pattern.test(value);
+        };
+    }
+}
+class NameValidator {
+    constructor() {
+        this.errorMessage = 'Enter three space-separated words';
+        this.validate = (value) => {
+            const pattern = /[A-Za-z]+ [A-Za-z]+ [A-Za-z]+/;
+            return pattern.test(value);
+        };
+    }
+}
+class FormComponent {
+    constructor(componentId, validators) {
+        this.validate = () => {
+            this.validators.forEach(validator => {
+                const message = validator.errorMessage;
+                if (validator.validate(this.value)) {
+                    this.errorMessages.splice(this.errorMessages.indexOf(message), 1);
+                }
+                else {
+                    if (!this.errorMessages.includes(message)) {
+                        this.errorMessages.push(message);
+                    }
+                }
+            });
+        };
+        this.componentId = componentId;
+        this.validators = validators;
+        this.errorMessages = [];
+    }
+    ;
+}
+const fields = [
+    new FormComponent('full-name-input', [
+        new NameValidator(),
+    ]),
+    new FormComponent('email-input', [
+        new FieldFilledValidator(),
+    ]),
+    new FormComponent('phone-input', [
+        new PhoneNumberValidator(),
+    ]),
+    new FormComponent('message-input', [
+        new FieldFilledValidator(),
+    ]),
+];
+window.onload = () => {
+    const form = document.forms.item(0);
+    form.addEventListener('submit', validateForm);
+    fields.forEach(field => {
+        const fieldElement = document.getElementById(field.componentId);
+        fieldElement.addEventListener('change', () => validateField(field));
+    });
+};
+const validateField = (field) => {
+    const errorsMessages = document.getElementById(`${field.componentId}-errors`);
+    if (errorsMessages !== null) {
+        errorsMessages.remove();
+    }
+    field.value = document.getElementById(field.componentId).value;
+    field.validate();
+    if (field.errorMessages.length > 0) {
+        showMessages(field);
+    }
+};
+const validateForm = () => {
+    let firstError;
+    fields.forEach(field => {
+        validateField(field);
+        if (!firstError && field.errorMessages.length > 0) {
+            firstError = field;
+        }
+    });
+    if (firstError) {
+        document.getElementById(firstError.componentId).focus();
+    }
+    if (fields.some(field => field.errorMessages.length > 0)) {
+        event.preventDefault();
+    }
+};
+const showMessages = (field) => {
+    const targetElement = document.getElementById(field.componentId);
+    const parentElement = targetElement.parentElement;
+    let contentWrapper = document.createElement('div');
+    contentWrapper.setAttribute('id', `${field.componentId}-errors`);
+    contentWrapper.setAttribute('class', 'error-messages');
+    field.errorMessages.forEach(message => {
+        let messageListItem = document.createElement('li');
+        messageListItem.innerHTML = message;
+        contentWrapper.appendChild(messageListItem);
+    });
+    parentElement.insertBefore(contentWrapper, targetElement);
+};
+\end{lstlisting}
+
+На рисунках \ref{fig:contact-validation} - \ref{fig:form-validation}
+изображены сообщения при нажатии на кнопку \enquote{Submit} при пустой форме.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=8.\linewidth]{}
-    \caption{Тексты сообщений при ошибке валидации}
+    \includegraphics[width=.8\linewidth]{contact}
+    \caption{Тексты сообщений при ошибке валидации на странице \enquote{Контакт}}
     \label{fig:contact-validation}
 \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{test}
+    \caption{Тексты сообщений при ошибке валидации на странице \enquote{Тест}}
+    \label{fig:form-validation}
+\end{figure}
+
+В данных программах создаются массивы элементов формы, в которых
+к элементам привязываются классы валидации, содержащие саму
+функцию валидации и сообщение об ошибке валидации. При изменении
+любого из полей, на нем срабатывает функция валидации.
+
+В формы добавлены поля \enquote{Номер телефона}. Поле \enquote{Имя} валидируется
+как три слова, разделенные пробелом. Текстовое поле ответа на третий вопрос теста
+требует менее 30 слов.
+
+\section*{Выводы}
+В ходе лабораторной работы были изучены способы получения и вставки элементов
+\code{HTML}-документа. Для работы с \code{HTML} используется механизм
+\code{DOM}, в котором каждый элемент документа представляет из себя объект
+языка JavaScript.
+
+Валидация проводилась с помощью функций, которые реагировали на событие
+\enquote{change}. Привязка к полям документа осуществлялась по их id.
 \end{document}
