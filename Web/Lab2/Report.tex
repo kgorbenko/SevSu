@@ -57,4 +57,41 @@ JavaScript.
           файлов с использованием сервиса jshint.
 \end{enumerate}
 \textbf{Вариант № 3}: 3 вопрос, количество слов в ответе не более 30.
+
+\section{Ход работы}
+\subsection{Страница \enquote{Фотоальбом}}
+Для выведения фотографий средствами языка JavaScript была написана\
+следующая программа:
+\begin{lstlisting}
+window.onload = () => {
+    let photoWrapper = document.getElementsByClassName('photo-wrapper').item(0);
+    photos.forEach(photo => {
+        let img = document.createElement('img');
+        img.setAttribute('src', photo);
+        img.setAttribute('alt', 'photoalbum photo');
+        photoWrapper.appendChild(img);
+    });
+};
+const photos = [
+    'picachu.jpg',
+    'images.jpeg',
+    'lion-king.jpg',
+    'road.jpeg',
+    'car.png',
+    'bridge.jpg',
+    'green.jpeg',
+    'statue.jpg',
+    'cock.jpg',
+    'city.jpg',
+    'fire.jpg',
+    'rose.jpeg',
+    'photo.jpg',
+    'castrle.jpg',
+    'shimpanze.jpg',
+].map(image => image = `../images/${image}`);
+\end{lstlisting}
+
+В данной программе пути к фото хранятся в массиве \code{photos}.
+При загрузке страницы происходит вызов функции, которая в цикле
+добавляет фото в документ.
 \end{document}
