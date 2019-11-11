@@ -17,7 +17,7 @@ const showInterest = (targetId : string) : void => {
         const targetElement = document.getElementById(targetId);
         const parentElement = targetElement.parentElement;
         const nextElement = targetElement.nextSibling;
-        let contentWrapper = document.createElement('div');
+        let contentWrapper = document.createElement('li');
         contentWrapper.setAttribute('id', `${targetId}-wrapper`)
         contentWrapper.appendChild(createElement('h2', content.header));
         contentWrapper.appendChild(createElement('p', content.values[0]));
