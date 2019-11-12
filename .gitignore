@@ -511,9 +511,6 @@ acs-*.bib
 _minted*
 *.pyg
 
-# morewrites
-*.mw
-
 # nomencl
 *.nlg
 *.nlo
