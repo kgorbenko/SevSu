@@ -6,18 +6,18 @@ namespace Testing.UnitTesting
     public static class UnitTestConstants
     {
         public static string Path => path;
-        public static IEnumerable<UnitTestDto> TestSuite => testSuite;
+        public static IEnumerable<GetColumnsUnitTestDto> TestSuite => testSuite;
 
         private static string path = "file.txt";
 
-        private static IEnumerable<UnitTestDto> testSuite = new[]
+        private static IEnumerable<GetColumnsUnitTestDto> testSuite = new[]
         {
-            new UnitTestDto {
+            new GetColumnsUnitTestDto {
                 Name     = "Single item",
                 Input    = new[,] { { 3 } },
                 Expected = new[] { new[] { 3 } }.AsEnumerable()
             },
-            new UnitTestDto {
+            new GetColumnsUnitTestDto {
                 Name = "Multiple items in square matrix",
                 Input = new[,]
                 {
@@ -32,7 +32,7 @@ namespace Testing.UnitTesting
                     new[] { 36, 14, 35 }
                 }.AsEnumerable()
             },
-            new UnitTestDto {
+            new GetColumnsUnitTestDto {
                 Name = "Multiple items in non-square matrix",
                 Input = new[,]
                 {

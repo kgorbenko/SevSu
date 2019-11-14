@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Testing.UnitTesting
 {
-    public class UnitTestDto
+    public class GetColumnsUnitTestDto
     {
         public string Name { get; set; }
         public int[,] Input { get; set; }
