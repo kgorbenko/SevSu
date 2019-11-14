@@ -5,10 +5,8 @@ namespace Testing.UnitTesting
 {
     public static class UnitTestConstants
     {
-        public static string Path => path;
+        public static string Path { get; } = "unitTest.txt";
         public static IEnumerable<GetColumnsUnitTestDto> TestSuite => testSuite;
-
-        private static string path = "file.txt";
 
         private static IEnumerable<GetColumnsUnitTestDto> testSuite = new[]
         {

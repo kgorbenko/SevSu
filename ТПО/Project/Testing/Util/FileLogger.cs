@@ -12,6 +12,11 @@ namespace Testing.Util
             streamWriter = writer ?? throw new ArgumentNullException("StreamWriter instance was null");
         }
 
+        public void Dispose()
+        {
+            streamWriter.Dispose();
+        }
+
         public void Log(string message)
         {
             if (message != null && !string.IsNullOrWhiteSpace(message))

@@ -1,0 +1,246 @@
+\documentclass[a4paper,14pt]{extarticle}
+\usepackage{../../tex-shared/preamble}
+
+\renewcommand{\mylabnumber}{2}
+\renewcommand{\mylabtitle}{Расчет числовых характеристик и 
+                           энтропии дискретной случайной величины}
+\renewcommand{\mysubject}{Теория информационных процессов и систем}
+\renewcommand{\mylecturer}{Заикина Е.Н.}
+
+\begin{document}
+\input{../../tex-shared/title-page.tex}
+\section{Цель работы}
+Исследовать основные принципы интеграционного тестирования
+программного обеспечения. Приобрести практические навыки организации
+интеграционных тестов для объектно-ориентированных программ.
+
+\section{Порядок выполнения работы}
+\begin{enumerate}
+    \item Выбрать в качестве тестируемого взаимодействие двух или более
+          классов, спроектированных в лабораторных работах № 1 – 4.
+    \item Составить спецификацию тестового случая.
+    \item Реализовать тестируемые классы и необходимое тестовое
+          окружение на языке С\#.
+    \item Выполнить тестирование с выводом результатов на экран и
+          сохранением в log-файл.
+    \item Проанализировать результаты тестирования, сделать выводы.
+\end{enumerate}
+
+\section{Ход работы}
+\sloppy
+В качестве тестируемого взаимодействия выберем взаимодействие классов
+\code{GetColumnsUnitTestEngine}, \code{FileLogger} и
+\code{GetColumnsUnitTestDto}, где \code{GetColumnsUnitTestEngine} -
+тестовый двигатель для выполнения модульных тестов над методом \code{GetColumns}
+(Л.Р.№ 2).
+\begin{lstlisting}
+public class GetColumnsUnitTestEngine
+{
+    private ILogger Logger { get; set; }
+    private IEnumerable<GetColumnsUnitTestDto> TestSuite { get; set; }
+
+    public GetColumnsUnitTestEngine(ILogger logger, IEnumerable<GetColumnsUnitTestDto> testSuite)
+    {
+        Logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        TestSuite = testSuite ?? throw new ArgumentNullException(nameof(logger));
+    }
+
+    public void Run()
+    {
+        foreach (var test in TestSuite)
+        {
+            try
+            {
+                var actual = test.Input.GetColumns();
+                var result = actual.SequenceEqual(test.Expected, new Int32ArrayEqualityComparer());
+
+                Logger.Log($"Test {test.Name}," + 
+                            $"result:{result}" + 
+                            $"{(result ? "" : $",expected: {PrintArrayCollection(test.Expected)} actual:{PrintArrayCollection(actual)}")}");
+            }
+            catch (Exception e)
+            {
+                Logger.Log($"Test {test.Name}," +
+                            $"result:{false}," +
+                            $"Exception: {e.Message}");
+            }
+        }
+    }
+
+    private string PrintArrayCollection(IEnumerable<int[]> collection)
+    {
+        var stringBuilder = new StringBuilder("{ ");
+
+        foreach (var array in collection)
+        {
+            stringBuilder.Append("[ ");
+            foreach (var item in array)
+            {
+                stringBuilder.Append($"{item} ");
+            }
+            stringBuilder.Append("] ");
+        }
+        stringBuilder.Append("}");
+        return stringBuilder.ToString();
+    }
+}
+\end{lstlisting}
+
+Класс \code{GetColumnsUnitTestEngine} зависит от экземпляров \code{FileLogger} 
+и \code{GetColumnsUnitTestDto}. Это взаимодействие 3-го типа (классы \code{FileLogger} и
+\code{GetColumnsUnitTestDto} - часть его реализации).
+
+\subsection{Тестовые случаи}
+Опишем два тестовых случая:
+\begin{enumerate}
+    \item Тест экземпляра \code{FileLogger}
+    \begin{enumerate} 
+        \item Взаимодействующие классы: \code{GetColumnsUnitTestEngine} и \code{FileLogger}.
+        \item Имя теста: \code{GetColumnsUnitTestEngine} вызывает метод \code{Log} класса
+              \code{FileLogger}.
+        \item Описание теста: при прогоне тестовой последовательности, класс
+              \code{GetColumnsUnitTestEngine} для записи реультатов должен вызывать
+              метод \code{Log} класса \code{FileLogger}.
+    \end{enumerate}
+
+    \item Тест экземпляров тестов
+    \begin{enumerate}
+        \item Взаимодействующие классы: \code{GetColumnsUnitTestEngine} и \code{GetColumnsUnitTestDto}.
+        \item Имя теста: \code{GetColumnsUnitTestEngine} записывает результат выполнения каждого теста
+              последовательности в файл.
+        \item Описание теста: после прогона тестовой последовательности, для каждого теста в тестовой
+              последовательности должна остаться запись в файле. 
+    \end{enumerate}
+\end{enumerate}
+
+\section{Программная реализация}
+Для тестирования случая № 1 создадим замену классу \code{FileLogger}:
+\begin{lstlisting}
+public class FakeLogger : ILogger
+{
+    public bool LogCalled { get; private set; } = false;
+
+    public void Log(string message)
+    {
+        LogCalled = true;
+    }
+
+    public void Dispose() { }
+}
+\end{lstlisting}
+
+Свойство \code{LogCalled} позволяет определить, был ли метод \code{Log} вызван.
+Использование замены:
+\begin{lstlisting}
+private bool TestThatLogMethodGetsCalled()
+{
+    try
+    {
+        this.logger.Log($"Test {nameof(TestThatLogMethodGetsCalled)}.");
+        var logger = new FakeLogger();
+        var unitTestEngine = new GetColumnsUnitTestEngine(logger, UnitTestConstants.TestSuite);
+        this.logger.Log("Passing logger.");
+        this.logger.Log("Running unit tests.");
+        unitTestEngine.Run();
+        bool result = logger.LogCalled;
+        if (result == true)
+        {
+            this.logger.Log("Test passed.");
+        }
+        else
+        {
+            this.logger.Log("Test failed.");
+        }
+        return result;
+    }
+    catch
+    {
+        return false;
+    }
+}
+\end{lstlisting}
+
+Для тестирования случая № 2 выполним последовательно проверку каждой строки файла.
+Она должна содержать имя прогоняемого теста. Реализация:
+\begin{lstlisting}
+private bool TestThatAllTestSuiteTestsAreRunning()
+{
+    try
+    {
+        this.logger.Log($"Test {nameof(TestThatAllTestSuiteTestsAreRunning)}.");
+        var logger = new FileLogger(new StreamWriter(UnitTestConstants.Path));
+        var unitTestEngine = new GetColumnsUnitTestEngine(logger, UnitTestConstants.TestSuite);
+        this.logger.Log("Passing logger.");
+        this.logger.Log("Running unit tests.");
+        unitTestEngine.Run();
+        logger.Dispose();
+        this.logger.Log("Checking file content.");
+        bool result = true;
+        using (var streamReader = new StreamReader(UnitTestConstants.Path))
+        {
+            foreach (var test in UnitTestConstants.TestSuite)
+            {
+                var fileLine = streamReader.ReadLine();
+                if (!fileLine.StartsWith($"Test {test.Name}"))
+                {
+                    result = false;
+                }
+            }
+        }
+        if (result == true)
+        {
+            this.logger.Log("Test passed.");
+        }
+        else
+        {
+            this.logger.Log("Test failed.");
+        }
+        return result;
+    }
+    catch
+    {
+        return false;
+    }
+}
+\end{lstlisting}
+
+Тестовый драйвер полученных интеграционных тестов:
+\begin{lstlisting}
+public class GetColumnsUnitTestEngineIntegrationTestEngine
+{
+    private readonly ILogger logger;
+    
+    public GetColumnsUnitTestEngineIntegrationTestEngine(ILogger logger)
+    {
+        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+    }
+    
+    public void Run()
+    {
+        TestThatLogMethodGetsCalled();
+        TestThatAllTestSuiteTestsAreRunning();
+    }
+
+    private bool TestThatLogMethodGetsCalled()
+    {
+        ...
+    }
+
+    private bool TestThatAllTestSuiteTestsAreRunning()
+    {
+        ...
+    }
+}
+\end{lstlisting}
+
+\section*{Выводы}
+В ходе лабораторной работы был протестирован тестовый драйвер, созданный
+для реализации модульных тестов к лабораторной работе № 2. Тестирование
+проводилось с точки зрения интеграции в него экземпляров объектов логгера
+и тестовой последовательности. Было выявлено, что тестовый драйвер правильно
+взаимодействует с используемыми объектами (в соответствии с их спецификацией).
+
+Модульное и интеграционное тестирование представляет из себя трудоемкий процесс
+из-за необходимости создавать тестовое окружение для каждого тестируемого метода.
+Чтобы упростить этот процесс необходимо использовать тестовые и mock-фреймворки. 
+\end{document}

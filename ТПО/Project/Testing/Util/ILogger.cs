@@ -1,6 +1,8 @@
-﻿namespace Testing.Util
+﻿using System;
+
+namespace Testing.Util
 {
-    public interface ILogger
+    public interface ILogger : IDisposable
     {
         void Log(string message);
     }

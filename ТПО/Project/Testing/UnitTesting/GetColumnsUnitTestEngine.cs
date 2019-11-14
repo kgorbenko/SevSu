@@ -14,8 +14,8 @@ namespace Testing.UnitTesting
 
         public GetColumnsUnitTestEngine(ILogger logger, IEnumerable<GetColumnsUnitTestDto> testSuite)
         {
-            Logger = logger ?? throw new ArgumentNullException("Logger instance was null");
-            TestSuite = testSuite ?? throw new ArgumentNullException("Test suite was null");
+            Logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            TestSuite = testSuite ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public void Run()
