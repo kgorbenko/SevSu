@@ -7,14 +7,14 @@ using Testing.Model;
 
 namespace Testing.UnitTesting
 {
-    public class TestEngine
+    public class UnitTestEngine : ITestEngine
     {
         private ILogger Logger { get; set; }
-        private IEnumerable<Test> TestSuite { get; set; }
+        private IEnumerable<UnitTestDto> TestSuite { get; set; }
 
-        public TestEngine(ILogger logger, IEnumerable<Test> testSuite)
+        public UnitTestEngine(ILogger logger, IEnumerable<UnitTestDto> testSuite)
         {
-            Logger    = logger    ?? throw new ArgumentNullException("Logger instance was null");
+            Logger = logger ?? throw new ArgumentNullException("Logger instance was null");
             TestSuite = testSuite ?? throw new ArgumentNullException("Test suite was null");
         }
 

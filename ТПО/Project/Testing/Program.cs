@@ -9,7 +9,7 @@ namespace Lab3
         static void Main(string[] args)
         {
             var fileLogger = new FileLogger(new StreamWriter(UnitTestConstants.Path, append:true));
-            var testEngine = new TestEngine(fileLogger, UnitTestConstants.TestSuite);
+            var testEngine = new UnitTestEngine(fileLogger, UnitTestConstants.TestSuite);
             testEngine.Run();
         }
     }

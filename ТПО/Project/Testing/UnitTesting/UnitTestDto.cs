@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Testing.UnitTesting
 {
-    public class Test
+    public class UnitTestDto
     {
-        public string Name                 { get; set; }
-        public int[,] Input                { get; set; }
+        public string Name { get; set; }
+        public int[,] Input { get; set; }
         public IEnumerable<int[]> Expected { get; set; }
     }
 }

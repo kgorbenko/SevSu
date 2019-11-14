@@ -5,16 +5,19 @@ namespace Testing.UnitTesting
 {
     public static class UnitTestConstants
     {
-        public static string Path = "file.txt";
+        public static string Path => path;
+        public static IEnumerable<UnitTestDto> TestSuite => testSuite;
 
-        public static IEnumerable<Test> TestSuite = new[]
+        private static string path = "file.txt";
+
+        private static IEnumerable<UnitTestDto> testSuite = new[]
         {
-            new Test {
+            new UnitTestDto {
                 Name     = "Single item",
                 Input    = new[,] { { 3 } },
                 Expected = new[] { new[] { 3 } }.AsEnumerable()
             },
-            new Test {
+            new UnitTestDto {
                 Name = "Multiple items in square matrix",
                 Input = new[,]
                 {
@@ -29,7 +32,7 @@ namespace Testing.UnitTesting
                     new[] { 36, 14, 35 }
                 }.AsEnumerable()
             },
-            new Test {
+            new UnitTestDto {
                 Name = "Multiple items in non-square matrix",
                 Input = new[,]
                 {
