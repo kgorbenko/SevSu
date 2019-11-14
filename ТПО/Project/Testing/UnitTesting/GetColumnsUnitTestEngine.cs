@@ -7,7 +7,7 @@ using Testing.Model;
 
 namespace Testing.UnitTesting
 {
-    public class GetColumnsUnitTestEngine : ITestEngine
+    public class GetColumnsUnitTestEngine
     {
         private ILogger Logger { get; set; }
         private IEnumerable<GetColumnsUnitTestDto> TestSuite { get; set; }
