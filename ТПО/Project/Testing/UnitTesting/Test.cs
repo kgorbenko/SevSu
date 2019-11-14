@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Lab3
+namespace Testing.UnitTesting
 {
     public class Test
     {

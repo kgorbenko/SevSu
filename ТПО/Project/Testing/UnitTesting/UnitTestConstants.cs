@@ -1,22 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.IO;
 
-namespace Lab3
+namespace Testing.UnitTesting
 {
-    public static class Program
+    public static class UnitTestConstants
     {
-        static void Main(string[] args)
-        {
-            var fileLogger = new FileLogger(new StreamWriter(path, append:true));
-            var testEngine = new TestEngine(fileLogger, TestSuite);
-            testEngine.TestEquality();
-        }
+        public static string Path = "file.txt";
 
-        private static string path = "file.txt";
-
-        private static IEnumerable<Test> TestSuite = new[]
+        public static IEnumerable<Test> TestSuite = new[]
         {
             new Test {
                 Name     = "Single item",

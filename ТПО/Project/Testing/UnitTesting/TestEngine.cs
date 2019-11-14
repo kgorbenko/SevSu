@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Testing.Util;
+using Testing.Model;
 
-namespace Lab3
+namespace Testing.UnitTesting
 {
     public class TestEngine
     {
-        private ILogger           Logger    { get; set; }
+        private ILogger Logger { get; set; }
         private IEnumerable<Test> TestSuite { get; set; }
 
         public TestEngine(ILogger logger, IEnumerable<Test> testSuite)
@@ -16,7 +18,7 @@ namespace Lab3
             TestSuite = testSuite ?? throw new ArgumentNullException("Test suite was null");
         }
 
-        public void TestEquality()
+        public void Run()
         {
             foreach (var test in TestSuite)
             {

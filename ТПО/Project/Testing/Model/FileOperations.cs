@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 
-namespace TestingLab1
+namespace Testing.Model
 {
     public class TextOperations
     {

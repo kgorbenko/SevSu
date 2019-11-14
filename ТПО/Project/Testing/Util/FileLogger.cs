@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Lab3
+namespace Testing.Util
 {
     public class FileLogger : ILogger
     {

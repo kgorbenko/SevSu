@@ -1,4 +1,4 @@
-﻿namespace Lab3
+﻿namespace Testing.Util
 {
     public interface ILogger
     {

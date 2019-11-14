@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TestingLab1
+namespace Testing.Model
 {
     public static class MatrixOperations
     {

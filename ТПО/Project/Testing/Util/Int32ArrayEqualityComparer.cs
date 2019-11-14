@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Lab3
+namespace Testing.Util
 {
     class Int32ArrayEqualityComparer : IEqualityComparer<int[]>
     {
