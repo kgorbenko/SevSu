@@ -8,8 +8,15 @@ namespace Testing.Model
     {
         public static IEnumerable<int> GetSumOfColumnsWithoutNegativeElements(int[,] matrix)
         {
-            if (matrix == null) throw new ArgumentNullException($"{nameof(matrix)} instance was null");
-            if (matrix.GetLength(0) != matrix.GetLength(1)) throw new ArgumentException($"Only square martixes are allowed");
+            if (matrix == null)
+            {
+                throw new ArgumentNullException(nameof(matrix));
+            }
+
+            if (matrix.GetLength(0) != matrix.GetLength(1))
+            {
+                throw new ArgumentException("Only square martixes are allowed");
+            }
 
             return matrix
                     .GetColumns()

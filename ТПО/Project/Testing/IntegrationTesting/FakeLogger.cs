@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Testing.Util;
+﻿using Testing.Util;
 
 namespace Testing.IntegrationTesting
 {
     public class FakeLogger : ILogger
     {
-        public bool LogCalled { get; private set; } = false;
-
+        public bool LogCalled { get; private set; }
+        
         public void Log(string message)
         {
             LogCalled = true;

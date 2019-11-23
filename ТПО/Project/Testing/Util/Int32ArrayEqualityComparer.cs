@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Testing.Util
 {
-    class Int32ArrayEqualityComparer : IEqualityComparer<int[]>
+    internal class Int32ArrayEqualityComparer : IEqualityComparer<int[]>
     {
         public bool Equals(int[] x, int[] y)
         {
+            if (x == null || y == null) return false;
+
             return x.SequenceEqual(y);
         }
 

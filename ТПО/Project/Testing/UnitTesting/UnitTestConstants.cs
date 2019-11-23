@@ -6,9 +6,7 @@ namespace Testing.UnitTesting
     public static class UnitTestConstants
     {
         public static string Path { get; } = "unitTest.txt";
-        public static IEnumerable<GetColumnsUnitTestDto> TestSuite => testSuite;
-
-        private static IEnumerable<GetColumnsUnitTestDto> testSuite = new[]
+        public static IEnumerable<GetColumnsUnitTestDto> TestSuite { get; } = new[]
         {
             new GetColumnsUnitTestDto {
                 Name     = "Single item",
@@ -47,7 +45,7 @@ namespace Testing.UnitTesting
                     new[] { 16,   9, 15,   2 },
                     new[] { 46, -14,  2, 523 }
                 }.AsEnumerable()
-            },
+            }
         };
     }
 }

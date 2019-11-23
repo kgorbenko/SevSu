@@ -3,7 +3,7 @@ using Testing.UnitTesting;
 using System.IO;
 using Testing.IntegrationTesting;
 
-namespace Lab3
+namespace Testing
 {
     public static class Program
     {
@@ -13,22 +13,26 @@ namespace Lab3
             Lab4
         }
         
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            var option = Labs.Lab4;
+            const Labs option = Labs.Lab4;
 
-            if (option == Labs.Lab3)
+            switch (option)
             {
-                var fileLogger = new FileLogger(new StreamWriter(UnitTestConstants.Path));
-                var testEngine = new GetColumnsUnitTestEngine(fileLogger, UnitTestConstants.TestSuite);
-                testEngine.Run();
-            }
-
-            if (option == Labs.Lab4)
-            {
-                var fileLogger = new FileLogger(new StreamWriter(IntegrationTestConstants.Path));
-                var testEngine = new GetColumnsUnitTestEngineIntegrationTestEngine(fileLogger);
-                testEngine.Run();
+                case Labs.Lab3:
+                {
+                    var fileLogger = new FileLogger(new StreamWriter(UnitTestConstants.Path));
+                    var testEngine = new GetColumnsUnitTestEngine(fileLogger, UnitTestConstants.TestSuite);
+                    testEngine.Run();
+                    break;
+                }
+                case Labs.Lab4:
+                {
+                    var fileLogger = new FileLogger(new StreamWriter(IntegrationTestConstants.Path));
+                    var testEngine = new GetColumnsUnitTestEngineIntegrationTestEngine(fileLogger);
+                    testEngine.Run();
+                    break;
+                }
             }
         }
     }

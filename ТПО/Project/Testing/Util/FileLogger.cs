@@ -7,9 +7,9 @@ namespace Testing.Util
     {
         private readonly StreamWriter streamWriter;
         
-        public FileLogger(StreamWriter writer)
+        public FileLogger(StreamWriter streamWriter)
         {
-            streamWriter = writer ?? throw new ArgumentNullException("StreamWriter instance was null");
+            this.streamWriter = streamWriter ?? throw new ArgumentNullException(nameof(streamWriter));
         }
 
         public void Dispose()
@@ -19,11 +19,13 @@ namespace Testing.Util
 
         public void Log(string message)
         {
-            if (message != null && !string.IsNullOrWhiteSpace(message))
+            if (string.IsNullOrWhiteSpace(message))
             {
-                streamWriter.WriteLine(message);
-                streamWriter.Flush();
+                throw new ArgumentNullException(nameof(message));
             }
+
+            streamWriter.WriteLine(message);
+            streamWriter.Flush();
         }
     }
 }

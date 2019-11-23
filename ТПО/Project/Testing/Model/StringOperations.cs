@@ -6,7 +6,10 @@ namespace Testing.Model
     {
         public static string RemoveAt(string source, int position)
         {
-            if (source == null) throw new ArgumentNullException(source);
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
 
             return source.Remove(position, 1);
         }

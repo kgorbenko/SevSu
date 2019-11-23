@@ -9,8 +9,8 @@ namespace Testing.UnitTesting
 {
     public class GetColumnsUnitTestEngine
     {
-        private ILogger Logger { get; set; }
-        private IEnumerable<GetColumnsUnitTestDto> TestSuite { get; set; }
+        private ILogger Logger { get; }
+        private IEnumerable<GetColumnsUnitTestDto> TestSuite { get; }
 
         public GetColumnsUnitTestEngine(ILogger logger, IEnumerable<GetColumnsUnitTestDto> testSuite)
         {
@@ -24,7 +24,7 @@ namespace Testing.UnitTesting
             {
                 try
                 {
-                    var actual = test.Input.GetColumns();
+                    var actual = test.Input.GetColumns().ToArray();
                     var result = actual.SequenceEqual(test.Expected, new Int32ArrayEqualityComparer());
 
                     Logger.Log($"Test {test.Name}," + 
@@ -40,7 +40,7 @@ namespace Testing.UnitTesting
             }
         }
 
-        private string PrintArrayCollection(IEnumerable<int[]> collection)
+        private static string PrintArrayCollection(IEnumerable<int[]> collection)
         {
             var stringBuilder = new StringBuilder("{ ");
 

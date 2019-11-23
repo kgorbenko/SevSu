@@ -10,7 +10,9 @@ namespace Testing.Model
         private readonly string[] delimiters = { " ", ".", ",", "?", "!", "(", ")", ":", ";", Environment.NewLine };
 
         public TextOperations(StreamReader streamReader)
-            => this.streamReader = streamReader ?? throw new ArgumentNullException($"{nameof(streamReader)} instance was null");
+        { 
+            this.streamReader = streamReader ?? throw new ArgumentNullException(nameof(streamReader));
+        }
 
         public string ReverseEveryTwoWords()
         {
@@ -22,7 +24,7 @@ namespace Testing.Model
                                         .GroupBy(x => x.Index / 2)
                                         .Select(group => group.Select(x => x.Value).Reverse())
                                         .SelectMany(x => x)
-                );
+            );
         }
     }
 }

@@ -24,21 +24,14 @@ namespace Testing.IntegrationTesting
         {
             try
             {
-                this.logger.Log($"Test {nameof(TestThatLogMethodGetsCalled)}.");
-                var logger = new FakeLogger();
-                var unitTestEngine = new GetColumnsUnitTestEngine(logger, UnitTestConstants.TestSuite);
-                this.logger.Log("Passing logger.");
-                this.logger.Log("Running unit tests.");
+                logger.Log($"Test {nameof(TestThatLogMethodGetsCalled)}.");
+                var fakeLogger = new FakeLogger();
+                var unitTestEngine = new GetColumnsUnitTestEngine(fakeLogger, UnitTestConstants.TestSuite);
+                logger.Log("Passing logger.");
+                logger.Log("Running unit tests.");
                 unitTestEngine.Run();
-                bool result = logger.LogCalled;
-                if (result == true)
-                {
-                    this.logger.Log("Test passed.");
-                }
-                else
-                {
-                    this.logger.Log("Test failed.");
-                }
+                var result = fakeLogger.LogCalled;
+                logger.Log(result ? "Test passed." : "Test failed.");
                 return result;
             }
             catch
@@ -51,33 +44,33 @@ namespace Testing.IntegrationTesting
         {
             try
             {
-                this.logger.Log($"Test {nameof(TestThatAllTestSuiteTestsAreRunning)}.");
-                var logger = new FileLogger(new StreamWriter(UnitTestConstants.Path));
-                var unitTestEngine = new GetColumnsUnitTestEngine(logger, UnitTestConstants.TestSuite);
-                this.logger.Log("Passing logger.");
-                this.logger.Log("Running unit tests.");
+                logger.Log($"Test {nameof(TestThatAllTestSuiteTestsAreRunning)}.");
+                var fakeLogger = new FileLogger(new StreamWriter(UnitTestConstants.Path));
+                var unitTestEngine = new GetColumnsUnitTestEngine(fakeLogger, UnitTestConstants.TestSuite);
+                logger.Log("Passing logger.");
+                logger.Log("Running unit tests.");
                 unitTestEngine.Run();
-                logger.Dispose();
-                this.logger.Log("Checking file content.");
-                bool result = true;
+                fakeLogger.Dispose();
+                logger.Log("Checking file content.");
+                var result = true;
                 using (var streamReader = new StreamReader(UnitTestConstants.Path))
                 {
                     foreach (var test in UnitTestConstants.TestSuite)
                     {
                         var fileLine = streamReader.ReadLine();
-                        if (!fileLine.StartsWith($"Test {test.Name}"))
+                        if (fileLine != null && !fileLine.StartsWith($"Test {test.Name}"))
                         {
                             result = false;
                         }
                     }
                 }
-                if (result == true)
+                if (result)
                 {
-                    this.logger.Log("Test passed.");
+                    logger.Log("Test passed.");
                 }
                 else
                 {
-                    this.logger.Log("Test failed.");
+                    logger.Log("Test failed.");
                 }
                 return result;
             }
