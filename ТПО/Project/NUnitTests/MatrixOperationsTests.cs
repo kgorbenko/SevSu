@@ -10,7 +10,7 @@ namespace NUnitTests
         [Test]
         public void PassingNullIssuesException()
         {
-            Assert.Throws<ArgumentNullException>(() => GetSumsOfColumns(null));
+            Assert.Throws<ArgumentNullException>(() => GetSumsOfPositiveElementsInColumns(null));
         }
 
         [Test]
@@ -18,16 +18,16 @@ namespace NUnitTests
         {
             var matrix = new[,] {{1, 3, 5}, {2, 3, 4}};
             
-            Assert.Throws<ArgumentException>(() => GetSumsOfColumns(matrix));
+            Assert.Throws<ArgumentException>(() => GetSumsOfPositiveElementsInColumns(matrix));
         }
 
         [Test]
         public void SingleNegativeItem()
         {
             var matrix = new[,] {{-15}};
-            var expected = new[]{-15};
+            var expected = new[]{0};
             
-            var actual = GetSumsOfColumns(matrix);
+            var actual = GetSumsOfPositiveElementsInColumns(matrix);
 
             Assert.That(expected, Is.EqualTo(actual));
         }
@@ -38,7 +38,7 @@ namespace NUnitTests
             var matrix = new[,] {{3}};
             var expected = new[] {3};
 
-            var actual = GetSumsOfColumns(matrix);
+            var actual = GetSumsOfPositiveElementsInColumns(matrix);
             
             Assert.That(expected, Is.EqualTo(actual));
         }
@@ -54,7 +54,7 @@ namespace NUnitTests
             };
             var expected = new[] {90, 25, 1285};
 
-            var actual = GetSumsOfColumns(matrix);
+            var actual = GetSumsOfPositiveElementsInColumns(matrix);
 
             Assert.That(expected, Is.EqualTo(actual));
         }
@@ -68,9 +68,9 @@ namespace NUnitTests
                 {13, 0, 14},
                 {62, -5, 1235}
             };
-            var expected = new[] {45, 5, 1285};
+            var expected = new[] {75, 10, 1285};
 
-            var actual = GetSumsOfColumns(matrix);
+            var actual = GetSumsOfPositiveElementsInColumns(matrix);
 
             Assert.That(expected, Is.EqualTo(actual));
         }

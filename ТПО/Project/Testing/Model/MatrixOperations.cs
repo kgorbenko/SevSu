@@ -6,7 +6,7 @@ namespace Testing.Model
 {
     public static class MatrixOperations
     {
-        public static IEnumerable<int> GetSumsOfColumns(int[,] matrix)
+        public static IEnumerable<int> GetSumsOfPositiveElementsInColumns(int[,] matrix)
         {
             if (matrix == null)
             {
@@ -20,7 +20,7 @@ namespace Testing.Model
 
             return matrix
                     .GetColumns()
-                    .Select(column => column.Sum());
+                    .Select(column => column.Where(x => x > 0).Sum());
         }
     }
 }
