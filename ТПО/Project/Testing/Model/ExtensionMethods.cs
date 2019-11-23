@@ -9,7 +9,7 @@ namespace Testing.Model
         {
             if (array == null)
             {
-                throw new ArgumentNullException($"{nameof(array)} instance was null");
+                throw new ArgumentNullException(nameof(array));
             }
 
             for (var j = 0; j < array.GetLength(1); j++)
