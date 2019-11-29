@@ -15,8 +15,5 @@
       "interests.ts",
       "contact.ts",
       "test.ts",
-  ],
-  "scripts": {
-      "tsbuild": "tsc --build tsconfig.json",
-  }
+  ]
 }
