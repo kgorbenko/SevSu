@@ -98,11 +98,21 @@ const fields: FormComponent[] = [
 
 window.onload = () => {
     const form = document.forms.item(0);
+    const date = document.getElementById('date');
+    const time = document.getElementById('time');
+
     form.addEventListener('submit', validateForm);
     fields.forEach(field => {
         const fieldElement = document.getElementById(field.componentId);
         fieldElement.addEventListener('change', () => validateField(field));
     });
+    setInterval(() => {
+        const currentDate = new Date();
+        date.innerHTML = `${currentDate.getDate()}.` +
+                            `${currentDate.getMonth() + 1}.${currentDate.getFullYear()}, ` +
+                            `${currentDate.toLocaleString(window.navigator.language, { weekday: 'long'})}`;
+        time.innerHTML = currentDate.toLocaleString(window.navigator.language, { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    }, 1000);
 };
 
 const validateField = (field: FormComponent) => {

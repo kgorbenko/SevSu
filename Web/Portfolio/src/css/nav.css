@@ -15,6 +15,10 @@ nav > ul {
     height: 100%;
 }
 
+#date, #time {
+    line-height: 30px;
+}
+
 nav ul > li {
     flex: 3 3 auto;
     text-align: center;

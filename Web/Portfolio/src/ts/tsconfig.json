@@ -15,5 +15,8 @@
       "interests.ts",
       "contact.ts",
       "test.ts",
+      "index.ts",
+      "about.ts",
+      "learning.ts",
   ]
 }
