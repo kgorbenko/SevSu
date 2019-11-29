@@ -166,6 +166,10 @@ td {
 }
 
 .error-messages {
-	color: red;
-	margin-bottom: 5px;
-};
+    color: red;
+    margin-bottom: 5px;
+}
+
+.validation-failed {
+    box-shadow: 0 0 8px red;
+}

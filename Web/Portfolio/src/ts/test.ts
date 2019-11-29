@@ -119,6 +119,7 @@ const validateField = (field: FormComponent) => {
     const errorsMessages = document.getElementById(`${field.componentId}-errors`);
     if (errorsMessages !== null) {
         errorsMessages.remove();
+        document.getElementById(field.componentId).classList.remove('validation-failed');
     }
     field.value = (<HTMLFormElement>document.getElementById(field.componentId)).value;
     field.validate();
@@ -147,6 +148,7 @@ const showMessages = (field: FormComponent) : void => {
     const targetElement = document.getElementById(field.componentId);
     const parentElement = targetElement.parentElement;
     let contentWrapper = document.createElement('div');
+    targetElement.classList.add('validation-failed');
     contentWrapper.setAttribute('id', `${field.componentId}-errors`);
     contentWrapper.setAttribute('class', 'error-messages');
     field.errorMessages.forEach(message => {
