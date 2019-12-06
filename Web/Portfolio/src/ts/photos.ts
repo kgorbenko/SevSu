@@ -8,6 +8,12 @@ window.onload = () => {
         img.setAttribute('alt', 'photoalbum photo');
         photoWrapper.appendChild(img);
     });
+    photoWrapper.addEventListener('click', (event) => expandPhoto(event));
+    window.onclick = (event) => {
+        if (event.target === document.getElementById('modal')) {
+            collapsePhoto();
+        }
+    }
     setInterval(() => {
         const currentDate = new Date();
         date.innerHTML = `${currentDate.getDate()}.` +
@@ -15,6 +21,30 @@ window.onload = () => {
                             `${currentDate.toLocaleString(window.navigator.language, { weekday: 'long'})}`;
         time.innerHTML = currentDate.toLocaleString(window.navigator.language, { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     }, 1000);
+};
+
+const expandPhoto = (event) => {
+    const modal = document.createElement('div');
+    modal.id = 'modal';
+    modal.classList.add('modal');
+
+    const image = document.createElement('img');
+    image.setAttribute('src' ,event.target.src);
+    image.classList.add('modal-picture');
+
+    const closeButton = document.createElement('div');
+    closeButton.innerHTML = '&times';
+    closeButton.setAttribute('class', 'modal-close');
+    closeButton.onclick = onclick = (() => collapsePhoto());
+
+    modal.appendChild(closeButton);
+    modal.appendChild(image);
+    document.body.appendChild(modal);
+};
+
+const collapsePhoto = () => {
+    const modal = document.getElementById('modal');
+    modal.remove();
 };
 
 const photos : string[] = [
