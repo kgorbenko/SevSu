@@ -31,6 +31,6 @@ const photos : string[] = [
     'fire.jpg',
     'rose.jpeg',
     'photo.jpg',
-    'castrle.jpg',
+    'castle.jpg',
     'shimpanze.jpg',
 ].map(image => image = `../images/${image}`);
