@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "Typescript client side for web technologies portfolio",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "tsbuild": "tsc --project tsconfig.json"
   },
   "author": "Gorbenko Kirill",
-  "license": "ISC"
+  "license": "ISC",
 }
