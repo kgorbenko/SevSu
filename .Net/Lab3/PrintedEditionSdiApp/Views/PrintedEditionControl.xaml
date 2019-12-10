@@ -23,7 +23,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button Margin="5">Add</Button>
+            <Button Click="AddPrintedEditionButtonClick" Margin="5">Add</Button>
         </StackPanel>
         
         <StackPanel DataContext="{Binding SelectedPrintedEdition}" Margin="5">
