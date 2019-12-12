@@ -4,9 +4,9 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <link href="../css/nav.css" rel="stylesheet" type="text/css" />
-    <link href="../css/shared.css" rel="stylesheet" type="text/css" />
-    <title>Photo album</title>
+    <link href="../src/pages/nav.css" rel="stylesheet" type="text/css" />
+    <link href="../src/pages/shared.css" rel="stylesheet" type="text/css" />
+    <title>Interests</title>
 </head>
 <body>
     <nav>
@@ -24,9 +24,16 @@
     </nav>
     <img src="../images/portrait.jpg" class="portrait">
     <div class="main-content">
-        <header><h1>Фотоальбом</h1></header>
-
-        <div class="photo-wrapper"></div>
+        <header><h1>Мои интересы</h1></header>
+        <section>
+            <header><h2>Contents</h1></header>
+            <ul id="interests">
+                <li class="contents" id="Hobbies">Мои хобби.</li>
+                <li class="contents" id="Books">Мои книги.</li>
+                <li class="contents" id="Music">Моя музыка.</li>
+                <li class="contents" id="Films">Мои фильмы.</li>
+            </ul>
+        </section>
     </div>
     <footer>
         <section>
@@ -46,6 +53,6 @@
             </p>
         </section>
     </footer>
-    <script src="../js/photos.js"></script>
+    <script src="../js/interests.js"></script>
 </body>
 </html>

@@ -4,9 +4,9 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <link href="../css/nav.css" rel="stylesheet" type="text/css" />
-    <link href="../css/shared.css" rel="stylesheet" type="text/css" />
-    <title>Contact page</title>
+    <link href="../src/pages/nav.css" rel="stylesheet" type="text/css" />
+    <link href="../src/pages/shared.css" rel="stylesheet" type="text/css" />
+    <title>Test page</title>
 </head>
 <body>
     <nav>
@@ -24,15 +24,33 @@
     </nav>
     <img src="../images/portrait.jpg" class="portrait">
     <div class="main-content">
-        <section>
+        <section>   
             <header>
-                <h1>Mail Me!</h1>
+                <h1>Тест по инженерной графике</h1>
             </header>
 
             <p>All fields are required!</p>
 
             <form method="POST" action="someaction">
                 <ol>
+                    <li>
+                        <p>От чего зависит величина стрелок размерной линии?</p>
+                        <label for="1" class="inline">От длины размерной линии</label>
+                        <input type="radio" id="1" value="1" checked="true" name="question1">
+                        <label for="2" class="inline">От толщины линии  контура изображения</label>
+                        <input type="radio" id="2" value="2" name="question1">
+                    <li>
+                        <label for="select-input">Какое назначение имеет тонкая сплошная линия?</label>
+                        <select name="question2" id="select-input">
+                            <option value="1">Линии разграничения вида и разреза.</option>
+                            <option value="2">Линии сечений.</option>
+                            <option value="3">Линии штриховки.</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="question3">Какие размеры являются рабочими? </label>
+                        <textarea name="question3" id="question3" class="field-long"></textarea>
+                    </li>
                     <li>
                         <label for="full-name-input">Full Name</label>
                         <input type="text" name="full-name" id="full-name-input" class="field-long" />
@@ -74,5 +92,6 @@
             </p>
         </section>
     </footer>
-    <script src="../js/contact.js"></script>
+    <script src="../js/test.js"></script>`
+</body>
 </html>

@@ -4,9 +4,9 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <link href="../css/nav.css" rel="stylesheet" type="text/css" />
-    <link href="../css/shared.css" rel="stylesheet" type="text/css" />
-    <title>About</title>
+    <link href="../src/pages/nav.css" rel="stylesheet" type="text/css" />
+    <link href="../src/pages/shared.css" rel="stylesheet" type="text/css" />
+    <title>Contact page</title>
 </head>
 <body>
     <nav>
@@ -24,32 +24,36 @@
     </nav>
     <img src="../images/portrait.jpg" class="portrait">
     <div class="main-content">
-        <header><h1>Автобиография</h1></header>
-
         <section>
-            <header><h1>Раздел 1</h1></header>
+            <header>
+                <h1>Mail Me!</h1>
+            </header>
 
-            <p>Здесь должна быть какая-то автобиография. Пускай тут будет списочек:</p>
+            <p>All fields are required!</p>
 
-            <ol>
-                <li>19 лет.</li>
-                <li>Сын своих родителей.</li>
-                <li>Не знаю чего написать еще.</li>
-                <li>Пойду заварю чайку.</li>
-                <li>Заварил.</li>
-                <li>Рыба меч дыня друг.</li>
-            </ol>
-
-            <p>Вот еще фоточки:</p>
-
-            <div class="photo-wrapper">
-                <img src="../images/bridge.jpg" alt="Bridge" />
-                <img src="../images/green.jpeg" alt="Greens" />
-                <img src="../images/statue.jpg" alt="Statue" />
-                <img src="../images/cock.jpg" alt="Cock" />
-                <img src="../images/city.jpg" alt="City" />
-                <img src="../images/fire.jpg" alt="Fire" />
-            </div>
+            <form method="POST" action="someaction">
+                <ol>
+                    <li>
+                        <label for="full-name-input">Full Name</label>
+                        <input type="text" name="full-name" id="full-name-input" class="field-long" />
+                    </li>
+                    <li>
+                        <label for="email-input">Email</label>
+                        <input type="email" name="email" id="email-input" class="field-long" />
+                    </li>
+                    <li>
+                        <label for="phone-input">Phone number</label>
+                        <input type="text" name="phone" id="phone-input" class="field-long" />
+                    </li>
+                    <li>
+                        <label for="message-input">Your Message</label>
+                        <textarea name="field4" id="message-input" class="field-long"></textarea>
+                    </li>
+                    <li>
+                        <input type="submit" value="Submit" />
+                    </li>
+                </ol>
+            </form>
         </section>
     </div>
     <footer>
@@ -70,6 +74,5 @@
             </p>
         </section>
     </footer>
-    <script src="../js/about.js"></script>
-</body>
+    <script src="../js/contact.js"></script>
 </html>
