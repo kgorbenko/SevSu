@@ -3,11 +3,17 @@
   "version": "1.0.0",
   "description": "Typescript client side for web technologies portfolio",
   "scripts": {
-    "tsbuild": "tsc --project tsconfig.json"
+    "tsbuild": "tsc --project tsconfig.json",
+    "build": "webpack"
   },
   "author": "Gorbenko Kirill",
   "license": "ISC",
   "devDependencies": {
-    "webpack": "^4.41.2"
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.3",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   }
 }
