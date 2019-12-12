@@ -11,12 +11,12 @@
     "noFallthroughCasesInSwitch": true,
   },
   "files": [
-      "photos.ts",
-      "interests.ts",
-      "contact.ts",
-      "test.ts",
-      "index.ts",
-      "about.ts",
-      "learning.ts"
+      "./pages/photos.ts",
+      "./pages/interests.ts",
+      "./pages/contact.ts",
+      "./pages/test.ts",
+      "./pages/index.ts",
+      "./pages/about.ts",
+      "./pages/learning.ts"
   ]
 }

@@ -2,13 +2,13 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        index: './ts/index.ts',
-        about: './ts/about.ts',
-        interests: './ts/interests.ts',
-        learning: './ts/learning.ts',
-        photos: './ts/photos.ts',
-        contact: './ts/contact.ts',
-        test: './ts/test.ts'
+        index: './src/pages/index.ts',
+        about: './src/pages/about.ts',
+        interests: './src/pages/interests.ts',
+        learning: './src/pages/learning.ts',
+        photos: './src/pages/photos.ts',
+        contact: './src/pages/contact.ts',
+        test: './src/pages/test.ts'
     },
     devtool: 'inline-source-map',
     module: {
