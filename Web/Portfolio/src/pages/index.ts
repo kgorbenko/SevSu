@@ -1,4 +1,4 @@
-import { formatDate, formatTime } from './clock/clock';
+import { formatDate, formatTime } from '../clock/clock';
 
 window.onload = () => {
     const date = document.getElementById('date');
