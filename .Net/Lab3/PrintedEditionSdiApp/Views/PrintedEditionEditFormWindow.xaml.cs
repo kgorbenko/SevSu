@@ -1,11 +1,11 @@
-﻿using System.Windows;
+using System.Windows;
 using PrintedEditionSdiApp.ViewModels;
 
 namespace PrintedEditionSdiApp.Views
 {
-    public partial class PrintedEditionMainWindow : Window
+    public partial class PrintedEditionEditFormWindow : Window
     {
-        public PrintedEditionMainWindow()
+        public PrintedEditionEditFormWindow()
         {
             InitializeComponent();
             DataContext = PrintedEditionViewModel.GetInstance();
