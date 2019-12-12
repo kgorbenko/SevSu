@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+    mode: 'none',
     entry: {
         index: './src/pages/index.ts',
         about: './src/pages/about.ts',
