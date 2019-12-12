@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Typescript client side for web technologies portfolio",
   "scripts": {
-    "tsbuild": "tsc --project tsconfig.json",
+    "tsbuild": "tsc --project ./src/tsconfig.json",
     "webpack-build": "webpack"
   },
   "author": "Gorbenko Kirill",
