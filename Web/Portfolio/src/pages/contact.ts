@@ -45,6 +45,8 @@ window.onload = () => {
         date.innerHTML = formatCurrentDate();
         time.innerHTML = formatCurrentTime();
     }, 1000);
+
+    init();
 };
 
 const validateField = (field: FormComponent) => {
