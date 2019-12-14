@@ -33,7 +33,9 @@ const insertDate = (event) => {
 const showDatePicker = () => {
     if (!isShown) {
         datepickerInput().parentNode.insertBefore(createDatePicker(), datepickerInput().nextSibling);
-        dateList().addEventListener('click', (event) => insertDate(event));
+        Array.from(dateList().childNodes).forEach(listItem => {
+            listItem.addEventListener('click', (event) => insertDate(event));
+        })
         yearSelect().addEventListener('change', updateDatesList);
         monthSelect().addEventListener('change', updateDatesList);
         isShown = true;
