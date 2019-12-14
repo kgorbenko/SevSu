@@ -25,7 +25,7 @@ const insertDate = (event) => {
     const selectedYear = (yearSelect() as HTMLFormElement).value;
     const selectedMonthNumber = months.indexOf((monthSelect() as HTMLFormElement).value) + 1;
     const selectedDate = event.target.innerHTML;
-    const date = new Date(selectedYear, selectedMonthNumber, selectedDate);
+    const date = new Date(selectedYear, selectedMonthNumber - 1, selectedDate);
 
     (datepickerInput() as HTMLFormElement).value = formatDate(date);
 }
