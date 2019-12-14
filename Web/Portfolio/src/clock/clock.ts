@@ -1,8 +1,8 @@
 ﻿export const formatDate = (date: Date): string => {
-    return `${date.getDate()}.
-            ${date.getMonth() + 1}.
-            ${date.getFullYear()},
-            ${date.toLocaleString(window.navigator.language, { weekday: 'long'})}`;
+    return `${date.getDate()}.` +
+           `${date.getMonth() + 1}.` +
+           `${date.getFullYear()}, ` +
+           `${date.toLocaleString(window.navigator.language, { weekday: 'long'})}`;
 };
 
 export const formatTime = (time : Date): string => {
