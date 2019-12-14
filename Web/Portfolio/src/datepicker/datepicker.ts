@@ -110,7 +110,7 @@ const getNumberOfDaysInSpecificMonth = (year, month) => {
 
 const getYears = () => {
     let years = [];
-    for (let i = 1900; i <= 2100; i++) {
+    for (let i = 2000; i <= 2025; i++) {
         years.push(i);
     }
 
