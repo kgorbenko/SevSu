@@ -13,3 +13,11 @@ export const createElementWithInnerHTML = (elementType: string, innerHTML?: stri
     }
     return element;
 }
+
+export const createElementWithId = (elementType: string, id?: string) => {
+    const element = document.createElement(elementType);
+    if (id) {
+        element.id = id;
+    }
+    return element;
+}
