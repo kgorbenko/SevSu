@@ -60,7 +60,7 @@ const createDatePicker = () => {
     yearAndMonthSelectsWrapper.appendChild(createYearsSelect());
     yearAndMonthSelectsWrapper.appendChild(createMonthSelect());
     datepicker.appendChild(yearAndMonthSelectsWrapper);
-    dateListWrapper.appendChild(createDateList(selectedYear || date.getFullYear(), selectedMonthNumber || date.getMonth() - 1));
+    dateListWrapper.appendChild(createDateList(selectedYear || date.getFullYear(), selectedMonthNumber + 1 || date.getMonth() - 1));
     datepicker.appendChild(dateListWrapper);
 
     return datepicker;
@@ -91,7 +91,7 @@ const createMonthSelect = () => {
     months.forEach(month => {
         selectMonth.appendChild(createElementWithInnerHTML('option', month));
     });
-    (selectMonth as HTMLFormElement).value = months[selectedMonthNumber - 1] || months[new Date().getMonth()];
+    (selectMonth as HTMLFormElement).value = months[selectedMonthNumber] || months[new Date().getMonth()];
     return selectMonth;
 }
 
