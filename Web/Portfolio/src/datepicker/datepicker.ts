@@ -32,7 +32,7 @@ const insertDate = (event) => {
 
 const showDatePicker = () => {
     if (!isShown) {
-        document.body.appendChild(createDatePicker());
+        datepickerInput().parentNode.insertBefore(createDatePicker(), datepickerInput().nextSibling);
         dateList().addEventListener('click', (event) => insertDate(event));
         yearSelect().addEventListener('change', updateDatesList);
         monthSelect().addEventListener('change', updateDatesList);
@@ -42,7 +42,7 @@ const showDatePicker = () => {
 
 const removeDatePicker = (event) => {
     if (isShown && !datepicker().contains(event.target as Node) && event.target !== datepickerInput()) {
-        document.body.removeChild(datepicker());
+        datepicker().remove();
         isShown = false;
     }
 };
@@ -67,7 +67,9 @@ const updateDatesList = () => {
     const dateListWrapper = dateList().parentElement;
 
     dateList().remove();
-    dateListWrapper.appendChild(createDateList(selectedYear, selectedMonthNumber + 1));
+    const newDateList = createDateList(selectedYear, selectedMonthNumber + 1);
+    newDateList.addEventListener('click', (event) => insertDate(event));
+    dateListWrapper.appendChild(newDateList);
 }
 
 const createYearsSelect = () => {
