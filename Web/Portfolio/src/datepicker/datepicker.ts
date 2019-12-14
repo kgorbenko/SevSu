@@ -1,18 +1,18 @@
-import { createElementWithClass, createElementWithInnerHTML } from '../utils/utils';
+import { createElementWithClass, createElementWithInnerHTML, createElementWithId } from '../utils/utils';
 import { formatDate } from '../clock/clock';
 
-const datepickerClass = 'datepicker';
-const datepickerInputClass = 'datepicker-input';
-const datepickerYearSelectClass = 'datepicker-year';
-const datepickerMonthSelectClass = 'datepicker-month';
-const datepickerDateListClass = 'datepicker-date';
+const datepickerId = 'datepicker';
+const datepickerInputId = 'datepicker-input';
+const datepickerYearSelectId = 'datepicker-year';
+const datepickerMonthSelectId = 'datepicker-month';
+const datepickerDateListId = 'datepicker-date-list';
 const elementWrapperClass = 'element-wrapper';
 
-const datepicker = () => document.querySelector('.' + datepickerClass);
-const datepickerInput = () => document.querySelector('.' + datepickerInputClass);
-const yearSelect = () => document.querySelector('.' + datepickerYearSelectClass);
-const monthSelect = () => document.querySelector('.' + datepickerMonthSelectClass);
-const dateList = () => document.querySelector('.' + datepickerDateListClass);
+const datepicker = () => document.querySelector('#' + datepickerId);
+const datepickerInput = () => document.querySelector('#' + datepickerInputId);
+const yearSelect = () => document.querySelector('#' + datepickerYearSelectId);
+const monthSelect = () => document.querySelector('#' + datepickerMonthSelectId);
+const dateList = () => document.querySelector('#' + datepickerDateListId);
 
 let isShown = false;
 
@@ -49,7 +49,7 @@ const removeDatePicker = (event) => {
 
 const createDatePicker = () => {
     const date = new Date();
-    let datepicker = createElementWithClass('div', datepickerClass);
+    let datepicker = createElementWithId('div', datepickerId);
     let yearAndMonthSelectsWrapper = createElementWithClass('div', elementWrapperClass);
     let dateListWrapper = createElementWithClass('div', elementWrapperClass);
     yearAndMonthSelectsWrapper.appendChild(createYearsSelect());
@@ -73,7 +73,7 @@ const updateDatesList = () => {
 }
 
 const createYearsSelect = () => {
-    const selectYear = createElementWithClass('select', datepickerYearSelectClass);
+    const selectYear = createElementWithId('select', datepickerYearSelectId);
     getYears().forEach(year => {
         selectYear.appendChild(createElementWithInnerHTML('option', year));
     });
@@ -82,7 +82,7 @@ const createYearsSelect = () => {
 }
 
 const createMonthSelect = () => {
-    const selectMonth = createElementWithClass('select', datepickerMonthSelectClass);
+    const selectMonth = createElementWithId('select', datepickerMonthSelectId);
     months.forEach(month => {
         selectMonth.appendChild(createElementWithInnerHTML('option', month));
     });
@@ -91,7 +91,7 @@ const createMonthSelect = () => {
 }
 
 const createDateList = (year, month) => {
-    let dateList = createElementWithClass('ul', datepickerDateListClass);
+    let dateList = createElementWithId('ul', datepickerDateListId);
     getDays(getNumberOfDaysInSpecificMonth(year, month)).forEach(date => {
         dateList.appendChild(createElementWithInnerHTML('li', date));
     });
