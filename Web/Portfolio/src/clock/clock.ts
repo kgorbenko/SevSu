@@ -1,14 +1,18 @@
-﻿export const formatDate = () : string => {
-    const currentDate = new Date();
-    
-    return `${currentDate.getDate()}.
-            ${currentDate.getMonth() + 1}.
-            ${currentDate.getFullYear()},
-            ${currentDate.toLocaleString(window.navigator.language, { weekday: 'long'})}`;
+﻿export const formatDate = (date: Date): string => {
+    return `${date.getDate()}.
+            ${date.getMonth() + 1}.
+            ${date.getFullYear()},
+            ${date.toLocaleString(window.navigator.language, { weekday: 'long'})}`;
 };
 
-export const formatTime = () : string => {
-    const currentTime = new Date();
-    return currentTime
-           .toLocaleString(window.navigator.language, { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+export const formatTime = (time : Date): string => {
+    return time.toLocaleString(window.navigator.language, { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+}
+
+export const formatCurrentDate = () => {
+    return formatDate(new Date());
+}
+
+export const formatCurrentTime = (): string => {
+    return formatTime(new Date());
 };

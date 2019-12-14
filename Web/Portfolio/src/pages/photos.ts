@@ -1,4 +1,4 @@
-import { formatDate, formatTime } from '../clock/clock';
+import { formatCurrentDate, formatCurrentTime } from '../clock/clock';
 
 window.onload = () => {
     let photoWrapper = document.getElementsByClassName('photo-wrapper').item(0);
@@ -20,8 +20,8 @@ window.onload = () => {
     const time = document.getElementById('time');
 
     setInterval(() => {
-        date.innerHTML = formatDate();
-        time.innerHTML = formatTime();
+        date.innerHTML = formatCurrentDate();
+        time.innerHTML = formatCurrentTime();
     }, 1000);
 };
 

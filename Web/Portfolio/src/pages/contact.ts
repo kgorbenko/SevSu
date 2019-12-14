@@ -1,5 +1,6 @@
-import { formatDate, formatTime } from '../clock/clock';
+import { formatCurrentDate, formatCurrentTime } from '../clock/clock';
 import { FormComponent, NameValidator, FieldFilledValidator, PhoneNumberValidator } from '../forms/forms';
+import { init } from '../datepicker/datepicker';
 
 const fields: FormComponent[] = [
     new FormComponent(
@@ -41,8 +42,8 @@ window.onload = () => {
     const time = document.getElementById('time');
 
     setInterval(() => {
-        date.innerHTML = formatDate();
-        time.innerHTML = formatTime();
+        date.innerHTML = formatCurrentDate();
+        time.innerHTML = formatCurrentTime();
     }, 1000);
 };
 
