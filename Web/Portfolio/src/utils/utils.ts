@@ -12,4 +12,4 @@ export const createElementWithInnerHTML = (elementType: string, innerHTML?: stri
         element.innerHTML = innerHTML;
     }
     return element;
-};
+}
