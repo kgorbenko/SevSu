@@ -14,6 +14,7 @@ const yearSelect = () => document.querySelector('#' + datepickerYearSelectId);
 const monthSelect = () => document.querySelector('#' + datepickerMonthSelectId);
 const dateList = () => document.querySelector('#' + datepickerDateListId);
 
+let selectedYear, selectedMonthNumber, selectedDate;
 let isShown = false;
 
 export const init = () => {
@@ -22,12 +23,14 @@ export const init = () => {
 }
 
 const insertDate = (event) => {
-    const selectedYear = (yearSelect() as HTMLFormElement).value;
-    const selectedMonthNumber = months.indexOf((monthSelect() as HTMLFormElement).value) + 1;
-    const selectedDate = event.target.innerHTML;
-    const date = new Date(selectedYear, selectedMonthNumber - 1, selectedDate);
+    if (event.target !== dateList()) {
+        selectedYear = (yearSelect() as HTMLFormElement).value;
+        selectedMonthNumber = months.indexOf((monthSelect() as HTMLFormElement).value);
+        selectedDate = event.target.innerHTML;
+        const date = new Date(selectedYear, selectedMonthNumber, selectedDate);
 
-    (datepickerInput() as HTMLFormElement).value = formatDate(date);
+        (datepickerInput() as HTMLFormElement).value = formatDate(date);
+    }
 }
 
 const showDatePicker = () => {
@@ -57,7 +60,7 @@ const createDatePicker = () => {
     yearAndMonthSelectsWrapper.appendChild(createYearsSelect());
     yearAndMonthSelectsWrapper.appendChild(createMonthSelect());
     datepicker.appendChild(yearAndMonthSelectsWrapper);
-    dateListWrapper.appendChild(createDateList(date.getFullYear(), date.getMonth() - 1));
+    dateListWrapper.appendChild(createDateList(selectedYear || date.getFullYear(), selectedMonthNumber || date.getMonth() - 1));
     datepicker.appendChild(dateListWrapper);
 
     return datepicker;
@@ -79,7 +82,7 @@ const createYearsSelect = () => {
     getYears().forEach(year => {
         selectYear.appendChild(createElementWithInnerHTML('option', year));
     });
-    (selectYear as HTMLFormElement).value = new Date().getFullYear();
+    (selectYear as HTMLFormElement).value = selectedYear || new Date().getFullYear();
     return selectYear;
 }
 
@@ -88,7 +91,7 @@ const createMonthSelect = () => {
     months.forEach(month => {
         selectMonth.appendChild(createElementWithInnerHTML('option', month));
     });
-    (selectMonth as HTMLFormElement).value = months[new Date().getMonth()];
+    (selectMonth as HTMLFormElement).value = months[selectedMonthNumber - 1] || months[new Date().getMonth()];
     return selectMonth;
 }
 
