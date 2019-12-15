@@ -1,5 +1,5 @@
 import { updateClockOnInterval } from '../clock/clock';
-import { addLightbox } from '../lightbox/lightbox';
+import addLightbox from '../lightbox/lightbox';
 
 window.onload = () => {
     updateClockOnInterval(document.getElementById('date'), document.getElementById('time'), 1000);

@@ -5,8 +5,8 @@ const lightboxClass = 'lightbox';
 const lightboxPictureClass = 'lightbox-picture';
 const lightboxCloseButtonClass = 'lightbox-close';
 
-export const addLightbox = (lightboxTarget: Element) => {
-    lightboxTarget.addEventListener('click', (event) => expandLightbox(event));
+export default (lightboxPhotosWrapper: Element) => {
+    lightboxPhotosWrapper.addEventListener('click', (event) => expandLightbox(event));
 
     window.onclick = (event) => {
         if (event.target === document.getElementById(lightboxId)) {
