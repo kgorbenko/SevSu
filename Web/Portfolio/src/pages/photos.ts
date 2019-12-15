@@ -4,7 +4,7 @@ import addLightbox from '../lightbox/lightbox';
 
 window.onload = () => {
     updateClockOnInterval(document.getElementById('date'), document.getElementById('time'), 1000);
-    let photoWrapper = document.getElementsByClassName('photo-wrapper').item(0);
+    let photoWrapper = document.querySelector('.photo-wrapper');
     
     photos.forEach(photo => {
         let img = createElement('img', { src: photo, alt: 'photoalbum photo' });
