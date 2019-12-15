@@ -1,4 +1,5 @@
 import { updateClockOnInterval } from '../clock/clock';
+import { createElement } from '../utils/utils';
 import addLightbox from '../lightbox/lightbox';
 
 window.onload = () => {
@@ -6,9 +7,7 @@ window.onload = () => {
     let photoWrapper = document.getElementsByClassName('photo-wrapper').item(0);
     
     photos.forEach(photo => {
-        let img = document.createElement('img');
-        img.setAttribute('src', photo);
-        img.setAttribute('alt', 'photoalbum photo');
+        let img = createElement('img', { src: photo, alt: 'photoalbum photo' });
         photoWrapper.appendChild(img);
     });
 

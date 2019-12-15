@@ -2,6 +2,7 @@ interface ICreateElementParameters {
     id?: string;
     classList?: string[];
     src?: string;
+    alt?: string;
     innerHTML?: string;
     onclick?: () => void;
 }
