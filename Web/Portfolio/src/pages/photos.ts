@@ -1,5 +1,5 @@
 import { updateClockOnInterval } from '../clock/clock';
-import { addModal } from '../photos/photos';
+import { addLightbox } from '../photos/photos';
 
 window.onload = () => {
     updateClockOnInterval(document.getElementById('date'), document.getElementById('time'), 1000);
@@ -12,7 +12,7 @@ window.onload = () => {
         photoWrapper.appendChild(img);
     });
 
-    addModal(photoWrapper);
+    addLightbox(photoWrapper);
 };
 
 const photos : string[] = [

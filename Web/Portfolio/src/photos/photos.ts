@@ -1,31 +1,31 @@
 import { createElement } from '../utils/utils'
 
-const modalId = 'modal';
-const modalClass = 'modal';
-const modalPictureClass = 'modal-picture';
-const modalCloseButtonClass = 'modal-close';
+const lightboxId = 'lightbox';
+const lightboxClass = 'lightbox';
+const lightboxPictureClass = 'lightbox-picture';
+const lightboxCloseButtonClass = 'lightbox-close';
 
-export const addModal = (modalTarget: Element) => {
-    modalTarget.addEventListener('click', (event) => expandPhoto(event));
+export const addLightbox = (lightboxTarget: Element) => {
+    lightboxTarget.addEventListener('click', (event) => expandLightbox(event));
 
     window.onclick = (event) => {
-        if (event.target === document.getElementById(modalId)) {
-            collapsePhoto();
+        if (event.target === document.getElementById(lightboxId)) {
+            collapseLightbox();
         }
     }
 }
 
-const expandPhoto = (event) => {
-    const modal = createElement('div', { id: modalId, classList: [modalClass] });
-    const image = createElement('img', { src: event.target.src, classList: [modalPictureClass] });
-    const closeButton = createElement('div', { innerHTML: '&times', classList: [modalCloseButtonClass], onclick: () => collapsePhoto() });
+const expandLightbox = (event) => {
+    const lightbox = createElement('div', { id: lightboxId, classList: [lightboxClass] });
+    const image = createElement('img', { src: event.target.src, classList: [lightboxPictureClass] });
+    const closeButton = createElement('div', { innerHTML: '&times', classList: [lightboxCloseButtonClass], onclick: () => collapseLightbox() });
 
-    modal.appendChild(image);
-    modal.appendChild(closeButton);
-    document.body.appendChild(modal);
+    lightbox.appendChild(image);
+    lightbox.appendChild(closeButton);
+    document.body.appendChild(lightbox);
 }
 
-const collapsePhoto = () => {
-    const modal = document.getElementById(modalId);
-    modal.remove();
+const collapseLightbox = () => {
+    const lightbox = document.getElementById(lightboxId);
+    lightbox.remove();
 }
