@@ -1,4 +1,5 @@
 import { updateClockOnInterval } from '../clock/clock';
+import { addModal } from '../photos/photos';
 
 window.onload = () => {
     updateClockOnInterval(document.getElementById('date'), document.getElementById('time'), 1000);
@@ -10,36 +11,8 @@ window.onload = () => {
         img.setAttribute('alt', 'photoalbum photo');
         photoWrapper.appendChild(img);
     });
-    photoWrapper.addEventListener('click', (event) => expandPhoto(event));
-    window.onclick = (event) => {
-        if (event.target === document.getElementById('modal')) {
-            collapsePhoto();
-        }
-    }
-};
 
-const expandPhoto = (event) => {
-    const modal = document.createElement('div');
-    modal.id = 'modal';
-    modal.classList.add('modal');
-
-    const image = document.createElement('img');
-    image.setAttribute('src' ,event.target.src);
-    image.classList.add('modal-picture');
-
-    const closeButton = document.createElement('div');
-    closeButton.innerHTML = '&times';
-    closeButton.setAttribute('class', 'modal-close');
-    closeButton.onclick = onclick = (() => collapsePhoto());
-
-    modal.appendChild(closeButton);
-    modal.appendChild(image);
-    document.body.appendChild(modal);
-};
-
-const collapsePhoto = () => {
-    const modal = document.getElementById('modal');
-    modal.remove();
+    addModal(photoWrapper);
 };
 
 const photos : string[] = [
