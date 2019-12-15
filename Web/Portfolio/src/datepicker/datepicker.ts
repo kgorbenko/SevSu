@@ -29,7 +29,9 @@ const insertDate = (event) => {
         selectedDate = event.target.innerHTML;
         const date = new Date(selectedYear, selectedMonthNumber, selectedDate);
 
+        (datepickerInput() as HTMLElement).focus();
         (datepickerInput() as HTMLFormElement).value = formatDate(date);
+        (datepickerInput() as HTMLElement).blur();
     }
 }
 
@@ -47,6 +49,7 @@ const showDatePicker = () => {
 
 const removeDatePicker = (event) => {
     if (isShown && !datepicker().contains(event.target as Node) && event.target !== datepickerInput()) {
+        (datepickerInput() as HTMLElement).blur();
         datepicker().remove();
         isShown = false;
     }
