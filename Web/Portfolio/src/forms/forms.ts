@@ -1,4 +1,4 @@
-import { createElementWithId, createElementWithInnerHTML } from '../utils/utils';
+import { createElementWithInnerHTML, createElement } from '../utils/utils';
 
 export interface FormValidator {
     errorMessage: string;
@@ -118,9 +118,8 @@ const validateField = (field: FormComponent) => {
 const showMessages = (field: FormComponent) => {
     const targetElement = document.getElementById(field.componentId);
     const parentElement = targetElement.parentElement;
-    let contentWrapper = createElementWithId('div', `${field.componentId}-errors`);
+    let contentWrapper = createElement('div', { id: `${field.componentId}-errors`, classList: ['error-messages'] });
     targetElement.classList.add('validation-failed');
-    contentWrapper.className = 'error-messages';
     field.errorMessages.forEach(message => {
         let messageListItem = createElementWithInnerHTML('li', message);
         contentWrapper.appendChild(messageListItem);

@@ -1,4 +1,5 @@
 import { updateClockOnInterval } from '../clock/clock';
+import { createElement } from '../utils/utils';
 
 window.onload = () => {
     updateClockOnInterval(document.getElementById('date'), document.getElementById('time'), 1000);
@@ -24,9 +25,9 @@ const showInterest = (targetId : string) : void => {
         let contentWrapper = document.createElement('li');
         contentWrapper.setAttribute('id', `${targetId}-wrapper`);
         contentWrapper.setAttribute('class', 'interests');
-        contentWrapper.appendChild(createElement('h2', content.header));
-        contentWrapper.appendChild(createElement('p', content.values[0]));
-        contentWrapper.appendChild(createElement('p', content.values[1]));
+        contentWrapper.appendChild(createElement('h2', { innerHTML: content.header }));
+        contentWrapper.appendChild(createElement('p', { innerHTML: content.values[0] }));
+        contentWrapper.appendChild(createElement('p', { innerHTML: content.values[1] }));
         parentElement.insertBefore(contentWrapper, nextElement);
         content.isHidden = false;
     }
@@ -37,12 +38,6 @@ const hideInterest = (targetId : string) : void  => {
     const contentWrapper = document.getElementById(`${targetId}-wrapper`);
     contentWrapper.remove();
     content.isHidden = true;
-};
-
-const createElement = (tagName: string, content : string) => {
-    let element = document.createElement(tagName);
-    element.innerHTML = content;
-    return element;
 };
 
 enum InterestIds {
