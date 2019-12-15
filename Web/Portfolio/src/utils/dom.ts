@@ -42,3 +42,12 @@ export const createElementWithAttribute = (elementType: string, attributeName?: 
 export const createElement = (elementType: string, objectParams: ICreateElementParameters) => {
     return Object.assign(document.createElement(elementType), objectParams);
 }
+
+export const insertAfter = (newElement: HTMLElement, element: HTMLElement,) : void => {
+    element.parentNode.insertBefore(newElement, element.nextSibling);
+}
+
+export const removeElementById = (targetId : string) : void  => {
+    const contentWrapper = document.querySelector(`#${targetId}`);
+    contentWrapper.remove();
+}
