@@ -51,6 +51,7 @@ const removeDatePicker = (event) => {
         isShown = false;
     }
 };
+}
 
 const createDatePicker = () => {
     const date = new Date();
@@ -60,7 +61,7 @@ const createDatePicker = () => {
     yearAndMonthSelectsWrapper.appendChild(createYearsSelect());
     yearAndMonthSelectsWrapper.appendChild(createMonthSelect());
     datepicker.appendChild(yearAndMonthSelectsWrapper);
-    dateListWrapper.appendChild(createDateList(selectedYear || date.getFullYear(), selectedMonthNumber + 1 || date.getMonth() - 1));
+    dateListWrapper.appendChild(createDatesList(selectedYear || date.getFullYear(), selectedMonthNumber + 1 || date.getMonth() - 1));
     datepicker.appendChild(dateListWrapper);
 
     return datepicker;
@@ -72,7 +73,7 @@ const updateDatesList = () => {
     const dateListWrapper = dateList().parentElement;
 
     dateList().remove();
-    const newDateList = createDateList(selectedYear, selectedMonthNumber + 1);
+    const newDateList = createDatesList(selectedYear, selectedMonthNumber + 1);
     newDateList.addEventListener('click', (event) => insertDate(event));
     dateListWrapper.appendChild(newDateList);
 }
@@ -95,16 +96,15 @@ const createMonthSelect = () => {
     return selectMonth;
 }
 
-const createDateList = (year, month) => {
+const createDatesList = (year, month) => {
     let dateList = createElementWithId('ul', datepickerDateListId);
-    getDays(getNumberOfDaysInSpecificMonth(year, month)).forEach(date => {
+    getDays(getNumberOfDaysInMonth(year, month)).forEach(date => {
         dateList.appendChild(createElementWithInnerHTML('li', date));
     });
-
     return dateList;
 }
 
-const getNumberOfDaysInSpecificMonth = (year, month) => {
+const getNumberOfDaysInMonth = (year, month) => {
     return new Date(year, month, 0).getDate();
 }
 
@@ -113,8 +113,15 @@ const getYears = () => {
     for (let i = 2000; i <= 2025; i++) {
         years.push(i);
     }
-
     return years;
+}
+
+const getDays = (n : number) => {
+    let days = [];
+    for (let i = 1; i <= n; i++) {
+        days.push(i);
+    }
+    return days;
 }
 
 const months = [
@@ -131,12 +138,3 @@ const months = [
     'November',
     'December'
 ];
-
-const getDays = (n : number) => {
-    let dates = [];
-    for (let i = 1; i <= n; i++) {
-        dates.push(i);
-    }
-
-    return dates;
-}
