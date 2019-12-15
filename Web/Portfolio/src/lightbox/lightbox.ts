@@ -1,4 +1,4 @@
-import { createElement } from '../utils/utils'
+import { createElement } from '../utils/dom'
 
 const lightboxId = 'lightbox';
 const lightboxClass = 'lightbox';

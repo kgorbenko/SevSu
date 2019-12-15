@@ -1,5 +1,5 @@
 import { updateClockOnInterval } from '../clock/clock';
-import { createElement } from '../utils/utils';
+import { createElement } from '../utils/dom';
 import addLightbox from '../lightbox/lightbox';
 
 window.onload = () => {

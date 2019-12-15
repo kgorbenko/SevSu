@@ -1,4 +1,4 @@
-import { createElementWithInnerHTML, createElement } from '../utils/utils';
+import { createElementWithInnerHTML, createElement } from '../utils/dom';
 
 export interface FormValidator {
     errorMessage: string;
