@@ -43,7 +43,15 @@ export const createElement = (elementType: string, objectParams: ICreateElementP
     return Object.assign(document.createElement(elementType), objectParams);
 }
 
-export const insertAfter = (newElement: HTMLElement, element: HTMLElement,) : void => {
+export const appendChildren = (element: HTMLElement, ...children: HTMLElement[]) => {
+    if (children.length > 0) {
+        children.forEach(child => {
+            element.appendChild(child);
+        });
+    }
+}
+
+export const insertAfter = (newElement: HTMLElement, element: HTMLElement) : void => {
     element.parentNode.insertBefore(newElement, element.nextSibling);
 }
 
