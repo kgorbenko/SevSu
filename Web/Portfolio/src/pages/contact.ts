@@ -1,6 +1,6 @@
 import { formatCurrentDate, formatCurrentTime } from '../clock/clock';
 import { FormComponent, NameValidator, FieldFilledValidator, PhoneNumberValidator } from '../forms/forms';
-import { init } from '../datepicker/datepicker';
+import datepicker from '../datepicker/datepicker';
 
 const fields: FormComponent[] = [
     new FormComponent(
@@ -46,7 +46,7 @@ window.onload = () => {
         time.innerHTML = formatCurrentTime();
     }, 1000);
 
-    init();
+    datepicker();
 };
 
 const validateField = (field: FormComponent) => {

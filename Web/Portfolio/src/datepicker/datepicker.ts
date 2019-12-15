@@ -17,7 +17,7 @@ const dateList = () => document.querySelector('#' + datepickerDateListId);
 let selectedYear, selectedMonthNumber, selectedDate;
 let isShown = false;
 
-export const init = () => {
+export default () => {
     datepickerInput().addEventListener('click', showDatePicker);
     window.addEventListener('click', (event) => removeDatePicker(event));
 }
