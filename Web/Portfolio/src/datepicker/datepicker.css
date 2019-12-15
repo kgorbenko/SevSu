@@ -39,4 +39,5 @@
 
 #datepicker-date-list li:hover {
     background-color: #cccccc;
+    cursor: pointer;
 }
