@@ -26,6 +26,6 @@ const expandPhoto = (event) => {
 }
 
 const collapsePhoto = () => {
-    const modal = document.getElementById(modalClass);
+    const modal = document.getElementById(modalId);
     modal.remove();
 }
