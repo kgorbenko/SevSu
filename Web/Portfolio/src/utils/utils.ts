@@ -1,3 +1,11 @@
+interface ICreateElementParameters {
+    id?: string;
+    classList?: string[];
+    src?: string;
+    innerHTML?: string;
+    onclick?: () => void;
+}
+
 export const createElementWithClass = (elementType: string, className?: string) => {
     const element = document.createElement(elementType);
     if (className) {
@@ -20,4 +28,16 @@ export const createElementWithId = (elementType: string, id?: string) => {
         element.id = id;
     }
     return element;
+}
+
+export const createElementWithAttribute = (elementType: string, attributeName?: string, attributeValue?: string) => {
+    const element = document.createElement(elementType);
+    if (attributeName && attributeValue) {
+        element.setAttribute(attributeName, attributeValue);
+    }
+    return element;
+}
+
+export const createElement = (elementType: string, objectParams: ICreateElementParameters) => {
+    return Object.assign(document.createElement(elementType), objectParams);
 }
