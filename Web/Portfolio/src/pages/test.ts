@@ -1,15 +1,8 @@
-import { formatCurrentDate, formatCurrentTime } from '../clock/clock';
+import { updateClockOnInterval } from '../clock/clock';
 import { FormComponent, NameValidator, FieldFilledValidator, PhoneNumberValidator, DetailedAnswerValidator, setFieldsForValidation } from '../forms/forms';
 
 window.onload = () => {
-    const date = document.getElementById('date');
-    const time = document.getElementById('time');
-
-    setInterval(() => {
-        date.innerHTML = formatCurrentDate();
-        time.innerHTML = formatCurrentTime();
-    }, 1000);
-
+    updateClockOnInterval(document.getElementById('date'), document.getElementById('time'), 1000);
     setFieldsForValidation(fields, document.forms.item(0));
 };
 

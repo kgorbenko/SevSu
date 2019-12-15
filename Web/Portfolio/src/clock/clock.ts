@@ -16,3 +16,10 @@ export const formatCurrentDate = () => {
 export const formatCurrentTime = (): string => {
     return formatTime(new Date());
 }
+
+export const updateClockOnInterval = (dateElement: HTMLElement, timeElement: HTMLElement, interval: number) => {
+    setInterval(() => {
+        dateElement.innerHTML = formatCurrentDate();
+        timeElement.innerHTML = formatCurrentTime();
+    }, interval);
+}
