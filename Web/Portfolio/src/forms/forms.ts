@@ -48,8 +48,10 @@ export class FormComponent {
     validate = () : void => {
         this.validators.forEach(validator => {
             const message = validator.errorMessage;
-            if (validator.validate(this.value)) {
-                this.errorMessages.splice(this.errorMessages.indexOf(message), 1);
+            if (validator.validate(this.value())) {
+                if (this.errorMessages.includes(message)) {
+                    this.errorMessages.splice(this.errorMessages.indexOf(message), 1);
+                }
             }
             else {
                 if (!this.errorMessages.includes(message)) {
