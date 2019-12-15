@@ -39,7 +39,7 @@ export const createElementWithAttribute = (elementType: string, attributeName?: 
     return element;
 }
 
-export const createElement = (elementType: string, objectParams: ICreateElementParameters) => {
+export const createElement = (elementType: string, objectParams: ICreateElementParameters): HTMLElement => {
     return Object.assign(document.createElement(elementType), objectParams);
 }
 
