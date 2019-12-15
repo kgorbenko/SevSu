@@ -50,7 +50,6 @@ const removeDatePicker = (event) => {
         datepicker().remove();
         isShown = false;
     }
-};
 }
 
 const createDatePicker = () => {
