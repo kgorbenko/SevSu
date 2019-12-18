@@ -71,5 +71,5 @@ export const getSessionStorageValue = (name: string) => {
 }
 
 export const setSessionStorageValue = (name: string, value: string) => {
-    localStorage.setItem(name, value);
+    sessionStorage.setItem(name, value);
 }
