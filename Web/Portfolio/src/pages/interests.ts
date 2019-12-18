@@ -1,49 +1,5 @@
 import { updateClockOnInterval } from '../clock/clock';
-
-window.onload = () => {
-    updateClockOnInterval(document.getElementById('date'), document.getElementById('time'), 1000);
-    let links = document.getElementsByClassName('contents');
-
-    Array.from(links).forEach(link => {
-        link.addEventListener('click', handleClick);
-    });
-};
-
-const handleClick = () : void => {
-    const targetId : string = (<HTMLElement>event.target).id;
-    if (interests[targetId].isHidden) showInterest(targetId);
-    else hideInterest(targetId);
-};
-
-const showInterest = (targetId : string) : void => {
-    const content : InterestsNodeContent = interests[targetId];
-    if (content.isHidden) {
-        const targetElement = document.getElementById(targetId);
-        const parentElement = targetElement.parentElement;
-        const nextElement = targetElement.nextSibling;
-        let contentWrapper = document.createElement('li');
-        contentWrapper.setAttribute('id', `${targetId}-wrapper`);
-        contentWrapper.setAttribute('class', 'interests');
-        contentWrapper.appendChild(createElement('h2', content.header));
-        contentWrapper.appendChild(createElement('p', content.values[0]));
-        contentWrapper.appendChild(createElement('p', content.values[1]));
-        parentElement.insertBefore(contentWrapper, nextElement);
-        content.isHidden = false;
-    }
-};
-
-const hideInterest = (targetId : string) : void  => {
-    const content: InterestsNodeContent = interests[targetId];
-    const contentWrapper = document.getElementById(`${targetId}-wrapper`);
-    contentWrapper.remove();
-    content.isHidden = true;
-};
-
-const createElement = (tagName: string, content : string) => {
-    let element = document.createElement(tagName);
-    element.innerHTML = content;
-    return element;
-};
+import { insertAfter, removeElementById, createElement, appendChildren } from '../utils/dom';
 
 enum InterestIds {
     Hobbies = 'Hobbies', 
@@ -61,6 +17,37 @@ interface InterestsNodeContent {
     values: string[];
     isHidden: boolean;
 }
+
+window.onload = () => {
+    updateClockOnInterval(document.getElementById('date'), document.getElementById('time'), 1000);
+    let interestsLinks = document.getElementsByClassName('contents');
+
+    Array.from(interestsLinks).forEach(link => {
+        link.addEventListener('click', handleClick);
+    });
+};
+
+const handleClick = (event) : void => {
+    const target = event.target as HTMLElement;
+    if (interests[target.id].isHidden) {
+        insertAfter(createInterestNode(target.id), target);
+        interests[target.id].isHidden = false;
+    } else {
+        removeElementById(`${target.id}-expand`);
+        interests[target.id].isHidden = true;
+    }
+}
+
+const createInterestNode = (interestId: string) => {
+    const interestContent = interests[interestId];
+    const interestNode = createElement('li', { id: `${interestId}-expand`, classList: ['interests'] });
+    appendChildren(interestNode,
+        createElement('h2', { innerHTML: interestContent.header }),
+        createElement('p', { innerHTML: interestContent.values[0] }),
+        createElement('p', { innerHTML: interestContent.values[1] })
+    );
+    return interestNode;
+} 
 
 const interestContent: string =
     `Lorem ipsum dolor sit amet, consecteturadipiscing elit. Sed gravida

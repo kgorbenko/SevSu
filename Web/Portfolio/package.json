@@ -4,7 +4,7 @@
   "description": "Typescript client side for web technologies portfolio",
   "scripts": {
     "tsbuild": "tsc --project ./src/tsconfig.json",
-    "webpack-build": "webpack"
+    "webpack-build": "npx webpack --config ./webpack.config.js"
   },
   "author": "Gorbenko Kirill",
   "license": "ISC",

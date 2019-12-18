@@ -2,6 +2,7 @@ interface ICreateElementParameters {
     id?: string;
     classList?: string[];
     src?: string;
+    alt?: string;
     innerHTML?: string;
     onclick?: () => void;
 }
@@ -38,6 +39,23 @@ export const createElementWithAttribute = (elementType: string, attributeName?: 
     return element;
 }
 
-export const createElement = (elementType: string, objectParams: ICreateElementParameters) => {
+export const createElement = (elementType: string, objectParams: ICreateElementParameters): HTMLElement => {
     return Object.assign(document.createElement(elementType), objectParams);
+}
+
+export const appendChildren = (element: HTMLElement, ...children: HTMLElement[]) => {
+    if (children.length > 0) {
+        children.forEach(child => {
+            element.appendChild(child);
+        });
+    }
+}
+
+export const insertAfter = (newElement: HTMLElement, element: HTMLElement) : void => {
+    element.parentNode.insertBefore(newElement, element.nextSibling);
+}
+
+export const removeElementById = (targetId : string) : void  => {
+    const contentWrapper = document.querySelector(`#${targetId}`);
+    contentWrapper.remove();
 }

@@ -1,18 +1,17 @@
 import { updateClockOnInterval } from '../clock/clock';
-import { addModal } from '../photos/photos';
+import { createElement } from '../utils/dom';
+import addLightbox from '../lightbox/lightbox';
 
 window.onload = () => {
     updateClockOnInterval(document.getElementById('date'), document.getElementById('time'), 1000);
-    let photoWrapper = document.getElementsByClassName('photo-wrapper').item(0);
+    let photoWrapper = document.querySelector('.photo-wrapper');
     
     photos.forEach(photo => {
-        let img = document.createElement('img');
-        img.setAttribute('src', photo);
-        img.setAttribute('alt', 'photoalbum photo');
+        let img = createElement('img', { src: photo, alt: 'photoalbum photo' });
         photoWrapper.appendChild(img);
     });
 
-    addModal(photoWrapper);
+    addLightbox(photoWrapper);
 };
 
 const photos : string[] = [
