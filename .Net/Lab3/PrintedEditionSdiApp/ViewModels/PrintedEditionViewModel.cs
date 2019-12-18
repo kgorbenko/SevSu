@@ -90,7 +90,7 @@ namespace PrintedEditionSdiApp.ViewModels
             }
 
             var oldPrintedEdition = PrintedEditions.FirstOrDefault(x => x.Id == printedEdition.Id);
-            if (oldPrintedEdition != null);
+            if (oldPrintedEdition != null)
             {
                 oldPrintedEdition.Name = printedEdition.Name;
                 oldPrintedEdition.Author = printedEdition.Author;
