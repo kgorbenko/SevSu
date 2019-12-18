@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using PrintedEditionSdiApp.Annotations;
 using PrintedEditionSdiApp.Models;
 
@@ -12,6 +13,7 @@ namespace PrintedEditionSdiApp.ViewModels
     {
         private static PrintedEditionViewModel instance;
         private PrintedEdition selectedPrintedEdition;
+        private ICommand deleteCommand;
 
         public event PropertyChangedEventHandler PropertyChanged;
         public ObservableCollection<PrintedEdition> PrintedEditions { get; set; }
@@ -25,6 +27,11 @@ namespace PrintedEditionSdiApp.ViewModels
                 OnPropertyChanged(nameof(SelectedPrintedEdition));
             }
         }
+
+        public ICommand DeleteCommand =>
+            deleteCommand ??= new RelayCommand(
+                obj => RemovePrintedEdition(selectedPrintedEdition),
+                obj => true);
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
