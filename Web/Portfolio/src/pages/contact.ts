@@ -1,8 +1,10 @@
 import { updateClockOnInterval } from '../clock/clock';
 import { FormComponent, NameValidator, FieldFilledValidator, PhoneNumberValidator, setFieldsForValidation, DateValidator } from '../forms/forms';
 import datepicker from '../datepicker/datepicker';
+import { visitPage } from '../storage/storage';
 
 window.onload = () => {
+    visitPage('contact');
     updateClockOnInterval(document.getElementById('date'), document.getElementById('time'), 1000);
     datepicker();
     setFieldsForValidation(fields, document.forms.item(0));

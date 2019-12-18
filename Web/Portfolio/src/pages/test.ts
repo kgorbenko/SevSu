@@ -1,7 +1,9 @@
 import { updateClockOnInterval } from '../clock/clock';
 import { FormComponent, NameValidator, FieldFilledValidator, PhoneNumberValidator, DetailedAnswerValidator, setFieldsForValidation } from '../forms/forms';
+import { visitPage } from '../storage/storage';
 
 window.onload = () => {
+    visitPage('test');
     updateClockOnInterval(document.getElementById('date'), document.getElementById('time'), 1000);
     setFieldsForValidation(fields, document.forms.item(0));
 };
