@@ -36,7 +36,8 @@
                                 <TextBlock Text="{Binding Author}" />
                                 <TextBlock Text="{Binding Price}" />
                             </StackPanel>
-                            <Button Name="EditButton" Grid.Column="1" Click="EditPrintedEditionButtonClick"
+                            <Button Grid.Column="1"
+                                    Click="EditPrintedEditionButtonClick"
                                     Margin="5" Content="Edit"/>
                             <Button Grid.Column="2"
                                     Command="{Binding Path=DataContext.DeleteCommand,
