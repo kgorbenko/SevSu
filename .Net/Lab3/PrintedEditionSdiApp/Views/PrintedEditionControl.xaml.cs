@@ -11,17 +11,22 @@ namespace PrintedEditionSdiApp.Views
         {
             InitializeComponent();
         }
-
-        // TODO: Implement window open according to MVVM pattern
         private void AddPrintedEditionButtonClick(object sender, RoutedEventArgs e)
         {
-            new PrintedEditionAddFormWindow().Show();
+            new AddPrintedEditionWindow().Show();
         }
 
         private void EditPrintedEditionButtonClick(object sender, RoutedEventArgs e)
         {
-            var viewModel = PrintedEditionViewModel.GetInstance();
-            new PrintedEditionEditFormWindow().Show();
+            var button = sender as Button;
+            var parent = button.Parent;
+            var printedEdition = button.DataContext as PrintedEdition;
+            var editPrintedEditionWindow = new EditPrintedEditionWindow
+            {
+                DataContext = new EditPrintedEditionViewModel(printedEdition)
+            };
+            
+            editPrintedEditionWindow.Show();
         }
     }
 }

@@ -5,8 +5,8 @@ namespace PrintedEditionSdiApp.ViewModels
 {
     public class RelayCommand : ICommand
     {
-        private readonly Action<object> execute;
-        private readonly Predicate<object> canExecute;
+        protected readonly Action<object> execute;
+        protected readonly Predicate<object> canExecute;
 
         public RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
@@ -19,7 +19,7 @@ namespace PrintedEditionSdiApp.ViewModels
             return canExecute(parameter);
         }
 
-        public void Execute(object parameter)
+        public virtual void Execute(object parameter)
         {
             execute(parameter);
         }

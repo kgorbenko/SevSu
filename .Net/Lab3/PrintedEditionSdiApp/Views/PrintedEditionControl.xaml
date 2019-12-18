@@ -14,15 +14,6 @@
             <ListView ItemsSource="{Binding PrintedEditions}" SelectedItem="{Binding SelectedPrintedEdition}"
                       ScrollViewer.VerticalScrollBarVisibility="Visible"
                       Height="250" Margin="5">
-                <ListView.Resources>
-                    <Style TargetType="ListViewItem">
-                        <Style.Triggers>
-                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                                <Setter Property="IsSelected" Value="True"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ListView.Resources>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -35,7 +26,8 @@
                                 <TextBlock Text="{Binding Author}" />
                                 <TextBlock Text="{Binding Price}" />
                             </StackPanel>
-                            <Button Name="EditButton" Grid.Column="1" Click="EditPrintedEditionButtonClick" Margin="5" Content="Edit"/>
+                            <Button Name="EditButton" Grid.Column="1" Click="EditPrintedEditionButtonClick"
+                                    Margin="5" Content="Edit"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -43,7 +35,7 @@
             <Button Click="AddPrintedEditionButtonClick" Margin="5">Add</Button>
         </StackPanel>
         
-        <StackPanel DataContext="{Binding SelectedPrintedEdition}" Margin="5">
+        <StackPanel IsEnabled="False" DataContext="{Binding SelectedPrintedEdition}" Margin="5">
             <Label HorizontalAlignment="Center">Selected Edition</Label>
             <TextBlock Text="Name" />
             <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />

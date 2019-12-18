@@ -3,9 +3,9 @@ using PrintedEditionSdiApp.ViewModels;
 
 namespace PrintedEditionSdiApp.Views
 {
-    public partial class PrintedEditionMainWindow : Window
+    public partial class MainWindow : Window
     {
-        public PrintedEditionMainWindow()
+        public MainWindow()
         {
             InitializeComponent();
             DataContext = PrintedEditionViewModel.GetInstance();

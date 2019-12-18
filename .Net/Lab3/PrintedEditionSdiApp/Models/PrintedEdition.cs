@@ -9,6 +9,7 @@ namespace PrintedEditionSdiApp.Models
         private string name;
         private string author;
         private double price;
+        public int Id { get; set; }
 
         public string Name
         {

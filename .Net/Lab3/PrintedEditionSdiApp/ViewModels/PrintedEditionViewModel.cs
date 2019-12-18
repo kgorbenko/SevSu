@@ -1,8 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Input;
 using PrintedEditionSdiApp.Annotations;
 using PrintedEditionSdiApp.Models;
 
@@ -12,26 +12,9 @@ namespace PrintedEditionSdiApp.ViewModels
     {
         private static PrintedEditionViewModel instance;
         private PrintedEdition selectedPrintedEdition;
-        private PrintedEdition newPrintedEditionInfo;
 
-        private RelayCommand addCommand;
-        private RelayCommand removeCommand;
-
-        public static PrintedEditionViewModel GetInstance()
-        {
-            return instance ??= new PrintedEditionViewModel();
-        }
-
+        public event PropertyChangedEventHandler PropertyChanged;
         public ObservableCollection<PrintedEdition> PrintedEditions { get; set; }
-        public PrintedEdition NewPrintedEditionInfo
-        {
-            get => newPrintedEditionInfo;
-            set
-            {
-                newPrintedEditionInfo = value;
-                OnPropertyChanged(nameof(NewPrintedEditionInfo));
-            }
-    }
 
         public PrintedEdition SelectedPrintedEdition
         {
@@ -43,54 +26,82 @@ namespace PrintedEditionSdiApp.ViewModels
             }
         }
 
-        public RelayCommand AddCommand
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            get
-            {
-                return addCommand ??= new RelayCommand(obj =>
-                {
-                    if (obj is PrintedEdition edition)
-                    {
-                        AddPrintedEdition(edition);
-                    }
-                }, obj => true);
-            }
-            set => AddCommand = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        /*public RelayCommand RemoveCommand
+        public static PrintedEditionViewModel GetInstance()
         {
-            
-        }*/
-
-        public void AddPrintedEdition(PrintedEdition edition)
-        {
-            PrintedEditions.Add(edition);
+            return instance ??= new PrintedEditionViewModel();
         }
 
         private PrintedEditionViewModel()
         {
             PrintedEditions = new ObservableCollection<PrintedEdition>
             {
-                new PrintedEdition {Name = "First", Author = "Some Random Dude", Price = 200},
-                new PrintedEdition {Name = "Second", Author = "Another Random Dude", Price = 150},
-                new PrintedEdition {Name = "Third", Author = "Other Random Dude", Price = 500},
-                new PrintedEdition {Name = "Fourth", Author = "Dude", Price = 700}
+                new PrintedEdition { Id = 1, Name = "First", Author = "Some Random Dude", Price = 200},
+                new PrintedEdition { Id = 2, Name = "Second", Author = "Another Random Dude", Price = 150},
+                new PrintedEdition { Id = 3, Name = "Third", Author = "Other Random Dude", Price = 500},
+                new PrintedEdition { Id = 4, Name = "Fourth", Author = "Dude", Price = 700}
             };
-            AddCommand = new RelayCommand((obj) =>
-            {
-                PrintedEditions.Add(NewPrintedEditionInfo);
-                
-            }, (obj)=>true);
-            newPrintedEditionInfo = new PrintedEdition();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public void AddPrintedEdition(PrintedEdition printedEdition)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (printedEdition == null)
+            {
+                throw new ArgumentNullException(nameof(printedEdition));
+            }
+
+            if (printedEdition.Id == 0)
+            {
+                printedEdition.Id = GetUniqueId();
+            }
+            PrintedEditions.Add(printedEdition);
+        }
+
+        public void RemovePrintedEdition(PrintedEdition printedEdition)
+        {
+            if (printedEdition == null)
+            {
+                throw new ArgumentNullException(nameof(printedEdition));
+            }
+
+            if (PrintedEditions.Contains(printedEdition))
+            {
+                PrintedEditions.Remove(printedEdition);
+            }
+        }
+
+        public void ReplacePrintedEdition(PrintedEdition printedEdition)
+        {
+            if (printedEdition == null)
+            {
+                throw new ArgumentNullException(nameof(printedEdition));
+            }
+
+            var oldPrintedEdition = PrintedEditions.FirstOrDefault(x => x.Id == printedEdition.Id);
+            if (oldPrintedEdition != null);
+            {
+                oldPrintedEdition.Name = printedEdition.Name;
+                oldPrintedEdition.Author = printedEdition.Author;
+                oldPrintedEdition.Price = printedEdition.Price;
+            }
+        }
+
+        private int GetUniqueId()
+        {
+            var generator = new Random();
+            var uniqueId = 0;
+
+            while (PrintedEditions.FirstOrDefault(x => x.Id == uniqueId) != null)
+            {
+                uniqueId = generator.Next();
+            }
+
+            return uniqueId;
         }
     }
 }
