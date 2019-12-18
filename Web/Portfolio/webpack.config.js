@@ -9,7 +9,8 @@ module.exports = {
         learning: './src/pages/learning.ts',
         photos: './src/pages/photos.ts',
         contact: './src/pages/contact.ts',
-        test: './src/pages/test.ts'
+        test: './src/pages/test.ts',
+        history: './src/pages/history.ts'
     },
     devtool: 'inline-source-map',
     module: {
