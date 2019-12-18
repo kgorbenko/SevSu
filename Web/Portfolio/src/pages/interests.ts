@@ -1,5 +1,6 @@
 import { updateClockOnInterval } from '../clock/clock';
 import { insertAfter, removeElementById, createElement, appendChildren } from '../utils/dom';
+import { visitPage } from '../storage/storage';
 
 enum InterestIds {
     Hobbies = 'Hobbies', 
@@ -19,6 +20,7 @@ interface InterestsNodeContent {
 }
 
 window.onload = () => {
+    visitPage('interests');
     updateClockOnInterval(document.getElementById('date'), document.getElementById('time'), 1000);
     let interestsLinks = document.getElementsByClassName('contents');
 

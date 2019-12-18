@@ -1,8 +1,10 @@
 import { updateClockOnInterval } from '../clock/clock';
 import { createElement } from '../utils/dom';
 import addLightbox from '../lightbox/lightbox';
+import { visitPage } from '../storage/storage';
 
 window.onload = () => {
+    visitPage('photos');
     updateClockOnInterval(document.getElementById('date'), document.getElementById('time'), 1000);
     let photoWrapper = document.querySelector('.photo-wrapper');
     
