@@ -18,6 +18,8 @@ export const formatCurrentTime = (): string => {
 }
 
 export const updateClockOnInterval = (dateElement: HTMLElement, timeElement: HTMLElement, interval: number) => {
+    dateElement.innerHTML = formatCurrentDate();
+    timeElement.innerHTML = formatCurrentTime();
     setInterval(() => {
         dateElement.innerHTML = formatCurrentDate();
         timeElement.innerHTML = formatCurrentTime();
