@@ -7,8 +7,15 @@
       mc:Ignorable="d"
       Title="PrintedEditionMainWindow"
       d:DataContext="{d:DesignInstance viewModels:PrintedEditionViewModel}">
-    
+
     <StackPanel>
+        <Menu>
+            <MenuItem Header="File">
+                <MenuItem Header="New Printed Edition" Click="AddPrintedEditionButtonClick"></MenuItem>
+                <MenuItem Header="Exit" Click="CloseButtonClick"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Exit" Click="CloseButtonClick"></MenuItem>
+        </Menu>
         <StackPanel>
             <Label HorizontalAlignment="Center">Printed Editions</Label>
             <ListView ItemsSource="{Binding PrintedEditions}" SelectedItem="{Binding SelectedPrintedEdition}"
@@ -49,6 +56,7 @@
                 </ListView.ItemTemplate>
             </ListView>
             <Button Click="AddPrintedEditionButtonClick" Margin="5">Add</Button>
+            <Button Command="{Binding SortCommand}" Margin="5">Sort</Button>
         </StackPanel>
         
         <StackPanel IsEnabled="False" DataContext="{Binding SelectedPrintedEdition}" Margin="5">

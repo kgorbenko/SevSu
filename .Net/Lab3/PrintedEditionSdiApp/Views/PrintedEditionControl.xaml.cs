@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using PrintedEditionSdiApp.Models;
 using PrintedEditionSdiApp.ViewModels;
@@ -21,12 +22,21 @@ namespace PrintedEditionSdiApp.Views
             var button = sender as Button;
             var parent = button.Parent;
             var printedEdition = button.DataContext as PrintedEdition;
-            var editPrintedEditionWindow = new EditPrintedEditionWindow
+            var editPrintedEditionWindow = new EditPrintedEditionWindow()
             {
                 DataContext = new EditPrintedEditionViewModel(printedEdition)
             };
             
             editPrintedEditionWindow.Show();
+        }
+
+        private void CloseButtonClick(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to exit?", "Exit dialog", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                Environment.Exit(0);
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows.Controls;
 using System.Windows.Input;
 using PrintedEditionSdiApp.Annotations;
 using PrintedEditionSdiApp.Models;
@@ -13,11 +14,19 @@ namespace PrintedEditionSdiApp.ViewModels
     {
         private static PrintedEditionViewModel instance;
         private PrintedEdition selectedPrintedEdition;
+        private ObservableCollection<PrintedEdition> printedEditions;
         private ICommand deleteCommand;
+        private ICommand sortCommand;
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public ObservableCollection<PrintedEdition> PrintedEditions { get; set; }
-
+        public ObservableCollection<PrintedEdition> PrintedEditions
+        {
+            get => printedEditions;
+            set {
+                printedEditions = value;
+                OnPropertyChanged(nameof(PrintedEditions));
+            }
+        }
         public PrintedEdition SelectedPrintedEdition
         {
             get => selectedPrintedEdition;
@@ -33,6 +42,15 @@ namespace PrintedEditionSdiApp.ViewModels
                 obj => RemovePrintedEdition(selectedPrintedEdition),
                 obj => true);
 
+        public ICommand SortCommand =>
+            sortCommand ??= new RelayCommand(
+                obj =>
+                {
+                    var edition = new ObservableCollection<PrintedEdition>(PrintedEditions.OrderBy(x => x.Author).ToArray());
+                    PrintedEditions = edition;
+                },
+                obj => true);
+
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -46,7 +64,7 @@ namespace PrintedEditionSdiApp.ViewModels
 
         private PrintedEditionViewModel()
         {
-            PrintedEditions = new ObservableCollection<PrintedEdition>
+            printedEditions = new ObservableCollection<PrintedEdition>
             {
                 new PrintedEdition { Id = 1, Name = "First", Author = "Some Random Dude", Price = 200},
                 new PrintedEdition { Id = 2, Name = "Second", Author = "Another Random Dude", Price = 150},
