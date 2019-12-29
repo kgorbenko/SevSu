@@ -23,9 +23,9 @@ const expandLightbox = (event) => {
     lightbox.appendChild(image);
     lightbox.appendChild(closeButton);
     document.body.appendChild(lightbox);
-}
+};
 
 const collapseLightbox = () => {
     const lightbox = document.getElementById(lightboxId);
     lightbox.remove();
-}
+};

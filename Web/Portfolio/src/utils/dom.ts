@@ -13,7 +13,7 @@ export const createElementWithClass = (elementType: string, className?: string) 
         element.className = className;
     }
     return element;
-}
+};
 
 export const createElementWithInnerHTML = (elementType: string, innerHTML?: string) => {
     const element = document.createElement(elementType);
@@ -21,7 +21,7 @@ export const createElementWithInnerHTML = (elementType: string, innerHTML?: stri
         element.innerHTML = innerHTML;
     }
     return element;
-}
+};
 
 export const createElementWithId = (elementType: string, id?: string) => {
     const element = document.createElement(elementType);
@@ -29,7 +29,7 @@ export const createElementWithId = (elementType: string, id?: string) => {
         element.id = id;
     }
     return element;
-}
+};
 
 export const createElementWithAttribute = (elementType: string, attributeName?: string, attributeValue?: string) => {
     const element = document.createElement(elementType);
@@ -37,11 +37,11 @@ export const createElementWithAttribute = (elementType: string, attributeName?: 
         element.setAttribute(attributeName, attributeValue);
     }
     return element;
-}
+};
 
 export const createElement = (elementType: string, objectParams: ICreateElementParameters): HTMLElement => {
     return Object.assign(document.createElement(elementType), objectParams);
-}
+};
 
 export const appendChildren = (element: HTMLElement, ...children: HTMLElement[]) => {
     if (children.length > 0) {
@@ -49,13 +49,13 @@ export const appendChildren = (element: HTMLElement, ...children: HTMLElement[])
             element.appendChild(child);
         });
     }
-}
+};
 
 export const insertAfter = (newElement: HTMLElement, element: HTMLElement) : void => {
     element.parentNode.insertBefore(newElement, element.nextSibling);
-}
+};
 
 export const removeElementById = (targetId : string) : void  => {
     const contentWrapper = document.querySelector(`#${targetId}`);
     contentWrapper.remove();
-}
+};

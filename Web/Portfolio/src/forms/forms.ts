@@ -76,7 +76,7 @@ export class FormComponent {
 export const setFieldsForValidation = (fields: FormComponent[], form: HTMLFormElement) => {
     addFormSubmitListener(form, fields);
     addFormComponentsChangeLiseners(fields);
-}
+};
 
 const addFormSubmitListener = (form: HTMLFormElement, fields: FormComponent[]) => form.addEventListener('submit', () => validateForm(fields));
 
@@ -85,7 +85,7 @@ const addFormComponentsChangeLiseners = (formComponents: FormComponent[]) => {
         const formComponentElement = document.getElementById(formComponent.componentId);
         formComponentElement.addEventListener('blur', () => validateField(formComponent));
     })
-}
+};
 
 const validateForm = (fields) => {
     let firstError : FormComponent;
@@ -101,7 +101,7 @@ const validateForm = (fields) => {
     if (fields.some(field => field.errorMessages.length > 0)) {
         event.preventDefault();
     }
-}
+};
 
 const validateField = (field: FormComponent) => {
     const presentErrorMessages = document.getElementById(`${field.componentId}-errors`);
@@ -113,7 +113,7 @@ const validateField = (field: FormComponent) => {
     if (field.errorMessages.length > 0) {
         showMessages(field);
     }
-}
+};
 
 const showMessages = (field: FormComponent) => {
     const targetElement = document.getElementById(field.componentId);
@@ -125,4 +125,4 @@ const showMessages = (field: FormComponent) => {
         contentWrapper.appendChild(messageListItem);
     });
     parentElement.insertBefore(contentWrapper, targetElement);
-}
+};

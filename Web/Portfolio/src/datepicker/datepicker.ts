@@ -33,19 +33,19 @@ const insertDate = (event) => {
         (datepickerInput() as HTMLFormElement).value = formatDate(date);
         (datepickerInput() as HTMLElement).blur();
     }
-}
+};
 
 const showDatePicker = () => {
     if (!isShown) {
         datepickerInput().parentNode.insertBefore(createDatePicker(), datepickerInput().nextSibling);
         Array.from(dateList().childNodes).forEach(listItem => {
             listItem.addEventListener('click', (event) => insertDate(event));
-        })
+        });
         yearSelect().addEventListener('change', updateDatesList);
         monthSelect().addEventListener('change', updateDatesList);
         isShown = true;
     }
-}
+};
 
 const removeDatePicker = (event) => {
     if (isShown && !datepicker().contains(event.target as Node) && event.target !== datepickerInput()) {
@@ -53,7 +53,7 @@ const removeDatePicker = (event) => {
         datepicker().remove();
         isShown = false;
     }
-}
+};
 
 const createDatePicker = () => {
     const date = new Date();
@@ -67,7 +67,7 @@ const createDatePicker = () => {
     datepicker.appendChild(dateListWrapper);
 
     return datepicker;
-}
+};
 
 const updateDatesList = () => {
     const selectedYear = (yearSelect() as HTMLFormElement).value;
@@ -78,7 +78,7 @@ const updateDatesList = () => {
     const newDateList = createDatesList(selectedYear, selectedMonthNumber + 1);
     newDateList.addEventListener('click', (event) => insertDate(event));
     dateListWrapper.appendChild(newDateList);
-}
+};
 
 const createYearsSelect = () => {
     const selectYear = createElementWithId('select', datepickerYearSelectId);
@@ -87,7 +87,7 @@ const createYearsSelect = () => {
     });
     (selectYear as HTMLFormElement).value = selectedYear || new Date().getFullYear();
     return selectYear;
-}
+};
 
 const createMonthSelect = () => {
     const selectMonth = createElementWithId('select', datepickerMonthSelectId);
@@ -96,7 +96,7 @@ const createMonthSelect = () => {
     });
     (selectMonth as HTMLFormElement).value = months[selectedMonthNumber] || months[new Date().getMonth()];
     return selectMonth;
-}
+};
 
 const createDatesList = (year, month) => {
     let dateList = createElementWithId('ul', datepickerDateListId);
@@ -104,11 +104,11 @@ const createDatesList = (year, month) => {
         dateList.appendChild(createElementWithInnerHTML('li', date));
     });
     return dateList;
-}
+};
 
 const getNumberOfDaysInMonth = (year, month) => {
     return new Date(year, month, 0).getDate();
-}
+};
 
 const getYears = () => {
     let years = [];
@@ -116,7 +116,7 @@ const getYears = () => {
         years.push(i);
     }
     return years;
-}
+};
 
 const getDays = (n : number) => {
     let days = [];
@@ -124,7 +124,7 @@ const getDays = (n : number) => {
         days.push(i);
     }
     return days;
-}
+};
 
 const months = [
     'January',

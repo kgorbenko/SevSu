@@ -38,7 +38,7 @@ const handleClick = (event) : void => {
         removeElementById(`${target.id}-expand`);
         interests[target.id].isHidden = true;
     }
-}
+};
 
 const createInterestNode = (interestId: string) => {
     const interestContent = interests[interestId];
@@ -49,7 +49,7 @@ const createInterestNode = (interestId: string) => {
         createElement('p', { innerHTML: interestContent.values[1] })
     );
     return interestNode;
-} 
+};
 
 const interestContent: string =
     `Lorem ipsum dolor sit amet, consecteturadipiscing elit. Sed gravida

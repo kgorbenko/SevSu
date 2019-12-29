@@ -12,4 +12,4 @@ window.onload = () => {
         const pageHistoryCell = document.querySelector(`.session-history .${key}`);
         pageHistoryCell.innerHTML = sessionHistory[key];
     }
-}
+};

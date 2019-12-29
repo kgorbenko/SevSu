@@ -12,7 +12,7 @@ type PageHistory = {[key in Pages]: number;};
 export const visitPage = (page: Pages) => {
     incrementLocalStoragePageVisits(page);
     incrementSessionStoragePageVisits(page);
-}
+};
 
 const incrementLocalStoragePageVisits = (page: Pages) => {
     const currentLocalStorageValue = getLocalStorageValue(page);
@@ -21,7 +21,7 @@ const incrementLocalStoragePageVisits = (page: Pages) => {
     } else {
         setLocalStorageValue(page, '1');
     }
-}
+};
 
 const incrementSessionStoragePageVisits = (page: Pages) => {
     const currentSessionStorageValue = getSessionStorageValue(page);
@@ -30,7 +30,7 @@ const incrementSessionStoragePageVisits = (page: Pages) => {
     } else {
         setSessionStorageValue(page, '1');
     }
-}
+};
 
 export const getGlobalHistory = (): PageHistory => {
     return {
@@ -43,7 +43,7 @@ export const getGlobalHistory = (): PageHistory => {
         test: Number(getLocalStorageValue('test')),
         history: Number(getLocalStorageValue('history'))
     };
-}
+};
 
 export const getSessionHistory = () => {
     return {
@@ -56,20 +56,20 @@ export const getSessionHistory = () => {
         test: Number(getSessionStorageValue('test')),
         history: Number(getSessionStorageValue('history'))
     };
-}
+};
 
 export const getLocalStorageValue = (name: string) => {
     return localStorage.getItem(name);
-}
+};
 
 export const setLocalStorageValue = (name: string, value: string) => {
     localStorage.setItem(name, value);
-}
+};
 
 export const getSessionStorageValue = (name: string) => {
     return sessionStorage.getItem(name);
-}
+};
 
 export const setSessionStorageValue = (name: string, value: string) => {
     sessionStorage.setItem(name, value);
-}
+};
