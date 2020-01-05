@@ -20,13 +20,12 @@ namespace PrintedEditionSdiApp.Views
         private void EditPrintedEditionButtonClick(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
-            var parent = button.Parent;
             var printedEdition = button.DataContext as PrintedEdition;
             var editPrintedEditionWindow = new EditPrintedEditionWindow()
             {
                 DataContext = new EditPrintedEditionViewModel(printedEdition)
             };
-            
+
             editPrintedEditionWindow.Show();
         }
 
