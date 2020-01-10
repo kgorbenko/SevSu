@@ -3,8 +3,20 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:viewModels="clr-namespace:PrintedEditionMdi.ViewModels"
       mc:Ignorable="d"
-      Title="PrintedEditionControl" Height="450" Width="800">
+      d:DataContext="{d:DesignInstance viewModels:PrintedEditionControlViewModel}"
+      Title="PrintedEditionControl"
+      MinHeight="450" MinWidth="400">
 
-    <Label>To implement</Label>
+    <DataGrid HorizontalAlignment="Left"
+              ItemsSource="{Binding Path=PrintedEditions}"
+              AutoGenerateColumns="False">
+        <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Path=Id}" Width="0.33*" Header="Id" />
+            <DataGridTextColumn Binding="{Binding Path=Name}" Width="0.33*" Header="Name" />
+            <DataGridTextColumn Binding="{Binding Path=Author}" Width="0.33*" Header="Author" />
+            <DataGridTextColumn Binding="{Binding Path=Price}" Width="0.33*" Header="Price" />
+        </DataGrid.Columns>
+    </DataGrid>
 </Page>

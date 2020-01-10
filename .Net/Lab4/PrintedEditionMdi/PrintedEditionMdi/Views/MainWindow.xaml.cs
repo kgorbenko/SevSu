@@ -1,4 +1,6 @@
-﻿namespace PrintedEditionMdi.Views
+﻿using PrintedEditionMdi.ViewModels;
+
+namespace PrintedEditionMdi.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -8,6 +10,7 @@
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = PrintedEditionControlViewModel.GetInstance();
         }
     }
 }
