@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using PrintedEditionMdi.Annotations;
+using System.Windows.Input;
 using PrintedEditionMdi.Models;
 
 namespace PrintedEditionMdi.ViewModels
@@ -10,7 +10,8 @@ namespace PrintedEditionMdi.ViewModels
     {
         private static PrintedEditionControlViewModel instance;
         private ObservableCollection<PrintedEdition> printedEditions;
-
+        private PrintedEdition selectedItem;
+        private ICommand removeCommand;
         public ObservableCollection<PrintedEdition> PrintedEditions
         {
             get => printedEditions;
@@ -21,7 +22,20 @@ namespace PrintedEditionMdi.ViewModels
             }
         }
 
-        public PrintedEditionControlViewModel()
+        public PrintedEdition SelectedItem
+        {
+            get => selectedItem;
+            set
+            {
+                selectedItem = value;
+                OnPropertyChanged(nameof(SelectedItem));
+            }
+        }
+
+        public ICommand RemoveCommand =>
+            removeCommand ??= new RelayCommand(() => PrintedEditions.Remove(selectedItem));
+
+        private PrintedEditionControlViewModel()
         {
             printedEditions = new ObservableCollection<PrintedEdition>
             {
@@ -32,14 +46,10 @@ namespace PrintedEditionMdi.ViewModels
             };
         }
 
-        public static PrintedEditionControlViewModel GetInstance()
-        {
-            return instance ??= new PrintedEditionControlViewModel();
-        }
+        public static PrintedEditionControlViewModel GetInstance() => instance ??= new PrintedEditionControlViewModel();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

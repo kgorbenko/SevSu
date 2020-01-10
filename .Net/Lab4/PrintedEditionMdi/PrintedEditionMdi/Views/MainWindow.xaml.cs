@@ -9,8 +9,8 @@ namespace PrintedEditionMdi.Views
     {
         public MainWindow()
         {
-            InitializeComponent();
             DataContext = PrintedEditionControlViewModel.GetInstance();
+            InitializeComponent();
         }
     }
 }
