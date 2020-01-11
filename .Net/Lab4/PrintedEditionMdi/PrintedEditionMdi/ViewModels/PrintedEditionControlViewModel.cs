@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using PrintedEditionMdi.Annotations;
 using PrintedEditionMdi.Models;
+using PrintedEditionMdi.Utils;
 
 namespace PrintedEditionMdi.ViewModels
 {
@@ -23,10 +24,10 @@ namespace PrintedEditionMdi.ViewModels
         {
             printedEditions = new ObservableCollection<PrintedEdition>
             {
-                new PrintedEdition { Id = 1, Name = "First", Author = "Some Random Dude", Price = 200},
-                new PrintedEdition { Id = 2, Name = "Second", Author = "Another Random Dude", Price = 150},
-                new PrintedEdition { Id = 3, Name = "Third", Author = "Other Random Dude", Price = 500},
-                new PrintedEdition { Id = 4, Name = "Fourth", Author = "Dude", Price = 700}
+                new PrintedEdition { Name = "Second", Author = "Another Random Dude", Price = 150},
+                new PrintedEdition { Name = "First", Author = "Some Random Dude", Price = 200},
+                new PrintedEdition { Name = "Third", Author = "Other Random Dude", Price = 500},
+                new PrintedEdition { Name = "Fourth", Author = "Dude", Price = 700}
             };
         }
 

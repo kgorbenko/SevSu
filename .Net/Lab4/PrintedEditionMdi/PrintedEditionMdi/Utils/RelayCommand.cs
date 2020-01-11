@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace PrintedEditionMdi
+namespace PrintedEditionMdi.Utils
 {
     public class RelayCommand : ICommand
     {
@@ -12,8 +12,8 @@ namespace PrintedEditionMdi
             this.execute = execute;
         }
 
-        public virtual bool CanExecute(object parameter) => true;
-        public virtual void Execute(object parameter) => execute.Invoke();
+        public bool CanExecute(object parameter) => true;
+        public void Execute(object parameter) => execute.Invoke();
 
         public event EventHandler CanExecuteChanged
         {

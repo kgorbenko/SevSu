@@ -15,8 +15,6 @@ namespace PrintedEditionMdi.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public int Id { get; set; }
-
         public string Name
         {
             get => name;
