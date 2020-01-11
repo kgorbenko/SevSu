@@ -9,6 +9,12 @@ namespace PrintedEditionMdi.Models
         private string author;
         private double price;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public int Id { get; set; }
 
         public string Name
@@ -35,12 +41,6 @@ namespace PrintedEditionMdi.Models
                 price = value;
                 OnPropertyChanged(nameof(Price));
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
