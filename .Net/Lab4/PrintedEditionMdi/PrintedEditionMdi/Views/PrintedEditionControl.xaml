@@ -10,6 +10,12 @@
       Title="PrintedEditionControl">
 
     <StackPanel>
+        <Menu>
+            <MenuItem Header="File">
+                <MenuItem Header="Open" Click="OpenButtonClick"></MenuItem>
+                <MenuItem Header="Save As" Click="SaveAsButtonClick"></MenuItem>
+            </MenuItem>
+        </Menu>
         <DataGrid HorizontalAlignment="Left"
                   ItemsSource="{Binding PrintedEditions}"
                   SelectedItem="{Binding SelectedItem}"

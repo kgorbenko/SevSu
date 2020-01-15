@@ -13,22 +13,18 @@ namespace PrintedEditionMdi.ViewModels
         private ObservableCollection<PrintedEdition> printedEditions;
         private PrintedEdition selectedItem;
         private ICommand removeCommand;
+        private ICommand saveCommand;
+        private ICommand openCommand;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         public PrintedEditionControlViewModel()
         {
-            printedEditions = new ObservableCollection<PrintedEdition>
-            {
-                new PrintedEdition { Name = "Second", Author = "Another Random Dude", Price = 150},
-                new PrintedEdition { Name = "First", Author = "Some Random Dude", Price = 200},
-                new PrintedEdition { Name = "Third", Author = "Other Random Dude", Price = 500},
-                new PrintedEdition { Name = "Fourth", Author = "Dude", Price = 700}
-            };
+            printedEditions = new ObservableCollection<PrintedEdition>();
         }
 
         public ObservableCollection<PrintedEdition> PrintedEditions
@@ -52,6 +48,14 @@ namespace PrintedEditionMdi.ViewModels
         }
 
         public ICommand RemoveCommand =>
-            removeCommand ??= new RelayCommand(() => PrintedEditions.Remove(selectedItem));
+            removeCommand ??= new RelayCommand(obj => PrintedEditions.Remove(selectedItem));
+
+        public ICommand SaveCommand =>
+            saveCommand ??= new RelayCommand(obj => PrintedEditionSerializeHelper.Serialize(printedEditions,
+                                                                                            obj as string));
+
+        public ICommand OpenCommand =>
+            openCommand ??= new RelayCommand(obj => PrintedEditions = new ObservableCollection<PrintedEdition>(
+                                                 PrintedEditionSerializeHelper.Deserialize(obj as string)));
     }
 }
