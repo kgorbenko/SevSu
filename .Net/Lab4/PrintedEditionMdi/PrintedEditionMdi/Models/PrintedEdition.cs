@@ -66,5 +66,8 @@ namespace PrintedEditionMdi.Models
                 OnPropertyChanged(nameof(CreatedAt));
             }
         }
+
+        public override string ToString() =>
+            FormattableString.Invariant($"{Name}, {Author}, {Price}, {CreatedAt:dd/MM/yyyy}");
     }
 }

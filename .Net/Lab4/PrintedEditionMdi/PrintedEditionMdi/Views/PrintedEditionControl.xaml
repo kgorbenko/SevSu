@@ -16,13 +16,7 @@
                 <MenuItem Header="Save As" Click="SaveAsButtonClick"></MenuItem>
             </MenuItem>
         </Menu>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.8*" />
-                <ColumnDefinition Width="0.2*" />
-            </Grid.ColumnDefinitions>
-            <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" FlowDirection="RightToLeft" Margin="5" Grid.Column="0"></TextBox>
-        </Grid>
+        <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" FlowDirection="RightToLeft" Margin="5"></TextBox>
         <DataGrid HorizontalAlignment="Left"
                   ItemsSource="{Binding PrintedEditions}"
                   SelectedItem="{Binding SelectedItem}"
@@ -32,7 +26,7 @@
                 <DataGridTextColumn Binding="{Binding Name}" Width="0.2*" Header="Name" />
                 <DataGridTextColumn Binding="{Binding Author}" Width="0.2*" Header="Author" />
                 <DataGridTextColumn Binding="{Binding Price}" Width="0.2*" Header="Price" />
-                <DataGridTextColumn Binding="{Binding CreatedAt, StringFormat='d'}" IsReadOnly="True"
+                <DataGridTextColumn Binding="{Binding CreatedAt, StringFormat='dd/MM/yyyy'}" IsReadOnly="True"
                                     Width="0.2*" Header="Created at" />
                 <DataGridTemplateColumn Width="0.1*">
                     <DataGridTemplateColumn.CellTemplate>

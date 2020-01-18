@@ -32,13 +32,9 @@ namespace PrintedEditionMdi.ViewModels
             printedEditionsView.Filter = x =>
             {
                 if (string.IsNullOrEmpty(filter)) return true;
+                if (!(x is PrintedEdition printedEdition)) return false;
 
-                var printedEdition = x as PrintedEdition;
-
-                return printedEdition.Name.Contains(filter)
-                    || printedEdition.Author.Contains(filter)
-                    || printedEdition.Price.ToString().Contains(filter)
-                    || printedEdition.CreatedAt.ToString("d").Contains(filter);
+                return printedEdition.ToString().Contains(filter);
             };
         }
 
@@ -48,6 +44,7 @@ namespace PrintedEditionMdi.ViewModels
             set
             {
                 printedEditions = value;
+                printedEditionsView.Refresh();
                 OnPropertyChanged(nameof(PrintedEditions));
             }
         }
@@ -67,10 +64,7 @@ namespace PrintedEditionMdi.ViewModels
             get => filter;
             set
             {
-                if (filter == value)
-                {
-                    return;
-                }
+                if (filter == value) return;
 
                 filter = value;
                 printedEditionsView.Refresh();
@@ -79,16 +73,15 @@ namespace PrintedEditionMdi.ViewModels
         }
 
         public ICommand RemoveCommand =>
-            removeCommand ??= new RelayCommand(obj => PrintedEditions.Remove(selectedItem));
+            removeCommand ??= new RelayCommand(obj => printedEditions.Remove(selectedItem));
 
         public ICommand SaveCommand =>
-            saveCommand ??= new RelayCommand(obj => PrintedEditionSerializeHelper.Serialize(printedEditions,
-                                                                                            obj as string));
+            saveCommand ??= new RelayCommand(obj =>
+                PrintedEditionSerializeHelper.Serialize(printedEditions, obj as string));
 
         public ICommand OpenCommand =>
             openCommand ??= new RelayCommand(obj =>
-                                                 PrintedEditions =
-                                                     new ObservableCollection<PrintedEdition
-                                                     >(PrintedEditionSerializeHelper.Deserialize(obj as string)));
+                PrintedEditionSerializeHelper.Deserialize(obj as string)
+                                             .ForEach(x => PrintedEditions.Add(x)));
     }
 }
