@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
 
 namespace PrintedEditionMdi.Models
 {
@@ -8,6 +10,20 @@ namespace PrintedEditionMdi.Models
         private string name;
         private string author;
         private double price;
+        private DateTime createdAt;
+
+        public PrintedEdition()
+        {
+            createdAt = DateTime.Now;
+        }
+
+        public PrintedEdition(string name, string author, double price, DateTime createdAt)
+        {
+            this.name = name;
+            this.author = author;
+            this.price = price;
+            this.createdAt = createdAt;
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -38,6 +54,16 @@ namespace PrintedEditionMdi.Models
             set {
                 price = value;
                 OnPropertyChanged(nameof(Price));
+            }
+        }
+
+        [JsonIgnore]
+        public DateTime CreatedAt
+        {
+            get => createdAt;
+            set {
+                createdAt = value;
+                OnPropertyChanged(nameof(CreatedAt));
             }
         }
     }
