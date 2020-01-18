@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -65,5 +66,7 @@ namespace PrintedEditionMdi.ViewModels
 
         public ICommand FilterCommand =>
             filterCommand ??= new RelayCommand(obj => PrintedEditions.Filter = obj as Predicate<object>);
+            openCommand ??= new RelayCommand(obj => PrintedEditions = new CollectionView(
+                                                 PrintedEditionSerializeHelper.Deserialize(obj as string)));
     }
 }
