@@ -21,8 +21,7 @@
                 <ColumnDefinition Width="0.8*" />
                 <ColumnDefinition Width="0.2*" />
             </Grid.ColumnDefinitions>
-            <TextBox Name="Filter" FlowDirection="RightToLeft" Margin="5" Grid.Column="0"></TextBox>
-            <Button Margin="5" Grid.Column="1" Click="FilterButtonClick">Search</Button>
+            <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" FlowDirection="RightToLeft" Margin="5" Grid.Column="0"></TextBox>
         </Grid>
         <DataGrid HorizontalAlignment="Left"
                   ItemsSource="{Binding PrintedEditions}"
