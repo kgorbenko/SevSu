@@ -27,7 +27,7 @@ namespace PrintedEditionMdi.Utils
             if (printedEditions == null) throw new ArgumentNullException(nameof(printedEditions));
             if (path == null) throw new ArgumentNullException(nameof(path));
 
-            var json = JsonConvert.SerializeObject(printedEditions);
+            var json = JsonConvert.SerializeObject(printedEditions, Formatting.Indented);
 
             using var streamWriter = new StreamWriter(path);
             streamWriter.Write(json);
