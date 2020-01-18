@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using PrintedEditionMdi.Models;
 using Newtonsoft.Json;
 using PrintedEditionMdi.Annotations;
@@ -16,10 +15,8 @@ namespace PrintedEditionMdi.Utils
 
             using var streamReader = File.OpenText(path);
             var json = streamReader.ReadToEnd();
-            var currentDateAndTime = DateTime.Now;
 
-            return JsonConvert.DeserializeObject<PrintedEdition[]>(json)
-                              .Select(x => { x.CreatedAt = currentDateAndTime; return x; });
+            return JsonConvert.DeserializeObject<PrintedEdition[]>(json);
         }
 
         public static void Serialize([NotNull] IEnumerable<PrintedEdition> printedEditions, [NotNull] string path)

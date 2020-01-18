@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -81,7 +83,12 @@ namespace PrintedEditionMdi.ViewModels
 
         public ICommand OpenCommand =>
             openCommand ??= new RelayCommand(obj =>
+            {
+                var currentDateAndTime = DateTime.Now;
+
                 PrintedEditionSerializeHelper.Deserialize(obj as string)
-                                             .ForEach(x => PrintedEditions.Add(x)));
+                                             .Select(x => { x.CreatedAt = currentDateAndTime; return x; })
+                                             .ForEach(x => PrintedEditions.Add(x));
+            });
     }
 }
