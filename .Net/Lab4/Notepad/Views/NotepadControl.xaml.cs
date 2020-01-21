@@ -20,8 +20,7 @@ namespace Notepad.Views
 
             if (dialog.ShowDialog() != true) return;
 
-            if (DataContext is NotepadControlViewModel viewModel &&
-                viewModel.OpenCommand.CanExecute(new object()))
+            if (DataContext is NotepadControlViewModel viewModel)
             {
                 viewModel.OpenCommand.Execute(dialog.FileName);
                 RichTextBox.Document.PageWidth = 500;
@@ -30,8 +29,7 @@ namespace Notepad.Views
 
         private void Save(object sender, RoutedEventArgs e)
         {
-            if (DataContext is NotepadControlViewModel viewModel &&
-                viewModel.SaveCommand.CanExecute(new object()))
+            if (DataContext is NotepadControlViewModel viewModel)
             {
                 if (string.IsNullOrWhiteSpace(viewModel.FilePath))
                 {
@@ -53,8 +51,7 @@ namespace Notepad.Views
 
             if (dialog.ShowDialog() != true) return;
 
-            if (DataContext is NotepadControlViewModel viewModel &&
-                viewModel.SaveAsCommand.CanExecute(new object()))
+            if (DataContext is NotepadControlViewModel viewModel)
             {
                 viewModel.SaveAsCommand.Execute(dialog.FileName);
             }
