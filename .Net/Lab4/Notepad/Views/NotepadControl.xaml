@@ -16,8 +16,7 @@
                 <MenuItem Header="Save As" Click="SaveAs" />
             </MenuItem>
         </Menu>
-        <xceedWpfToolkit:RichTextBox Name="RichTextBox"
-                                     Text="{Binding FileContent, Delay=2000, UpdateSourceTrigger=PropertyChanged}"
+        <xceedWpfToolkit:RichTextBox Text="{Binding FileContent, Delay=2000, UpdateSourceTrigger=PropertyChanged}"
                                      ScrollViewer.HorizontalScrollBarVisibility="Auto">
             <FlowDocument PageWidth="3000" />
             <xceedWpfToolkit:RichTextBox.TextFormatter>
