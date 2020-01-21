@@ -23,7 +23,6 @@ namespace Notepad.Views
             if (DataContext is NotepadControlViewModel viewModel)
             {
                 viewModel.OpenCommand.Execute(dialog.FileName);
-                RichTextBox.Document.PageWidth = 500;
             }
         }
 
