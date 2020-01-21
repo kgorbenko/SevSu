@@ -11,7 +11,7 @@ namespace Notepad.Views
             InitializeComponent();
         }
 
-        private void OpenCommand(object sender, RoutedEventArgs e)
+        private void Open(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog
             {
@@ -28,14 +28,14 @@ namespace Notepad.Views
             }
         }
 
-        private void SaveCommand(object sender, RoutedEventArgs e)
+        private void Save(object sender, RoutedEventArgs e)
         {
             if (DataContext is NotepadControlViewModel viewModel &&
                 viewModel.SaveCommand.CanExecute(new object()))
             {
                 if (string.IsNullOrWhiteSpace(viewModel.FilePath))
                 {
-                    SaveAsCommand(sender, e);
+                    SaveAs(sender, e);
                 }
                 else
                 {
@@ -44,7 +44,7 @@ namespace Notepad.Views
             }
         }
 
-        private void SaveAsCommand(object sender, RoutedEventArgs e)
+        private void SaveAs(object sender, RoutedEventArgs e)
         {
             var dialog = new SaveFileDialog
             {

@@ -12,9 +12,9 @@
     <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <MenuItem Header="Open" Click="OpenCommand" />
-                <MenuItem Header="Save" Click="SaveCommand"/>
-                <MenuItem Header="Save As" Click="SaveAsCommand" />
+                <MenuItem Header="Open" Click="Open" />
+                <MenuItem Header="Save" Click="Save"/>
+                <MenuItem Header="Save As" Click="SaveAs" />
             </MenuItem>
         </Menu>
         <xceedWpfToolkit:RichTextBox Name="RichTextBox" Text="{Binding FileContent, Delay=2000, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Auto">
