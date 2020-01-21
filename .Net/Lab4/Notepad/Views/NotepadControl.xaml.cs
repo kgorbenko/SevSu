@@ -54,9 +54,9 @@ namespace Notepad.Views
             if (dialog.ShowDialog() != true) return;
 
             if (DataContext is NotepadControlViewModel viewModel &&
-                viewModel.SaveCommand.CanExecute(new object()))
+                viewModel.SaveAsCommand.CanExecute(new object()))
             {
-                viewModel.SaveCommand.Execute(dialog.FileName);
+                viewModel.SaveAsCommand.Execute(dialog.FileName);
             }
         }
     }
