@@ -17,6 +17,10 @@
                 <MenuItem Header="Save As" Click="SaveAsCommand"></MenuItem>
             </MenuItem>
         </Menu>
-        <xceedWpfToolkit:RichTextBox Text="{Binding FileContent}" />
+        <xceedWpfToolkit:RichTextBox Text="{Binding FileContent}">
+            <xceedWpfToolkit:RichTextBox.TextFormatter>
+                <xceedWpfToolkit:PlainTextFormatter />
+            </xceedWpfToolkit:RichTextBox.TextFormatter>
+        </xceedWpfToolkit:RichTextBox>
     </DockPanel>
 </Page>

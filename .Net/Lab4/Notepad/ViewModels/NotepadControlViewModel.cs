@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Notepad.Annotations;
+using Notepad.Utils;
 
 namespace Notepad.ViewModels
 {
@@ -11,8 +13,8 @@ namespace Notepad.ViewModels
         private ICommand openCommand;
         private ICommand saveAsCommand;
         private ICommand saveCommand;
-        private string filePath;
         private string fileContent;
+        private string filePath;
 
         public string FileContent
         {
@@ -24,7 +26,22 @@ namespace Notepad.ViewModels
             }
         }
 
-        public ICommand OpenCommand => throw new NotImplementedException();
+        public ICommand OpenCommand => openCommand ??= new RelayCommand(obj =>
+        {
+            try
+            {
+                if (!(obj is string path)) return;
+
+                FileContent = File.ReadAllText(path);
+                filePath = path;
+            }
+            catch
+            {
+                filePath = string.Empty;
+                throw;
+            }
+        });
+
         public ICommand SaveCommand => throw new NotImplementedException();
         public ICommand SaveAsCommand => throw new NotImplementedException();
 
