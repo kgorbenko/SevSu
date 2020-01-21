@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -26,26 +25,43 @@ namespace Notepad.ViewModels
             }
         }
 
-        public ICommand OpenCommand => openCommand ??= new RelayCommand(obj =>
+        public string FilePath
         {
-            try
+            get => filePath;
+            set
             {
-                if (!(obj is string path)) return;
+                filePath = value;
+                OnPropertyChanged(nameof(FilePath));
+            }
+        }
 
-                FileContent = File.ReadAllText(path);
-                filePath = path;
-            }
-            catch
+        public ICommand OpenCommand =>
+            openCommand ??= new RelayCommand(obj =>
             {
-                filePath = string.Empty;
-                throw;
-            }
+                try
+                {
+                    if (!(obj is string path)) return;
+
+                    FileContent = File.ReadAllText(path);
+                    filePath = path;
+                }
+                catch
+                {
+                    filePath = string.Empty;
+                    throw;
+                }
+            });
+
+        public ICommand SaveCommand => saveCommand ??= new RelayCommand(obj => SaveAsCommand.Execute(filePath));
+        public ICommand SaveAsCommand => saveAsCommand ??= new RelayCommand(obj =>
+        {
+            if (!(obj is string path)) return;
+
+            File.WriteAllText(path, FileContent);
+            filePath = path;
         });
 
-        public ICommand SaveCommand => throw new NotImplementedException();
-        public ICommand SaveAsCommand => throw new NotImplementedException();
-
-        public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

@@ -13,11 +13,11 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
                 <MenuItem Header="Open" Click="OpenCommand" />
-                <MenuItem Header="Save" Click="SaveCommand" />
-                <MenuItem Header="Save As" Click="SaveAsCommand"></MenuItem>
+                <MenuItem Header="Save" Click="SaveCommand"/>
+                <MenuItem Header="Save As" Click="SaveAsCommand" />
             </MenuItem>
         </Menu>
-        <xceedWpfToolkit:RichTextBox Text="{Binding FileContent}">
+        <xceedWpfToolkit:RichTextBox Name="RichTextBox" Text="{Binding FileContent, Delay=2000, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Auto">
             <xceedWpfToolkit:RichTextBox.TextFormatter>
                 <xceedWpfToolkit:PlainTextFormatter />
             </xceedWpfToolkit:RichTextBox.TextFormatter>

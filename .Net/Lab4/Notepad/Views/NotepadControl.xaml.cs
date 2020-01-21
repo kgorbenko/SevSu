@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using Microsoft.Win32;
 using Notepad.ViewModels;
 
@@ -25,17 +24,40 @@ namespace Notepad.Views
                 viewModel.OpenCommand.CanExecute(new object()))
             {
                 viewModel.OpenCommand.Execute(dialog.FileName);
+                RichTextBox.Document.PageWidth = 500;
             }
         }
 
         private void SaveCommand(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (DataContext is NotepadControlViewModel viewModel &&
+                viewModel.SaveCommand.CanExecute(new object()))
+            {
+                if (string.IsNullOrWhiteSpace(viewModel.FilePath))
+                {
+                    SaveAsCommand(sender, e);
+                }
+                else
+                {
+                    viewModel.SaveCommand.Execute(null);
+                }
+            }
         }
 
         private void SaveAsCommand(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var dialog = new SaveFileDialog
+            {
+                Filter = "All files (*.*) | *.*"
+            };
+
+            if (dialog.ShowDialog() != true) return;
+
+            if (DataContext is NotepadControlViewModel viewModel &&
+                viewModel.SaveCommand.CanExecute(new object()))
+            {
+                viewModel.SaveCommand.Execute(dialog.FileName);
+            }
         }
     }
 }
