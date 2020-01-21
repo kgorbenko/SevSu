@@ -39,7 +39,7 @@ namespace PrintedEditionMdi.Views
             if (dialog.ShowDialog() != true) return;
 
             if (DataContext is PrintedEditionControlViewModel viewModel &&
-                viewModel.SaveCommand.CanExecute(new object()))
+                viewModel.OpenCommand.CanExecute(new object()))
             {
                 viewModel.OpenCommand.Execute(dialog.FileName);
             }
