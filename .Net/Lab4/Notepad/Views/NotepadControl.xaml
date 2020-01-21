@@ -6,8 +6,7 @@
       xmlns:viewModels="clr-namespace:Notepad.ViewModels"
       xmlns:xceedWpfToolkit="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
       mc:Ignorable="d"
-      d:DataContext="{d:DesignInstance viewModels:NotepadControlViewModel}"
-      Title="NotepadControl" Height="450" Width="800">
+      d:DataContext="{d:DesignInstance viewModels:NotepadControlViewModel}">
 
     <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top">
