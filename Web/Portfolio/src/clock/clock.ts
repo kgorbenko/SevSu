@@ -9,11 +9,11 @@ export const formatTime = (time : Date): string => {
     return time.toLocaleString(window.navigator.language, { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 };
 
-export const formatCurrentDate = () => {
+const formatCurrentDate = () => {
     return formatDate(new Date());
 };
 
-export const formatCurrentTime = (): string => {
+const formatCurrentTime = (): string => {
     return formatTime(new Date());
 };
 
