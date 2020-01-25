@@ -1,4 +1,4 @@
-import { createElementWithInnerHTML, createElement } from '../utils/dom';
+import * as $ from 'jquery';
 
 export interface FormValidator {
     errorMessage: string;
@@ -74,20 +74,12 @@ export class FormComponent {
 }
 
 export const setFieldsForValidation = (fields: FormComponent[], form: HTMLFormElement) => {
-    addFormSubmitListener(form, fields);
-    addFormComponentsChangeLiseners(fields);
+    $(form).on('submit', (event) => validateForm(event, fields));
+    fields.forEach(formComponent => $(`#${formComponent.componentId}`).on('blur', () => validateField(formComponent)));
+
 };
 
-const addFormSubmitListener = (form: HTMLFormElement, fields: FormComponent[]) => form.addEventListener('submit', () => validateForm(fields));
-
-const addFormComponentsChangeLiseners = (formComponents: FormComponent[]) => {
-    formComponents.forEach(formComponent => {
-        const formComponentElement = document.getElementById(formComponent.componentId);
-        formComponentElement.addEventListener('blur', () => validateField(formComponent));
-    })
-};
-
-const validateForm = (fields) => {
+const validateForm = (event, fields) => {
     let firstError : FormComponent;
     fields.forEach(field => {
         validateField(field);
@@ -96,7 +88,7 @@ const validateForm = (fields) => {
         }
     });
     if (firstError) {
-        document.getElementById(firstError.componentId).focus();
+        $(`#${firstError.componentId}`).trigger('focus');
     }
     if (fields.some(field => field.errorMessages.length > 0)) {
         event.preventDefault();
@@ -104,10 +96,10 @@ const validateForm = (fields) => {
 };
 
 const validateField = (field: FormComponent) => {
-    const presentErrorMessages = document.getElementById(`${field.componentId}-errors`);
-    if (presentErrorMessages !== null) {
+    const presentErrorMessages = $(`${field.componentId}-errors`);
+    if (presentErrorMessages.length > 0) {
         presentErrorMessages.remove();
-        document.getElementById(field.componentId).classList.remove('validation-failed');
+        $(`#${field.componentId}`).removeClass('validation-failed');
     }
     field.validate();
     if (field.errorMessages.length > 0) {
@@ -116,13 +108,8 @@ const validateField = (field: FormComponent) => {
 };
 
 const showMessages = (field: FormComponent) => {
-    const targetElement = document.getElementById(field.componentId);
-    const parentElement = targetElement.parentElement;
-    let contentWrapper = createElement('div', { id: `${field.componentId}-errors`, classList: ['error-messages'] });
-    targetElement.classList.add('validation-failed');
-    field.errorMessages.forEach(message => {
-        let messageListItem = createElementWithInnerHTML('li', message);
-        contentWrapper.appendChild(messageListItem);
-    });
-    parentElement.insertBefore(contentWrapper, targetElement);
+    const targetElement = $(`#${field.componentId}`).addClass('validation-failed');
+    let contentWrapper = $('<div></div>').attr('id', `${field.componentId}-errors`).addClass('error-messages');
+    field.errorMessages.forEach(message => contentWrapper.append($(`<li>${message}</li>`)));
+    contentWrapper.insertBefore(targetElement);
 };
