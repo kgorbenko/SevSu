@@ -1,3 +1,5 @@
+import * as $ from 'jquery';
+
 import { updateClockOnInterval } from '../clock/clock';
 import { insertAfter, removeElementById, createElement, appendChildren } from '../utils/dom';
 import { visitPage } from '../storage/storage';
@@ -19,7 +21,7 @@ interface InterestsNodeContent {
     isHidden: boolean;
 }
 
-window.onload = () => {
+$(() => {
     visitPage('interests');
     updateClockOnInterval(document.getElementById('date'), document.getElementById('time'), 1000);
     let interestsLinks = document.getElementsByClassName('contents');
@@ -27,7 +29,7 @@ window.onload = () => {
     Array.from(interestsLinks).forEach(link => {
         link.addEventListener('click', handleClick);
     });
-};
+});
 
 const handleClick = (event) : void => {
     const target = event.target as HTMLElement;
