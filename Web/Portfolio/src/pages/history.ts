@@ -6,12 +6,10 @@ $(() => {
     visitPage('history');
     const globalHistory = getGlobalHistory();
     for (let key in globalHistory) {
-        const pageHistoryCell = document.querySelector(`.global-history .${key}`);
-        pageHistoryCell.innerHTML = globalHistory[key];
+        $(`.global-history .${key}-page`).append(globalHistory[key]);
     }
     const sessionHistory = getSessionHistory();
     for (let key in sessionHistory) {
-        const pageHistoryCell = document.querySelector(`.session-history .${key}`);
-        pageHistoryCell.innerHTML = sessionHistory[key];
+        $(`.session-history .${key}-page`).append(sessionHistory[key]);
     }
 });
