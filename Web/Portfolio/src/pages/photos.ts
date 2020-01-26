@@ -15,7 +15,7 @@ $(() => {
         photoWrapper.appendChild(img);
     });
 
-    addLightbox(photoWrapper);
+    addLightbox(photoWrapper, photos);
 });
 
 const photos : string[] = [

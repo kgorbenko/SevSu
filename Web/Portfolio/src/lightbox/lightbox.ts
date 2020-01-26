@@ -1,31 +1,39 @@
-import { createElement } from '../utils/dom'
+import * as $ from 'jquery';
 
-const lightboxId = 'lightbox';
-const lightboxClass = 'lightbox';
-const lightboxPictureClass = 'lightbox-picture';
-const lightboxCloseButtonClass = 'lightbox-close';
+let currentPhoto;
+let photos;
 
-export default (lightboxPhotosWrapper: Element) => {
+export default (lightboxPhotosWrapper: Element, photosPaths: string[]) => {
+    photos = photosPaths;
     lightboxPhotosWrapper.addEventListener('click', (event) => expandLightbox(event));
 
     window.onclick = (event) => {
-        if (event.target === document.getElementById(lightboxId)) {
+        if (event.target === document.getElementById('lightbox')) {
             collapseLightbox();
         }
     }
 }
 
 const expandLightbox = (event) => {
-    const lightbox = createElement('div', { id: lightboxId, classList: [lightboxClass] });
-    const image = createElement('img', { src: event.target.src, classList: [lightboxPictureClass] });
-    const closeButton = createElement('div', { innerHTML: '&times', classList: [lightboxCloseButtonClass], onclick: () => collapseLightbox() });
-
-    lightbox.appendChild(image);
-    lightbox.appendChild(closeButton);
-    document.body.appendChild(lightbox);
+    currentPhoto = event.target.getAttribute('src');
+    $('#lightbox img').attr('src', currentPhoto);
+    $('#lightbox').toggle();
+    $('.lightbox-arrow-left').on('click', prevButtonClickHandler);
+    $('.lightbox-arrow-right').on('click', nextButtonClickHandler);
 };
 
-const collapseLightbox = () => {
-    const lightbox = document.getElementById(lightboxId);
-    lightbox.remove();
+const collapseLightbox = () => $('#lightbox').toggle();
+
+const prevButtonClickHandler = () => {
+    const currentIndex = photos.indexOf(currentPhoto);
+    if (currentIndex === 0 || currentIndex === -1) return;
+    currentPhoto = photos[currentIndex - 1];
+    $(`.lightbox-picture`).attr('src', currentPhoto);
+};
+
+const nextButtonClickHandler = () => {
+    const currentIndex = photos.indexOf(currentPhoto);
+    if (currentIndex === photos.length - 1 || currentIndex === -1) return;
+    currentPhoto = photos[currentIndex + 1];
+    $(`.lightbox-picture`).attr('src', currentPhoto);
 };
