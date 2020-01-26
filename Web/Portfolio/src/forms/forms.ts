@@ -96,7 +96,7 @@ const validateForm = (event, fields) => {
 };
 
 const validateField = (field: FormComponent) => {
-    const presentErrorMessages = $(`${field.componentId}-errors`);
+    const presentErrorMessages = $(`#${field.componentId}-errors`);
     if (presentErrorMessages.length > 0) {
         presentErrorMessages.remove();
         $(`#${field.componentId}`).removeClass('validation-failed');
