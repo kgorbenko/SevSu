@@ -9,6 +9,7 @@
   "author": "Gorbenko Kirill",
   "license": "ISC",
   "devDependencies": {
+    "@types/tooltipster": "0.0.29",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.3",
     "webpack": "^4.41.2",
@@ -16,6 +17,7 @@
   },
   "dependencies": {
     "@types/jquery": "^3.3.31",
-    "jquery": "^3.4.1"
+    "jquery": "^3.4.1",
+    "tooltipster": "^4.2.7"
   }
 }
