@@ -1,5 +1,11 @@
 import * as $ from 'jquery';
 
+let body = $('body');
+let lightbox = $('#lightbox');
+let lightboxImage = $('#lightbox img');
+let lightboxPrevArrow = $('.lightbox-arrow-left');
+let lightboxNextArrow = $('.lightbox-arrow-right');
+
 let currentPhoto;
 let photos;
 
@@ -16,24 +22,28 @@ export default (lightboxPhotosWrapper: Element, photosPaths: string[]) => {
 
 const expandLightbox = (event) => {
     currentPhoto = event.target.getAttribute('src');
-    $('#lightbox img').attr('src', currentPhoto);
-    $('#lightbox').toggle();
-    $('.lightbox-arrow-left').on('click', prevButtonClickHandler);
-    $('.lightbox-arrow-right').on('click', nextButtonClickHandler);
+    lightbox.toggle();
+    lightboxImage.attr('src', currentPhoto);
+    body.addClass('no-scroll');
+    lightboxPrevArrow.on('click', prevButtonClickHandler);
+    lightboxNextArrow.on('click', nextButtonClickHandler);
 };
 
-const collapseLightbox = () => $('#lightbox').toggle();
+const collapseLightbox = () => {
+    lightbox.toggle();
+    body.removeClass('no-scroll');
+};
 
 const prevButtonClickHandler = () => {
     const currentIndex = photos.indexOf(currentPhoto);
     if (currentIndex === 0 || currentIndex === -1) return;
     currentPhoto = photos[currentIndex - 1];
-    $(`.lightbox-picture`).attr('src', currentPhoto);
+    lightboxImage.attr('src', currentPhoto);
 };
 
 const nextButtonClickHandler = () => {
     const currentIndex = photos.indexOf(currentPhoto);
     if (currentIndex === photos.length - 1 || currentIndex === -1) return;
     currentPhoto = photos[currentIndex + 1];
-    $(`.lightbox-picture`).attr('src', currentPhoto);
+    lightboxImage.attr('src', currentPhoto);
 };
