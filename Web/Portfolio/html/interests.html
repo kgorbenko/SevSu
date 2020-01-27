@@ -6,6 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <link href="../src/pages/nav.css" rel="stylesheet" type="text/css" />
     <link href="../src/pages/shared.css" rel="stylesheet" type="text/css" />
+    <link href="../src/modal/modal.css" rel="stylesheet" type="text/css" />
     <title>Interests</title>
 </head>
 <body>
@@ -29,6 +30,7 @@
         <section>
             <header><h2>Contents</h1></header>
             <ul id="interests">
+                <button id="dialog" class="modal-button">Modal</button>
                 <li class="contents" id="Hobbies">Мои хобби.</li>
                 <li id="Hobbies-expand" class="interests">
                     <h2>My hobbies</h2>
@@ -110,6 +112,15 @@
             </p>
         </section>
     </footer>
+    <div class="modal">
+        <div class="modal-window">
+            <div><p class="modal-message"><p></div>
+            <div class="modal-navigation">
+                <button class="modal-button modal-confirm-button"></button>
+                <button class="modal-button modal-cancel-button"></button>
+            </div>
+        </div>
+    </div>
     <script src="../js/interests.js"></script>
 </body>
 </html>
