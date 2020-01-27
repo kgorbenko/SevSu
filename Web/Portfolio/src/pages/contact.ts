@@ -18,29 +18,34 @@ const fields: FormComponent[] = [
         [
             new NameValidator(),
         ],
+        'Type three space-separated words.'
     ),
     new FormComponent(
         'email-input',
         [
             new FieldFilledValidator(),
-        ]
+        ],
+        'Email field should contain "@" character.'
     ),
     new FormComponent(
         'phone-input',
         [
             new PhoneNumberValidator(),
-        ]
+        ],
+        'Type phone number in next format: +XXXXXXXXXX.'
     ),
     new FormComponent(
         'message-input',
         [
             new FieldFilledValidator(),
-        ]
+        ],
+        'Message field should be filled.'
     ),
     new FormComponent(
         'datepicker-input',
         [
             new DateValidator()
-        ]
+        ],
+        'Click on field to choose date.'
     )
 ];

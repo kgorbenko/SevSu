@@ -1,4 +1,5 @@
 import * as $ from 'jquery';
+import 'tooltipster';
 
 export interface FormValidator {
     errorMessage: string;
@@ -47,11 +48,13 @@ export class FormComponent {
     componentId: string;
     errorMessages: string[];
     validators: FormValidator[];
+    correctValueDescription: string;
 
-    constructor(componentId: string, validators: FormValidator[]){
+    constructor(componentId: string, validators: FormValidator[], correctValueDescription: string){
         this.componentId = componentId;
         this.validators = validators;
         this.errorMessages = [];
+        this.correctValueDescription = correctValueDescription;
     };
 
     value = () => (<HTMLFormElement>document.getElementById(this.componentId)).value;
@@ -75,8 +78,11 @@ export class FormComponent {
 
 export const setFieldsForValidation = (fields: FormComponent[], form: HTMLFormElement) => {
     $(form).on('submit', (event) => validateForm(event, fields));
-    fields.forEach(formComponent => $(`#${formComponent.componentId}`).on('blur', () => validateField(formComponent)));
-
+    fields.forEach(formComponent => {
+        const field =  $(`#${formComponent.componentId}`);
+        field.on('blur', () => validateField(formComponent));
+        field.tooltipster({ content: formComponent.correctValueDescription, theme: 'tooltipster-light', side: 'right' });
+    });
 };
 
 const validateForm = (event, fields) => {
