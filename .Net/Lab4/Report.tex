@@ -403,8 +403,6 @@ public class PrintedEditionControlViewModel : INotifyPropertyChanged
 в классе \code{PrintedEditionSerializeHelper}. Его структура:
 
 \begin{lstlisting}
-
-\end{lstlisting}
 public static class PrintedEditionSerializeHelper
 {
     public static IEnumerable<PrintedEdition> Deserialize([NotNull] string path)
@@ -428,6 +426,7 @@ public static class PrintedEditionSerializeHelper
         streamWriter.Write(json);
     }
 }
+\end{lstlisting}
 
 Данный класс выполняет сериализацию и десериализацию коллекции печатных изданий в Json,
 а затем записывает результат в файл.
