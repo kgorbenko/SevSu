@@ -1,0 +1,59 @@
+\documentclass[a4paper,14pt]{extarticle}
+\usepackage{../../tex-shared/preamble}
+
+\renewcommand{\mylabnumber}{1}
+\renewcommand{\mylabtitle}{Исследование возможностей языка
+R для статического анализа данных}
+\renewcommand{\mysubject}{Интеллектуальный анализ данных}
+\renewcommand{\mylecturer}{Сырых О.А.}
+
+\begin{document}
+\input{../../tex-shared/title-page.tex}
+
+\section{Цель работы}
+\begin{itemize}
+    \item изучить основные особенности языка R;
+    \item исследовать возможности языка R для работы с графикой.
+\end{itemize}
+
+\section{Задание на работу}
+\begin{enumerate}
+    \item Установить R на ПК.
+    \item Установить RStudio - инсталлятор скачать с официального сайта проекта.
+    \item Ознакомиться с кратким руководством пользователя RStudio.
+    \item Исследовать команду \code{\enquote{demo()}}, полученные результаты вставить в отчет.
+    \item Исследовать основные функции и команды языка R, представленные в данной
+          лабораторной работе, полученные результаты вставить в отчет.
+    \item Ответить на контрольные вопросы.
+\end{enumerate}
+
+\section{Ход работы}
+Используем консоль \code{R.exe}. При входе получаем следующий текст:
+
+\begin{lstlisting}
+R version 3.6.2 (2019-12-12) -- "Dark and Stormy 
+Copyright (C) 2019 The R Foundation for Statistic
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO W
+You are welcome to redistribute it under certain 
+Type 'license()' or 'licence()' for distribution 
+
+    Natural language support but running in an Engl
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+\end{lstlisting}
+
+Выполним команду \code{demo()}. Результат выполнения команды представлен
+на рисунке \ref{fig:demo}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{demo}
+    \caption{Результат выполнения команды \code{demo()}}
+    \label{fig:demo}
+\end{figure}
+\end{document}
