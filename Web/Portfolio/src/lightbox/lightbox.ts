@@ -40,12 +40,16 @@ const prevButtonClickHandler = () => {
     const currentIndex = photos.indexOf(currentPhoto);
     if (currentIndex === 0 || currentIndex === -1) return;
     currentPhoto = photos[currentIndex - 1];
-    lightboxImage.attr('src', currentPhoto);
+    lightboxImage.fadeOut('fast', () => {
+        lightboxImage.attr('src', currentPhoto).fadeIn('fast');
+    });
 };
 
 const nextButtonClickHandler = () => {
     const currentIndex = photos.indexOf(currentPhoto);
     if (currentIndex === photos.length - 1 || currentIndex === -1) return;
     currentPhoto = photos[currentIndex + 1];
-    lightboxImage.attr('src', currentPhoto);
+    lightboxImage.fadeOut('slow', function () {
+        lightboxImage.attr('src', currentPhoto).fadeIn('slow');
+    });
 };
