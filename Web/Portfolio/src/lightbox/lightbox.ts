@@ -31,6 +31,8 @@ const expandLightbox = (event) => {
 
 const collapseLightbox = () => {
     lightbox.toggle();
+    lightboxPrevArrow.off();
+    lightboxNextArrow.off();
     body.removeClass('no-scroll');
 };
 
