@@ -1,17 +1,18 @@
-﻿open System
+﻿module BinaryRelations.Program
 
-let relationGraph = [
-    [0; 1; 0; 0; 0; 0]
-    [1; 0; 1; 1; 0; 0]
-    [0; 0; 0; 0; 0; 0]
-    [0; 1; 0; 0; 1; 0]
-    [0; 0; 0; 0; 0; 0]
-    [0; 0; 0; 0; 1; 0]
-]
+let printMatrix (matrix: int list list): unit =
+    let size = matrix |> List.length
+    for i in [0..size - 1] do
+        for j in [0..size - 1] do
+            matrix.[i].[j] |> printf " %d " |> ignore
+        printfn "" |> ignore
+
+let printVector (vector: int list): unit =
+    vector |> List.iter (fun x -> x |> printf " %d " |> ignore)
 
 let getMaxR (graph: int list list): int list =
     let size = graph |> List.length
-    let maxR = [| 1; 1; 1; 1; 1 |]
+    let maxR = [| for i in [0..size-1] do 1 |]
 
     for i in [0..size - 1] do
         for j in [0..size - 1] do
@@ -19,21 +20,32 @@ let getMaxR (graph: int list list): int list =
                 if graph.[j].[i] = 0 then
                     maxR.[j] <- 0
                 if graph.[j].[i] = 1 && maxR.[i] = 0 then
-                    maxR.[j] <- 0;
+                    maxR.[j] <- 0
 
     maxR |> List.ofArray
 
-let print (matrix: int list list): unit =
-    let size = matrix |> List.length
+let getMaxR1 (graph: int list list): int list =
+    let size = graph |> List.length
+    let maxR = [| for i in [0..size-1] do 1 |]
+
     for i in [0..size - 1] do
         for j in [0..size - 1] do
-            relationGraph.[i].[j] |> printf " %d " |> ignore
-        printfn "" |> ignore
+            let neverDominated = true
+            if graph.[i].[j] = 1 then
+                if graph.[j].[i] = 0 then
+                    maxR.[j] <- 0
+
+
+                if graph.[j].[i] = 1 && maxR.[i] = 0 then
+                    maxR.[j] <- 0
+
+    maxR |> List.ofArray
 
 [<EntryPoint>]
 let main (args: string array): int =
-    printf "Processing graph:"
-    relationGraph |> print
+    let matrix = Data.relationGraph1
+    printfn "Processing graph:" |> ignore
+    matrix |> printMatrix |> ignore
     printfn "MaxR vector:"
-    relationGraph |> getMaxR |> List.iter (fun x -> x |> printf " %d ")
+    matrix |> getMaxR |> printVector
     0
