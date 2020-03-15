@@ -1,0 +1,49 @@
+%html
+  %head
+    %title My interests
+    = render("./partials/head-shared.haml")
+    %link{ href: "../src/modal/modal.css", rel: "stylesheet", type: "text/css" }
+    %script{ src: "../js/interests.js" }
+  %body
+    = render("./partials/nav.haml")
+    = render("./partials/portrait.haml")
+    %div.main-content
+      %header
+        %h1 Мои интересы
+      %section
+        %header
+          %h2 Contents
+        %button#dialog.modal-button Modal
+        %ul#interests
+          %li.contents#Hobbies Мои хобби
+          %li#Hobbies-expand.interests
+            %h2 My hobbies
+            %p My hobbies are supposed to be here
+            %p
+              = nonsense_paragraph()
+          %li.contents#Books Мои книги
+          %li#Books-expand.interests
+            %h2 My books
+            %p My books are supposed to be here
+            %p
+              = nonsense_paragraph()
+          %li.contents#Music Моя музыка
+          %li#Music-expand.interests
+            %h2 My music
+            %p My music is supposed to be here
+            %p
+              = nonsense_paragraph()
+          %li.contents#Films Мои фильмы
+          %li#Films-expand.interests
+            %h2 My films
+            %p My films are supposed to be here
+            %p
+              = nonsense_paragraph()
+    = render("./partials/footer.haml")
+    %div.modal
+      %div.modal-window
+        %div
+          %p.modal-message
+        %div.modal-navigation
+          %button.modal-button.modal-confirm-button
+          %button.modal-button.modal-cancel-button
