@@ -1,0 +1,27 @@
+%html
+  %head
+    %title About
+    = render("./partials/head-shared.haml")
+  %body
+    = render("./partials/nav.haml")
+    = render("./partials/portrait.haml")
+    %div.main-content
+      %header
+        %h1 Автобиография
+      %section
+        %header
+          %h1 Раздел 1
+        %p Здесь должна быть какая-то автобиография. Пускай тут будет списочек:
+        %ol
+          %li 19 лет.
+          %li Сын своих родителей.
+          %li Не знаю чего написать еще.
+          %li Пойду заварю чайку.
+          %li Заварил.
+          %li Рыба меч дыня друг.
+        %p Вот еще фоточки:
+        %div.photo-wrapper
+          - about_page_photos().each do |photo|
+            %img{ src: "#{photo[:src]}", alt: "#{photo[:alt]}"}
+    = render("./partials/footer.haml")
+    %script{ src: "../js/about.js" }

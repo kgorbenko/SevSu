@@ -1,0 +1,28 @@
+%html
+  %head
+    %title Homepage
+    = render("./partials/head-shared.haml")
+  %body
+    = render("./partials/nav.haml")
+    = render("./partials/portrait.haml")
+    %div.main-content
+      %header
+        %h1 Портфолио
+      %section
+        %img.avatar{ src: "../images/avatar.jpg", alt: "author's avatar", title: "that's me!" }
+        %header
+          %h2 Обо мне
+        %p
+          %i Горбенко Кирилл Николаевич.
+          Группа ИС-17-2-о. Исследование возможностей
+          языка разметки гипертекстов HTML и каскадных таблиц стилей CSS.
+          %strong Вариант № 3.
+        %p
+          = nonsense_paragraph()
+      %section
+        %header
+          %h2 Следующая глава
+        %p
+          = nonsense_paragraph()
+    = render("./partials/footer.haml")
+    %script{ src: "../js/index.js" }

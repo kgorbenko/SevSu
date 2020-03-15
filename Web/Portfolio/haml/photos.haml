@@ -1,0 +1,22 @@
+%html
+  %head
+    %title Photo album page
+    = render("./partials/head-shared.haml")
+    %link{ href: "../src/lightbox/lightbox.css", rel: "stylesheet", type:"text/css" }
+  %body
+    = render("./partials/nav.haml")
+    = render("./partials/portrait.haml")
+    %div.main-content
+      %header
+        %h1 Фотоальбом
+      %div.photo-wrapper
+    = render("./partials/footer.haml")
+    %div#lightbox
+      %div.lightbox-content
+        %div.image-wrapper
+          %img.lightbox-picture{ src: "file:///D:/Learning/Web/Portfolio/images/lion-king.jpg" }
+        %div.lightbox-navigation
+          %div.lightbox-button.lightbox-arrow-left &lt;
+          %div.lightbox-button.lightbox-arrow-right &gt;
+      %div.lightbox-button.lightbox-close ×
+    %script{ src: "../js/photos.js" }
