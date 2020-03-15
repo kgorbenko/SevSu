@@ -2,7 +2,6 @@
   %head
     %title Homepage
     = render("./partials/head-shared.haml")
-    %script{ src: "../js/index.js" }
   %body
     = render("./partials/nav.haml")
     = render("./partials/portrait.haml")
@@ -26,3 +25,4 @@
         %p
           = nonsense_paragraph()
     = render("./partials/footer.haml")
+    %script{ src: "../js/index.js" }
