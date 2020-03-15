@@ -1,8 +1,10 @@
 import * as $ from 'jquery';
 
 import { getGlobalHistory, getSessionHistory, visitPage } from '../storage/storage';
+import { updateClockOnInterval } from "../clock/clock";
 
 $(() => {
+    updateClockOnInterval(document.getElementById('date'), document.getElementById('time'), 1000);
     visitPage('history');
     const globalHistory = getGlobalHistory();
     for (let key in globalHistory) {
