@@ -1,0 +1,72 @@
+%html
+  %head
+    %title History page
+    = render("./partials/head-shared.haml")
+  %body
+    = render("./partials/nav.haml")
+    = render("./partials/portrait.haml")
+    %div.main-content
+      %header
+        %h1 История
+      %section
+        %header
+          %h2 История сессии
+        %table.session-history
+          %tr
+            %th{ colspan: "2" } История сессии
+          %tr
+            %td Домашняя страница
+            %td.home-page
+          %tr
+            %td Обо мне
+            %td.about-page
+          %tr
+            %td Мои интересы
+            %td.interests-page
+          %tr
+            %td Учеба
+            %td.learning-page
+          %tr
+            %td Фото
+            %td.photos-page
+          %tr
+            %td Контакт
+            %td.contact-page
+          %tr
+            %td Тест
+            %td.test-page
+          %tr
+            %td История
+            %td.history-page
+      %section
+        %header
+          %h2 История за все время
+        %table.global-history
+          %tr
+            %th{ colspan: "2" } История за все время
+          %tr
+            %td Домашняя страница
+            %td.home-page
+          %tr
+            %td Обо мне
+            %td.about-page
+          %tr
+            %td Мои интересы
+            %td.interests-page
+          %tr
+            %td Учеба
+            %td.learning-page
+          %tr
+            %td Фото
+            %td.photos-page
+          %tr
+            %td Контакт
+            %td.contact-page
+          %tr
+            %td Тест
+            %td.test-page
+          %tr
+            %td История
+            %td.history-page
+    = render("./partials/footer.haml")
+    %script{ src: "../js/history.js" }
