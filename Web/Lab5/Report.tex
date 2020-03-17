@@ -1,0 +1,572 @@
+\documentclass[a4paper,14pt]{extarticle}
+\usepackage{../../tex-shared/preamble}
+
+\renewcommand{\mylabnumber}{5}
+\renewcommand{\mylabtitle}{Исследование возможностей
+ускорения разработки веб-приложений с использованием HAML}
+\renewcommand{\mysubject}{Веб-технологии}
+\renewcommand{\mylecturer}{Дрозин А.Ю.}
+
+\begin{document}
+\input{../../tex-shared/title-page.tex}
+
+\section{Цель работы}
+Изучить основные возможности языка HAML, приобрести практические
+навыки реализации веб-страниц с использованием данной технологии.
+
+\section{Задание на работу}
+
+\subsection{Описание шаблона сайта}
+\begin{enumerate}
+    \item Необходимо с использованием языка HAML создать шаблон страниц
+    пользовательской части сайта, содержащий общие блоки информации, такие
+    как меню, ‘шапка’, ‘подвал’ и др. Шаблон разместить в отдельном файле.
+    \item Реализовать страницы «Главная», «Обо мне», «Контакты», «Учеба»
+    с использованием HAML, поместить результаты в отдельные файлы.
+    \item Реализовать страницу «Фотоальбом» с использованием языка
+    HAML. При реализации страницы воспользоваться циклическими
+    операторами языка HAML для автоматизации процесса верстки фотоальбома.
+    Информацию об изображениях хранить с использованием массива.
+\end{enumerate}
+
+\section{Ход работы}
+Выделим со страниц общие части и вынесем их в отдельные файлы. На каждой
+странице повторяются: навигационное меню, подвал, фоновая картинка,
+включение общих стилей. Вынесем их в отдельные файлы в директорию \code{haml\textbackslash partials}
+
+Содержимое файла \code{nav.haml}, описывающего навигационное меню сайта представлено далее:
+\begin{lstlisting}
+%nav
+  %ul
+    %li
+      %span Web lab1
+    %li
+      %a{ href: "index.html" } Home
+    %li
+      %a{ href: "about.html" } About
+    %li
+      %a{ href: "interests.html" } My interests
+    %li
+      %a{ href: "learning.html"} Learning
+    %li
+      %a{ href: "photos.html" } Photos
+    %li
+      %a{ href: "contact.html" } Contact
+    %li
+      %a{ href: "test.html" } Test
+    %li
+      %a{ href: "history.html" } History
+    %li
+      %span{ id: "time" }
+      %br
+      %span{ id: "date" }
+\end{lstlisting}
+
+Содержимое файла \code{footer.haml}, описывающего подвал сайта представлено далее:
+\begin{lstlisting}
+%footer
+  %section
+    %header
+      %h2 Футер
+    %p Some useful links here
+    %ul
+      %li Link
+      %li Another link
+    %p
+      And some info as well: Nunc eget viverra neque, non ullamcorper odio. Integer dolor sem, ultrices eu
+      tempus dapibus, sagittis ac lacus. Duis rutrum turpis eu lectus imperdiet, ac
+      sagittis orci faucibus. Vestibulum volutpat fringilla turpis vehicula lobortis.
+      Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam posuere
+      tempor enim, et tempus tellus commodo mattis. Sed sollicitudin mauris vitae
+      vestibulum malesuada.
+\end{lstlisting}
+
+Общее содержимое тега \code{head} сайта также вынесем в отдельный файл. Содержимое файла \code{head-shared.haml}
+представлено далее.
+\begin{lstlisting}
+%meta{ name: "viewport", content: "width=device-width" }
+%meta{ content: "no-cache", "http-equiv": "Cache-Control" }
+%link{ href: "../src/pages/nav.css", "rel": "stylesheet", "type": "text/css" }
+%link{ href: "../src/pages/shared.css", "rel": "stylesheet", "type": "text/css" }
+\end{lstlisting}
+
+Также вынесем фоновую картинку (файл \code{portrait.haml}):
+\begin{lstlisting}
+%img{ src: "../images/portrait.jpg", class: "portrait", alt: "Portrait picture in on the back. Don't mind id" }
+\end{lstlisting}
+
+\subsection{Формирование \code{.haml} документа страницы}
+После вынесения общих частей в отдельные файлы необходимо найти способ включить
+содержимое одного \code{.haml} файла в другой. Сделаем это с помощью следующей
+команды:
+
+\code{Haml::Engine.new(File.read(path)).render}
+
+Такая команда должна вызываться каждый раз при включении содержимого одного файла в другой.
+Упростим ее, вынеся в отдельный модуль (файл \code{shared\textbackslash globals.rb}):
+
+\begin{lstlisting}
+module Haml::Helpers
+    def render(path)
+        content = File.read(path)
+        Haml::Engine.new(content).render
+    end
+end
+\end{lstlisting}
+
+Теперь для решения задачи необходимо просто вызвать функцию \code{render}.
+Для включения этого файла в процесс парсинга \code{haml} в \code{html}
+нужно при вызове команды его явно указывать:
+
+\code{haml -r shared\textbackslash globals.rb file1.haml file2.html}
+
+\subsection{Верстка страниц сайта}
+
+\subsubsection{Домашняя страница}
+Текст документа \code{index.haml} приведен далее:
+\begin{lstlisting}
+%html
+  %head
+      %title Homepage
+      = render("./partials/head-shared.haml")
+  %body
+      = render("./partials/nav.haml")
+      = render("./partials/portrait.haml")
+      %div.main-content
+      %header
+          %h1 Портфолио
+      %section
+          %img.avatar{ src: "../images/avatar.jpg", alt: "author's avatar", title: "that's me!" }
+          %header
+          %h2 Обо мне
+          %p
+          %i Горбенко Кирилл Николаевич.
+          Группа ИС-17-2-о. Исследование возможностей
+          языка разметки гипертекстов HTML и каскадных таблиц стилей CSS.
+          %strong Вариант № 3.
+          %p
+          = nonsense_paragraph()
+      %section
+          %header
+          %h2 Следующая глава
+          %p
+          = nonsense_paragraph()
+      = render("./partials/footer.haml")
+      %script{ src: "../js/index.js" }
+\end{lstlisting}
+
+\subsubsection{Страница \enquote{Обо мне}}
+Текст документа \code{about.haml} приведен далее:
+\begin{lstlisting}
+%html
+  %head
+    %title About
+    = render("./partials/head-shared.haml")
+  %body
+    = render("./partials/nav.haml")
+    = render("./partials/portrait.haml")
+    %div.main-content
+      %header
+        %h1 Автобиография
+      %section
+        %header
+          %h1 Раздел 1
+        %p Здесь должна быть какая-то автобиография. Пускай тут будет списочек:
+        %ol
+          %li 19 лет.
+          %li Сын своих родителей.
+          %li Не знаю чего написать еще.
+          %li Пойду заварю чайку.
+          %li Заварил.
+          %li Рыба меч дыня друг.
+        %p Вот еще фоточки:
+        %div.photo-wrapper
+          - about_page_photos().each do |photo|
+            %img{ src: "#{photo[:src]}", alt: "#{photo[:alt]}"}
+    = render("./partials/footer.haml")
+    %script{ src: "../js/about.js" }
+\end{lstlisting}
+
+\subsubsection{Страница \enquote{Мои интересы}}
+Текст документа \code{interests.haml} приведен далее:
+\begin{lstlisting}
+%html
+  %head
+    %title My interests
+    = render("./partials/head-shared.haml")
+    %link{ href: "../src/modal/modal.css", rel: "stylesheet", type: "text/css" }
+  %body
+    = render("./partials/nav.haml")
+    = render("./partials/portrait.haml")
+    %div.main-content
+      %header
+        %h1 Мои интересы
+      %section
+        %header
+          %h2 Contents
+        %button#dialog.modal-button Modal
+        %ul#interests
+          %li.contents#Hobbies Мои хобби
+          %li#Hobbies-expand.interests
+            %h2 My hobbies
+            %p My hobbies are supposed to be here
+            %p
+              = nonsense_paragraph()
+          %li.contents#Books Мои книги
+          %li#Books-expand.interests
+            %h2 My books
+            %p My books are supposed to be here
+            %p
+              = nonsense_paragraph()
+          %li.contents#Music Моя музыка
+          %li#Music-expand.interests
+            %h2 My music
+            %p My music is supposed to be here
+            %p
+              = nonsense_paragraph()
+          %li.contents#Films Мои фильмы
+          %li#Films-expand.interests
+            %h2 My films
+            %p My films are supposed to be here
+            %p
+              = nonsense_paragraph()
+    = render("./partials/footer.haml")
+    %div.modal
+      %div.modal-window
+        %div
+          %p.modal-message
+        %div.modal-navigation
+          %button.modal-button.modal-confirm-button
+          %button.modal-button.modal-cancel-button
+    %script{ src: "../js/interests.js" }
+\end{lstlisting}
+
+\subsubsection{Страница \enquote{Учеба}}
+Текст документа \code{learning.haml} приведен далее:
+\begin{lstlisting}
+%html
+  %head
+    %title M university disciplines page
+    = render("./partials/head-shared.haml")
+  %body
+    = render("./partials/nav.haml")
+    = render("./partials/portrait.haml")
+    %div.main-content
+    %section
+        %header
+        %h1 Дисциплины
+        %p Институт информационных технологий и управления в технических системах
+        %p Кафедра информационных систем
+        %table
+        %tr
+            %td{:colspan => "9"} Дисциплины по семестрам
+        %tr
+            %th{:scope => "row"} 1 семестр
+            %td Высшая математика
+            %td Алгоритмизация и программирование
+            %td Информатика
+            %td История
+            %td Физика
+            %td Экология
+            %td Дискретная математика
+            %td Английский язык
+        %tr
+            %th{:scope => "row"} 2 семестр
+            %td Высшая математика
+            %td Алгоритмизация и программирование
+            %td Физика
+            %td Философия
+            %td Основы теории права
+            %td Экономика
+            %td БЖД
+            %td Английский язык
+        %tr
+            %th{:scope => "row"} 3 семестр
+            %td Архитектура компьютерных систем
+            %td Высшая математика
+            %td Дискретная математика
+            %td ООП
+            %td ТЭЦ
+            %td Экономика предприятия
+            %td Компьютерная графика
+            %td Английский язык
+        %tr
+            %th{:scope => "row"} 4 семестр
+            %td Электроника
+            %td Основы теории алгоритмов
+            %td Теория вероятностей и математическая статистика
+            %td Английский язык
+            %td Системный анализ
+            %td Теория баз данных
+            %td ТСПП
+            %td ОС
+    = render("./partials/footer.haml")
+    %script{ src: "../js/learning.js" }
+\end{lstlisting}
+
+\subsubsection{Страница \enquote{Фотоальбом}}
+Текст документа \code{photos.haml} приведен далее:
+\begin{lstlisting}
+%html
+  %head
+      %title Photo album page
+      = render("./partials/head-shared.haml")
+      %link{ href: "../src/lightbox/lightbox.css", rel: "stylesheet", type:"text/css" }
+  %body
+      = render("./partials/nav.haml")
+      = render("./partials/portrait.haml")
+      %div.main-content
+      %header
+          %h1 Фотоальбом
+      %div.photo-wrapper
+      = render("./partials/footer.haml")
+      %div#lightbox
+      %div.lightbox-content
+          %div.image-wrapper
+          %img.lightbox-picture{ src: "file:///D:/Learning/Web/Portfolio/images/lion-king.jpg" }
+          %div.lightbox-navigation
+          %div.lightbox-button.lightbox-arrow-left &lt;
+          %div.lightbox-button.lightbox-arrow-right &gt;
+      %div.lightbox-button.lightbox-close ×
+      %script{ src: "../js/photos.js" }
+\end{lstlisting}
+
+\subsubsection{Страница \enquote{Контакт}}
+Текст документа \code{contact.haml} приведен далее:
+\begin{lstlisting}
+%html
+  %head
+      %title Contact me
+      = render("./partials/head-shared.haml")
+      %link{ href: '../src/datepicker/datepicker.css', rel: "stylesheet", type: "text/css" }
+      %link{ rel: "stylesheet", type: "text/css", href: "../node_modules/tooltipster/dist/css/tooltipster.bundle.min.css" }
+      %link{ rel: "stylesheet", type: "text/css", href: "../node_modules/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css" }
+  %body
+      = render("./partials/nav.haml")
+      = render("./partials/portrait.haml")
+      %div.main-content
+      %section
+          %header
+          %h1 Mail Me!
+          %p All fields are required! Hover over fields to see the additional requirements.
+          %form{ action: "someaction", method: "POST" }
+          %ol
+              %li
+              %label{ for: "full-name-input"} Full Name
+              %input#full-name-input.field-long{ name: "full-name", type: "text" }
+              %br
+              %li
+              %label{ for: "email-input" } Email
+              %input#email-input.field-long{ name: "email", type: "email"}
+              %br
+              %li
+              %label{ for: "phone-input" } Phone number
+              %input#phone-input.field-long{ name: "phone", type: "text" }
+              %br
+              %li
+              %label{ for: "message-input" } Your Message
+              %textarea#message-input.field-long{ name: "field4" }
+              %li
+              %label{ for: "datepicker-input" } Date
+              %input#datepicker-input.field-long{ name: "date", type: "text" }
+              %br
+              %li
+              %input{ type: "submit", value: "Submit"}
+              %br  
+      = render("./partials/footer.haml")
+    %script{ src: "../js/contact.js" }
+\end{lstlisting}
+
+\subsubsection{Страница \enquote{Тест}}
+Текст документа \code{test.haml} приведен далее:
+\begin{lstlisting}
+%html
+  %head
+    %title Test page
+    = render("./partials/head-shared.haml")
+    %link{ href: '../src/datepicker/datepicker.css', rel: "stylesheet", type: "text/css" }
+    %link{ rel: "stylesheet", type: "text/css", href: "../node_modules/tooltipster/dist/css/tooltipster.bundle.min.css" }
+    %link{ rel: "stylesheet", type: "text/css", href: "../node_modules/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css" }
+  %body
+    = render("./partials/nav.haml")
+    = render("./partials/portrait.haml")
+    %div.main-content
+      %section
+        %header
+          %h1 Тест по инженерной графике
+        %p All fields are required! Hover over fields to see the additional requirements.
+        %form{ action: "someaction", method: "POST" }
+          %ol
+            %li
+              %p От чего зависит величина стрелок размерной линии?
+              %label.inline{ for: "1" } От длины размерной линии
+              %input#1{ checked: "true", name: "question1", type: "radio", value: "1"}
+              %br
+              %label.inline{ for: "2" } От толщины линии контура изображения
+              %input#2{ name: "question1", type: "radio", value: "2" }
+              %br
+            %li
+              %label{ for: "select-input" } Какое назначение имеет тонкая сплошная линия?
+              %select#select-input{ name: "question2" }
+                %option{ value: "1" } Линии разграничения вида и разреза.
+                %option{ value: "2" } Линии сечений.
+                %option{ value: "3" } Линии штриховки.
+            %li
+              %label{ for: "question3" } Какие размеры являются рабочими?
+              %textarea#question3.field-long{ name: "question3" }
+            %li
+              %label{ for: "full-name-input" } Full Name
+              %input#full-name-input.field-long{ name: "full-name", type: "text" }
+              %br
+            %li
+              %label{ for: "email-input" } Email
+              %input#email-input.field-long{ name: "email", type: "email" }
+              %br
+            %li
+              %label{ for: "phone-input" } Phone number
+              %input#phone-input.field-long{ name: "phone", type: "text" }
+              %br
+            %li
+              %label{ for: "message-input" } Your Message
+              %textarea#message-input.field-long{ name: "field4" }
+            %li
+              %input{ type: "submit", value: "Submit"}
+              %br
+    = render("./partials/footer.haml")
+    %script{ src: "../js/test.js" }
+\end{lstlisting}
+
+\subsubsection{Страница \enquote{История}}
+Текст документа \code{history.haml} приведен далее:
+\begin{lstlisting}
+%html
+  %head
+    %title History page
+    = render("./partials/head-shared.haml")
+  %body
+    = render("./partials/nav.haml")
+    = render("./partials/portrait.haml")
+    %div.main-content
+      %header
+        %h1 История
+      %section
+        %header
+          %h2 История сессии
+        %table.session-history
+          %tr
+            %th{ colspan: "2" } История сессии
+          %tr
+            %td Домашняя страница
+            %td.home-page
+          %tr
+            %td Обо мне
+            %td.about-page
+          %tr
+            %td Мои интересы
+            %td.interests-page
+          %tr
+            %td Учеба
+            %td.learning-page
+          %tr
+            %td Фото
+            %td.photos-page
+          %tr
+            %td Контакт
+            %td.contact-page
+          %tr
+            %td Тест
+            %td.test-page
+          %tr
+            %td История
+            %td.history-page
+      %section
+        %header
+          %h2 История за все время
+        %table.global-history
+          %tr
+            %th{ colspan: "2" } История за все время
+          %tr
+            %td Домашняя страница
+            %td.home-page
+          %tr
+            %td Обо мне
+            %td.about-page
+          %tr
+            %td Мои интересы
+            %td.interests-page
+          %tr
+            %td Учеба
+            %td.learning-page
+          %tr
+            %td Фото
+            %td.photos-page
+          %tr
+            %td Контакт
+            %td.contact-page
+          %tr
+            %td Тест
+            %td.test-page
+          %tr
+            %td История
+            %td.history-page
+    = render("./partials/footer.haml")
+    %script{ src: "../js/history.js" }
+\end{lstlisting}
+
+\subsection{Автоматизация}
+Так как с помощь команды можно распарсить только один \code{haml} файл, был создан \code{Powershell} скрипт,
+который парсит весь сайт. Текст скрипта приведен далее:
+
+\begin{lstlisting}
+param(
+    [string] $Dir,
+    [string] $Globals
+)
+
+$pages = @(
+    'index',
+    'about',
+    'interests',
+    'learning',
+    'photos',
+    'contact',
+    'test',
+    'history'
+)
+
+try {
+    $pages | ForEach-Object {
+        Write-Host "Processing $_.haml file."
+
+        $hamlFilePath = Join-Path $Dir "$_.haml"
+        $htmlFilePath = Join-Path $Dir "$_.html"
+        $command = "haml -r $Globals $hamlFilePath $htmlFilePath"
+        
+        Write-Host "Executing command `n$command"
+
+        Invoke-Expression $command
+        if (-not $?) { throw "An error occured during executing command $command." }
+
+        Write-Host "Command successfully executed. Output file is $htmlFilePath."
+    }
+    exit 0
+} catch {
+    Write-Error $_.Exception.Message
+    exit 1
+}
+\end{lstlisting}
+
+\section*{Выводы}
+В ходе лабораторной работы для создания \code{html} документа страниц сайта использовался
+препроцессор \code{haml}. С его помощью можно ускорить разработку веб-страниц за счет
+уменьшния объема разрабатываемого кода и автоматизации таких вещей как закрытие тегов.
+
+Кроме того, \code{haml} содержит функции, недоступные при создании обычного \code{html}:
+циклы и ветвления, что также упрощает разработку.
+
+В среде отличной от \code{Ruby on Rails} использовать \code{haml} я бы не стал из-за сильной
+привязки препроцессора к инфраструктуре языка \code{Ruby}. В таком случае получается, что
+появляется необходимость расширять \code{haml} компонентами, написанными на неосновном
+языке разработки.
+
+\end{document}
