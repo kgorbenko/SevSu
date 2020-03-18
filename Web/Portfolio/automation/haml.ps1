@@ -25,7 +25,7 @@ try {
         Write-Host "Executing command `n$command"
 
         Invoke-Expression $command
-        if (-not $?) { throw "An error occured during executing command $command." }
+        if (-not $?) { throw "An error occurred during executing command $command." }
 
         Write-Host "Command successfully executed. Output file is $htmlFilePath."
     }
