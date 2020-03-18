@@ -1,16 +1,16 @@
 %html
   %head
     %title Photo album page
-    = render("./partials/head-shared.haml")
+    = render(File.join(__dir__, "/partials/head-shared.haml"))
     %link{ href: "../src/lightbox/lightbox.css", rel: "stylesheet", type:"text/css" }
   %body
-    = render("./partials/nav.haml")
-    = render("./partials/portrait.haml")
+    = render(File.join(__dir__, "/partials/nav.haml"))
+    = render(File.join(__dir__, "/partials/portrait.haml"))
     %div.main-content
       %header
         %h1 Фотоальбом
       %div.photo-wrapper
-    = render("./partials/footer.haml")
+    = render(File.join(__dir__, "/partials/footer.haml"))
     %div#lightbox
       %div.lightbox-content
         %div.image-wrapper

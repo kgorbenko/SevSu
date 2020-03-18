@@ -1,10 +1,10 @@
 %html
   %head
     %title History page
-    = render("./partials/head-shared.haml")
+    = render(File.join(__dir__, "/partials/head-shared.haml"))
   %body
-    = render("./partials/nav.haml")
-    = render("./partials/portrait.haml")
+    = render(File.join(__dir__, "/partials/nav.haml"))
+    = render(File.join(__dir__, "/partials/portrait.haml"))
     %div.main-content
       %header
         %h1 История
@@ -68,5 +68,5 @@
           %tr
             %td История
             %td.history-page
-    = render("./partials/footer.haml")
+    = render(File.join(__dir__, "/partials/footer.haml"))
     %script{ src: "../js/history.js" }

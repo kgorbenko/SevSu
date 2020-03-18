@@ -1,10 +1,10 @@
 %html
   %head
     %title About
-    = render("./partials/head-shared.haml")
+    = render(File.join(__dir__, "/partials/head-shared.haml"))
   %body
-    = render("./partials/nav.haml")
-    = render("./partials/portrait.haml")
+    = render(File.join(__dir__, "/partials/nav.haml"))
+    = render(File.join(__dir__, "/partials/portrait.haml"))
     %div.main-content
       %header
         %h1 Автобиография
@@ -23,5 +23,5 @@
         %div.photo-wrapper
           - about_page_photos().each do |photo|
             %img{ src: "#{photo[:src]}", alt: "#{photo[:alt]}"}
-    = render("./partials/footer.haml")
+    = render(File.join(__dir__, "/partials/footer.haml"))
     %script{ src: "../js/about.js" }

@@ -1,11 +1,11 @@
 %html
   %head
     %title My interests
-    = render("./partials/head-shared.haml")
+    = render(File.join(__dir__, "/partials/head-shared.haml"))
     %link{ href: "../src/modal/modal.css", rel: "stylesheet", type: "text/css" }
   %body
-    = render("./partials/nav.haml")
-    = render("./partials/portrait.haml")
+    = render(File.join(__dir__, "/partials/nav.haml"))
+    = render(File.join(__dir__, "/partials/portrait.haml"))
     %div.main-content
       %header
         %h1 Мои интересы
@@ -38,7 +38,7 @@
             %p My films are supposed to be here
             %p
               = nonsense_paragraph()
-    = render("./partials/footer.haml")
+    = render(File.join(__dir__, "/partials/footer.haml"))
     %div.modal
       %div.modal-window
         %div
