@@ -5,6 +5,7 @@
     %link{ href: '../src/datepicker/datepicker.css', rel: "stylesheet", type: "text/css" }
     %link{ rel: "stylesheet", type: "text/css", href: "../node_modules/tooltipster/dist/css/tooltipster.bundle.min.css" }
     %link{ rel: "stylesheet", type: "text/css", href: "../node_modules/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css" }
+    %script{ src: "../js/contact.js" }
   %body
     = render(File.join(__dir__, "/partials/nav.haml"))
     = render(File.join(__dir__, "/partials/portrait.haml"))
@@ -37,6 +38,4 @@
             %li
               %input{ type: "submit", value: "Submit"}
               %br
-
     = render(File.join(__dir__, "/partials/footer.haml"))
-    %script{ src: "../js/contact.js" }

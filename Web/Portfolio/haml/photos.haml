@@ -3,6 +3,7 @@
     %title Photo album page
     = render(File.join(__dir__, "/partials/head-shared.haml"))
     %link{ href: "../src/lightbox/lightbox.css", rel: "stylesheet", type:"text/css" }
+    %script{ src: "../js/photos.js" }
   %body
     = render(File.join(__dir__, "/partials/nav.haml"))
     = render(File.join(__dir__, "/partials/portrait.haml"))
@@ -19,4 +20,3 @@
           %div.lightbox-button.lightbox-arrow-left &lt;
           %div.lightbox-button.lightbox-arrow-right &gt;
       %div.lightbox-button.lightbox-close ×
-    %script{ src: "../js/photos.js" }

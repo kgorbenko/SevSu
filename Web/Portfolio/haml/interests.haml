@@ -3,6 +3,7 @@
     %title My interests
     = render(File.join(__dir__, "/partials/head-shared.haml"))
     %link{ href: "../src/modal/modal.css", rel: "stylesheet", type: "text/css" }
+    %script{ src: "../js/interests.js" }
   %body
     = render(File.join(__dir__, "/partials/nav.haml"))
     = render(File.join(__dir__, "/partials/portrait.haml"))
@@ -46,4 +47,3 @@
         %div.modal-navigation
           %button.modal-button.modal-confirm-button
           %button.modal-button.modal-cancel-button
-    %script{ src: "../js/interests.js" }

@@ -2,6 +2,7 @@
   %head
     %title Homepage
     = render(File.join(__dir__, "/partials/head-shared.haml"))
+    %script{ src: "../js/index.js" }
   %body
     = render(File.join(__dir__, "/partials/nav.haml"))
     = render(File.join(__dir__, "/partials/portrait.haml"))
@@ -25,4 +26,3 @@
         %p
           = nonsense_paragraph()
     = render(File.join(__dir__, "/partials/footer.haml"))
-    %script{ src: "../js/index.js" }

@@ -2,6 +2,7 @@
   %head
     %title M university disciplines page
     = render(File.join(__dir__, "/partials/head-shared.haml"))
+    %script{ src: "../js/learning.js" }
   %body
     = render(File.join(__dir__, "/partials/nav.haml"))
     = render(File.join(__dir__, "/partials/portrait.haml"))
@@ -55,4 +56,3 @@
             %td ТСПП
             %td ОС
     = render(File.join(__dir__, "/partials/footer.haml"))
-    %script{ src: "../js/learning.js" }
