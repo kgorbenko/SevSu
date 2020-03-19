@@ -20,7 +20,7 @@
           %li Заварил.
           %li Рыба меч дыня друг.
         %p Вот еще фоточки:
-        %div.photo-wrapper
+        %div.photo-wrapper.full-width
           - about_page_photos().each do |photo|
             %img{ src: "#{photo[:src]}", alt: "#{photo[:alt]}"}
     = render("./partials/footer.haml")
