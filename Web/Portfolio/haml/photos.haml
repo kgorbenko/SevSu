@@ -9,8 +9,8 @@
     %div.main-content
       %header
         %h1 Фотоальбом
-      %div.photo-wrapper
-    = render("./partials/footer.haml")
+      %div.photo-wrapper.full-width
+    = render(File.join(__dir__, "/partials/footer.haml"))
     %div#lightbox
       %div.lightbox-content
         %div.image-wrapper
