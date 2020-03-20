@@ -23,9 +23,9 @@ try {
         $command = "haml -r $Globals $hamlFilePath $htmlFilePath"
         
         Write-Host "Executing command `n$command"
-
-        Invoke-Expression $command
-        if (-not $?) { throw "An error occurred during executing command $command." }
+        $command += ';$?'
+        $success = Invoke-Expression $command
+        if (-not $success) { throw "An error occurred during executing command $command." }
 
         Write-Host "Command successfully executed. Output file is $htmlFilePath."
     }
