@@ -15,11 +15,9 @@ module.exports = {
     devtool: 'inline-source-map',
     module: {
         rules: [
-            {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
-                exclude: /node_modules/,
-            },
+            { test: /\.tsx?$/, use: 'ts-loader', exclude: /node_modules/ },
+            { test: /\.css$/i, use: [ 'style-loader', 'css-loader' ] },
+            { test: /\.s[ac]ss$/i, use: [ 'style-loader', 'css-loader', 'sass-loader' ] }
         ],
     },
     resolve: {

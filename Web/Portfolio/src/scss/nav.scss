@@ -1,0 +1,43 @@
+$navHeight: 60px;
+
+nav {
+    border-bottom: solid black 1px;
+    height: $navHeight;
+
+    ul {
+        display: flex;
+        list-style: none;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: stretch;
+        padding-left: 0;
+        width: 70%;
+        margin: 0 auto;
+        height: 100%;
+
+        li {
+            flex: 3 3 auto;
+            text-align: center;
+
+            span {
+                line-height: $navHeight;
+
+                &#date, &#time {
+                    line-height: $navHeight / 2;
+                }
+            }
+
+            a {
+                @extend span;
+
+                text-decoration: none;
+                text-transform: none;
+                color: black;
+
+                &:hover {
+                    color: #bfbfbf;
+                }
+            }
+        }
+    }
+}

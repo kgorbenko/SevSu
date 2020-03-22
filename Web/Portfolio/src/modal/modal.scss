@@ -1,3 +1,6 @@
+$modalConfirmButtonColor: #4CAF50;
+$modalCancelButtonColor: #f44336;
+
 .modal {
     position: fixed;
     z-index: 1;
@@ -19,6 +22,11 @@
         background-color: lightgrey;
         border-radius: 5px;
 
+        .modal-message {
+            font-size: 28px;
+            text-align: center;
+        }
+
         .modal-navigation {
             text-align: center;
             margin: 20px;
@@ -29,23 +37,26 @@
                 border-radius: 5px;
                 font-size: 20px;
                 border: none;
-                margin: 0px 10px;
+                margin: 0 10px;
+
+                &.modal-confirm-button {
+                    background-color: $modalConfirmButtonColor;
+
+                    &:hover {
+                        background-color: darken($modalConfirmButtonColor, 20%);
+                    }
+                }
+
+                &.modal-cancel-button {
+                    background-color:  $modalCancelButtonColor;
+
+                    &:hover {
+                        background-color: darken($modalCancelButtonColor, 20%);
+                    }
+                }
             }
         }
     }
-}
-
-.modal-window .modal-message {
-    font-size: 28px;
-    text-align: center;
-}
-
-.modal-confirm-button {
-    background-color: #4CAF50;
-}
-
-.modal-cancel-button {
-    background-color:  #f44336;
 }
 
 .no-scroll {

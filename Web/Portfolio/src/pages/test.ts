@@ -4,6 +4,11 @@ import { updateClockOnInterval } from '../clock/clock';
 import { FormComponent, NameValidator, FieldFilledValidator, PhoneNumberValidator, DetailedAnswerValidator, setFieldsForValidation } from '../forms/forms';
 import { visitPage } from '../storage/storage';
 
+import '../scss/test.scss';
+import '../datepicker/datepicker.scss';
+import '../../node_modules/tooltipster/dist/css/tooltipster.bundle.min.css';
+import '../../node_modules/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css';
+
 $(() => {
     visitPage('test');
     updateClockOnInterval(document.getElementById('date'), document.getElementById('time'), 1000);
