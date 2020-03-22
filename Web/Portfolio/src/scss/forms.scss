@@ -1,0 +1,85 @@
+form {
+    ol {
+        margin: 10px auto;
+        max-width: 400px;
+        padding: 20px 12px 10px 20px;
+        font-weight: 100;
+
+        li {
+            padding: 0;
+            display: block;
+            list-style: none;
+            margin: 10px 0 0 0;
+        }
+
+        label {
+            text-align: center;
+            margin: 0 0 3px 0;
+            padding: 0;
+            display: block;
+            font-weight: bold;
+        }
+
+        .form-item {
+            box-sizing: border-box;
+            border: 1px solid #BEBEBE;
+            padding: 7px;
+            margin: 0;
+            outline: none;
+        }
+
+        select {
+            @extend .form-item;
+
+            width: 100%;
+        }
+
+        textarea {
+            @extend .form-item;
+
+            height: 100px;
+
+            &:focus {
+                box-shadow: 0 0 8px #88D5E9;
+                border: 1px solid #88D5E9;
+            }
+        }
+
+        input {
+            @extend .form-item;
+
+            .submit-and-button {
+                background: #4B99AD;
+                padding: 8px 15px 8px 15px;
+                border: none;
+                color: #fff;
+
+                &:hover {
+                    background: #4691A4;
+                    box-shadow: none;
+                }
+            }
+
+            &[type=submit] {
+                @extend .submit-and-button;
+            }
+
+            &[type=button] {
+                @extend .submit-and-button;
+            }
+
+            &:focus {
+                box-shadow: 0 0 8px #88D5E9;
+                border: 1px solid #88D5E9;
+            }
+        }
+
+        .inline {
+            display: inline-block;
+        }
+
+        .field-long {
+            width: 100%;
+        }
+    }
+}

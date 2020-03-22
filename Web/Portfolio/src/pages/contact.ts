@@ -5,6 +5,11 @@ import { FormComponent, NameValidator, FieldFilledValidator, PhoneNumberValidato
 import datepicker from '../datepicker/datepicker';
 import { visitPage } from '../storage/storage';
 
+import '../scss/contact.scss';
+import '../datepicker/datepicker.scss';
+import '../../node_modules/tooltipster/dist/css/tooltipster.bundle.min.css';
+import '../../node_modules/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css';
+
 $(() => {
     visitPage('contact');
     updateClockOnInterval(document.getElementById('date'), document.getElementById('time'), 1000);
