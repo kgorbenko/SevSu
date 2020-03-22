@@ -1,85 +1,84 @@
+@import "shared";
+
+$elementMargin: 5px;
+$invalidInputColor: #cb2431;
+
 form {
     ol {
         margin: 10px auto;
         max-width: 400px;
-        padding: 20px 12px 10px 20px;
         font-weight: 100;
 
         li {
-            padding: 0;
             display: block;
             list-style: none;
-            margin: 10px 0 0 0;
-        }
+            padding: 0 5px;
 
-        label {
-            text-align: center;
-            margin: 0 0 3px 0;
-            padding: 0;
-            display: block;
-            font-weight: bold;
-        }
-
-        .form-item {
-            box-sizing: border-box;
-            border: 1px solid #BEBEBE;
-            padding: 7px;
-            margin: 0;
-            outline: none;
-        }
-
-        select {
-            @extend .form-item;
-
-            width: 100%;
-        }
-
-        textarea {
-            @extend .form-item;
-
-            height: 100px;
-
-            &:focus {
-                box-shadow: 0 0 8px #88D5E9;
-                border: 1px solid #88D5E9;
+            label {
+                display: block;
+                text-align: center;
+                margin: $elementMargin 0;
+                padding: 5px;
             }
-        }
 
-        input {
-            @extend .form-item;
+            .form-item {
+                border: solid 1px #dedede;
+                border-radius: $defaultBorderRadius;
+                outline: none;
+                margin: $elementMargin 0;
+                padding: 5px;
 
-            .submit-and-button {
-                background: #4B99AD;
-                padding: 8px 15px 8px 15px;
-                border: none;
-                color: #fff;
+                &.error-messages {
+                    color: $invalidInputColor;
+                    margin-bottom: 5px;
+                }
 
-                &:hover {
-                    background: #4691A4;
-                    box-shadow: none;
+                &:focus {
+                    box-shadow: 0 0 0 2px #308DE0;
+                }
+
+                &.validation-failed {
+                    box-shadow: 0 0 0 2px $invalidInputColor;
                 }
             }
 
-            &[type=submit] {
-                @extend .submit-and-button;
+            select {
+                @extend .form-item;
+
+                width: 100%;
             }
 
-            &[type=button] {
-                @extend .submit-and-button;
+            textarea {
+                @extend .form-item;
+
+                height: 100px;
+                resize: vertical;
             }
 
-            &:focus {
-                box-shadow: 0 0 8px #88D5E9;
-                border: 1px solid #88D5E9;
+            input {
+                @extend .form-item;
+
+                &[type=submit] {
+                    color: white;
+                    background: #4B99AD;
+                    border: none;
+                    border-radius: $defaultBorderRadius;
+                    padding: 7px 15px;
+
+                    &:hover {
+                        background: #4691A4;
+                        box-shadow: none;
+                    }
+                }
             }
-        }
 
-        .inline {
-            display: inline-block;
-        }
+            .inline {
+                display: inline-block;
+            }
 
-        .field-long {
-            width: 100%;
+            .field-long {
+                width: 100%;
+            }
         }
     }
 }
