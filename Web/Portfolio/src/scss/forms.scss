@@ -21,7 +21,7 @@ form {
                 padding: 5px;
             }
 
-            .form-item {
+            %form-item {
                 border: solid 1px #dedede;
                 border-radius: $defaultBorderRadius;
                 outline: none;
@@ -43,20 +43,20 @@ form {
             }
 
             select {
-                @extend .form-item;
+                @extend %form-item;
 
                 width: 100%;
             }
 
             textarea {
-                @extend .form-item;
+                @extend %form-item;
 
                 height: 100px;
                 resize: vertical;
             }
 
             input {
-                @extend .form-item;
+                @extend %form-item;
 
                 &[type=submit] {
                     color: white;
