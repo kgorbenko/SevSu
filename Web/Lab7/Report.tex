@@ -1,0 +1,230 @@
+\documentclass[a4paper,14pt]{extarticle}
+\usepackage{../../tex-shared/preamble}
+
+\renewcommand{\mylabnumber}{7}
+\renewcommand{\mylabtitle}{Исследование возможностей ускорения
+разработки клиентских приложений с использованием CoffeeScript}
+\renewcommand{\mysubject}{Веб-технологии}
+\renewcommand{\mylecturer}{Дрозин А.Ю.}
+
+\begin{document}
+\input{../../tex-shared/title-page.tex}
+
+\section{Цель работы}
+Изучить основные возможности языка CoffeeScript, приобрести практические
+навыки написания клиентских приложений с использованием CoffeeScript.
+
+\section{Задание на работу}
+В процессе выполнения лабораторной работы необходимо переработать клиентский
+код страниц «Контакт», «Тест по дисциплине», «Фотоальбом» и «Мои интересы»,
+реализовав его на языке CoffeeScript.
+
+\section{Ход работы}
+Для парсинга \code{.coffee} скриптов подключим соответствующий лоадер:
+
+\code{npm install --save-dev coffeescript coffee-loader}.
+
+Теперь перепишем код файлов \code{interests.ts}, \code{photos.ts},
+\code{contact.ts}, \code{test.ts}.
+
+Файл \code{interests.coffee}:
+
+\begin{lstlisting}
+import * as $ from 'jquery';
+
+import { updateClockOnInterval } from '../clock/clock';
+import { visitPage } from '../storage/storage';
+import modal from '../modal/modal';
+
+import '../scss/interests.scss';
+import '../modal/modal.scss';
+
+$ () ->
+    visitPage 'interests'
+    updateClockOnInterval (document.getElementById('date')), (document.getElementById 'time'), 1000
+    $('.contents').on('click', (event) -> $(event.target).next().toggle())
+    $('#dialog').on('click', () -> modal({ confirmAction: () -> alert 'lol' }))
+\end{lstlisting}
+
+Подключим его следующим образом (\code{webpack.config.js}):
+\begin{lstlisting}
+entry: {
+    index: './src/pages/index.ts',
+    about: './src/pages/about.ts',
+    interests: './src/pages/interests.ts',
+    learning: './src/pages/learning.ts',
+    photos: './src/pages/photos.ts',
+    contact: './src/pages/contact.ts',
+    test: './src/pages/test.ts',
+    history: './src/pages/history.ts',
+    interestsCoffee: './src/coffee/interests.coffee',
+}
+\end{lstlisting}
+
+\code{interests.haml}:
+
+\code{\%script\{ src: "../js/interestsCoffee.js" \}}.
+Следующие файлы подключаются аналогично.
+
+Файл \code{photos.coffee}:
+\begin{lstlisting}
+import * as $ from 'jquery';
+
+import { updateClockOnInterval } from '../clock/clock';
+import { createElement } from '../utils/dom';
+import addLightbox from '../lightbox/lightbox';
+import { visitPage } from '../storage/storage';
+
+import '../scss/photos.scss';
+import '../lightbox/lightbox.scss';
+
+$ () ->
+    visitPage 'photos'
+    updateClockOnInterval (document.getElementById 'date'), (document.getElementById 'time'), 1000
+    photoWrapper = document.querySelector '.photo-wrapper'
+
+    photos.forEach (photo) ->
+        img = createElement 'img', { src: photo, alt: 'photoalbum photo' }
+        photoWrapper.appendChild(img)
+
+    addLightbox photoWrapper, photos
+
+photos = [
+    'picachu.jpg',
+    'images.jpeg',
+    'lion-king.jpg',
+    'road.jpeg',
+    'car.png',
+    'bridge.jpg',
+    'green.jpeg',
+    'statue.jpg',
+    'cock.jpg',
+    'city.jpg',
+    'fire.jpg',
+    'rose.jpeg',
+    'photo.jpg',
+    'castle.jpg',
+    'shimpanze.jpg',
+].map (image) -> "../images/#{image}"
+\end{lstlisting}
+
+Файл \code{contact.coffee}:
+\begin{lstlisting}
+import * as $ from 'jquery';
+
+import { updateClockOnInterval } from '../clock/clock';
+import { FormComponent, NameValidator, FieldFilledValidator, PhoneNumberValidator, setFieldsForValidation, DateValidator } from '../forms/forms';
+import datepicker from '../datepicker/datepicker';
+import { visitPage } from '../storage/storage';
+
+import '../scss/contact.scss';
+import '../datepicker/datepicker.scss';
+import '../../node_modules/tooltipster/dist/css/tooltipster.bundle.min.css';
+import '../../node_modules/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css';
+
+$ () ->
+    visitPage 'contact'
+    updateClockOnInterval (document.getElementById 'date'), (document.getElementById 'time'), 1000
+    datepicker()
+    setFieldsForValidation fields, document.forms.item 0
+
+fields = [
+    new FormComponent(
+        'full-name-input',
+        [ new NameValidator ],
+        'Type three space-separated words.'
+    ),
+    new FormComponent(
+        'email-input',
+        [ new FieldFilledValidator ],
+        'Email field should contain "@" character.'
+    ),
+    new FormComponent(
+        'phone-input',
+        [ new PhoneNumberValidator ],
+        'Type phone number in next format: +XXXXXXXXXX.'
+    ),
+    new FormComponent(
+        'message-input',
+        [ new FieldFilledValidator ],
+        'Message field should be filled.'
+    ),
+    new FormComponent(
+        'datepicker-input',
+        [ new DateValidator ],
+        'Click on field to choose date.'
+    )
+]
+\end{lstlisting}
+
+Файл \code{test.coffee}:
+\begin{lstlisting}
+import * as $ from 'jquery';
+
+import {updateClockOnInterval} from '../clock/clock';
+import {
+    FormComponent,
+    NameValidator,
+    FieldFilledValidator,
+    PhoneNumberValidator,
+    DetailedAnswerValidator,
+    setFieldsForValidation
+} from '../forms/forms';
+import {visitPage} from '../storage/storage';
+
+import '../scss/test.scss';
+import '../datepicker/datepicker.scss';
+import '../../node_modules/tooltipster/dist/css/tooltipster.bundle.min.css';
+import '../../node_modules/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css';
+
+$ () ->
+    visitPage 'test'
+    updateClockOnInterval (document.getElementById 'date'), (document.getElementById 'time'), 1000
+    setFieldsForValidation fields, document.forms.item 0
+
+fields = [
+    new FormComponent(
+        'question3',
+        [ new FieldFilledValidator, new DetailedAnswerValidator ],
+        'Field should be filled and should contain less than 30 words.'
+    ),
+    new FormComponent(
+        'full-name-input',
+        [ new NameValidator ],
+        'Type three space-separated words.'
+    ),
+    new FormComponent(
+        'email-input',
+        [ new FieldFilledValidator ],
+        'Email field should contain "@" character.'
+    ),
+    new FormComponent(
+        'phone-input',
+        [ new PhoneNumberValidator ],
+        'Type phone number in next format: +XXXXXXXXXX.'
+    ),
+    new FormComponent(
+        'message-input',
+        [ new FieldFilledValidator ],
+        'Message field should be filled.'
+    )
+]
+\end{lstlisting}
+
+\section*{Выводы}
+В ходе лабораторной работы для разработки клиентского кода был использован
+язык \code{CoffeeScript}. До выхода es6 он предоставлял более простой синтаксис,
+а именно: объявления функций, похожие на современные анонимные функции es6,
+объявления переменных с локальной областью видимости, отказ от большинства
+общепринятых скобок (при передаче параметров в функции, при объявлении
+объектов), итерации по массивам.
+
+Эти функции языка, несомненно, были преимуществом перед более старыми
+версиями языка \code{JavaScript}. Но \code{JS} в настоящее время развивается более активно,
+и, с развитием, сам обзавелся вышеупомянутыми функциями или их аналогами:
+стрелочные функции, \code{let} и \code{const} объявления, циклы \code{for...of},
+\code{for...in}, \code{forEach}.
+
+В настоящее время я не вижу преимуществ \code{CoffeeScript}, из-за которых
+я бы отдал ему предпочтение над \code{JavaScript}.
+\end{document}
