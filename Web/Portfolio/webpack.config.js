@@ -10,7 +10,8 @@ module.exports = {
         photos: './src/pages/photos.ts',
         contact: './src/pages/contact.ts',
         test: './src/pages/test.ts',
-        history: './src/pages/history.ts'
+        history: './src/pages/history.ts',
+        interestsCoffee: './src/coffee/interests.coffee',
     },
     devtool: 'inline-source-map',
     module: {
