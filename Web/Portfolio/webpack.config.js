@@ -12,7 +12,8 @@ module.exports = {
         test: './src/pages/test.ts',
         history: './src/pages/history.ts',
         interestsCoffee: './src/coffee/interests.coffee',
-        photosCoffee: './src/coffee/photos.coffee'
+        photosCoffee: './src/coffee/photos.coffee',
+        contactCoffee: './src/coffee/contact.coffee'
     },
     devtool: 'inline-source-map',
     module: {
