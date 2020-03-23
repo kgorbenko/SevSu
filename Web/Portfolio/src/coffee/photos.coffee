@@ -26,7 +26,7 @@ photos = [
   'shimpanze.jpg',
 ].map (image) -> "../images/#{image}"
 
-$(() ->
+$ () ->
     visitPage 'photos'
     updateClockOnInterval (document.getElementById 'date'), (document.getElementById 'time'), 1000
     photoWrapper = document.querySelector '.photo-wrapper'
@@ -36,4 +36,3 @@ $(() ->
         photoWrapper.appendChild(img)
 
     addLightbox photoWrapper, photos
-)

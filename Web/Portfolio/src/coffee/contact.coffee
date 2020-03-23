@@ -10,12 +10,11 @@ import '../datepicker/datepicker.scss';
 import '../../node_modules/tooltipster/dist/css/tooltipster.bundle.min.css';
 import '../../node_modules/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css';
 
-$(() ->
+$ () ->
     visitPage 'contact'
     updateClockOnInterval (document.getElementById 'date'), (document.getElementById 'time'), 1000
     datepicker()
     setFieldsForValidation fields, document.forms.item 0
-)
 
 fields = [
     new FormComponent(
