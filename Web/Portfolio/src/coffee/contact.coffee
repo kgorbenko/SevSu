@@ -42,4 +42,4 @@ fields = [
         [ new DateValidator ],
         'Click on field to choose date.'
     )
-];
+]
