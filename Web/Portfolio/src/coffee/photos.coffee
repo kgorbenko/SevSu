@@ -1,4 +1,4 @@
-import * as $ from 'jquery';
+﻿import * as $ from 'jquery';
 
 import { updateClockOnInterval } from '../clock/clock';
 import { createElement } from '../utils/dom';
@@ -8,20 +8,18 @@ import { visitPage } from '../storage/storage';
 import '../scss/photos.scss';
 import '../lightbox/lightbox.scss';
 
-$(() => {
-    visitPage('photos');
-    updateClockOnInterval(document.getElementById('date'), document.getElementById('time'), 1000);
-    let photoWrapper = document.querySelector('.photo-wrapper');
+$ () ->
+    visitPage 'photos'
+    updateClockOnInterval (document.getElementById 'date'), (document.getElementById 'time'), 1000
+    photoWrapper = document.querySelector '.photo-wrapper'
 
-    photos.forEach(photo => {
-        let img = createElement('img', { src: photo, alt: 'photoalbum photo' });
-        photoWrapper.appendChild(img);
-    });
+    photos.forEach (photo) ->
+        img = createElement 'img', { src: photo, alt: 'photoalbum photo' }
+        photoWrapper.appendChild(img)
 
-    addLightbox(photoWrapper, photos);
-});
+    addLightbox photoWrapper, photos
 
-const photos : string[] = [
+photos = [
     'picachu.jpg',
     'images.jpeg',
     'lion-king.jpg',
@@ -37,4 +35,4 @@ const photos : string[] = [
     'photo.jpg',
     'castle.jpg',
     'shimpanze.jpg',
-].map(image => `../images/${image}`);
+].map (image) -> "../images/#{image}"

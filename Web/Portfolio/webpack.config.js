@@ -10,11 +10,16 @@ module.exports = {
         photos: './src/pages/photos.ts',
         contact: './src/pages/contact.ts',
         test: './src/pages/test.ts',
-        history: './src/pages/history.ts'
+        history: './src/pages/history.ts',
+        interestsCoffee: './src/coffee/interests.coffee',
+        photosCoffee: './src/coffee/photos.coffee',
+        contactCoffee: './src/coffee/contact.coffee',
+        testCoffee: './src/coffee/test.coffee'
     },
     devtool: 'inline-source-map',
     module: {
         rules: [
+            { test: /\.coffee$/, use: [ 'coffee-loader']},
             { test: /\.tsx?$/, use: 'ts-loader', exclude: /node_modules/ },
             { test: /\.css$/i, use: [ 'style-loader', 'css-loader' ] },
             { test: /\.s[ac]ss$/i, use: [ 'style-loader', 'css-loader', 'sass-loader' ] }
