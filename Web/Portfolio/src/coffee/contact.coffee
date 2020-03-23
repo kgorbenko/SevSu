@@ -19,37 +19,27 @@ $ () ->
 fields = [
     new FormComponent(
         'full-name-input',
-        [
-            new NameValidator,
-        ],
+        [ new NameValidator ],
         'Type three space-separated words.'
     ),
     new FormComponent(
         'email-input',
-        [
-            new FieldFilledValidator,
-        ],
+        [ new FieldFilledValidator ],
         'Email field should contain "@" character.'
     ),
     new FormComponent(
         'phone-input',
-        [
-            new PhoneNumberValidator,
-        ],
+        [ new PhoneNumberValidator ],
         'Type phone number in next format: +XXXXXXXXXX.'
     ),
     new FormComponent(
         'message-input',
-        [
-            new FieldFilledValidator,
-        ],
+        [ new FieldFilledValidator ],
         'Message field should be filled.'
     ),
     new FormComponent(
         'datepicker-input',
-        [
-            new DateValidator
-        ],
+        [ new DateValidator ],
         'Click on field to choose date.'
     )
 ];
