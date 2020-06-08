@@ -190,7 +190,7 @@ Windows API. В результате его ингредиенты мало по
 `milcore.dll` реализована в неуправляемом коде потому, что ей требуется тесная
 интеграция с Direct3D, и вдобавок для нее чрезвычайно важна производительность.
 
-![Архитектура WPF](.Net/Lectures/images/architecture.png?raw=true)
+![Архитектура WPF](images/architecture.png?raw=true)
 
 Ниже описаны ключевые компоненты, присутствующие на рисунке:
 
@@ -240,7 +240,7 @@ Windows API. В результате его ингредиенты мало по
   начинающиеся с System.Windows.Forms, которые относятся к инструментам Windows
   Forms.
 
-![Иерархия классов WPF](.Net/Lectures/images/class-hierarchy.gif?raw=true)
+![Иерархия классов WPF](images/class-hierarchy.gif?raw=true)
 
 * **System.Threading.DispatcherObject** Приложения WPF используют знакомую
   однопоточную модель (single-thread affinity — STA), а это означает, что весь
