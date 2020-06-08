@@ -1,6 +1,6 @@
 # ВВЕДЕНИЕ В WPF
 
-Windows Presentation Foundation (WPF) — фреймворк для построения настольных
+**Windows Presentation Foundation** (WPF) — фреймворк для построения настольных
 приложений Windows. WPF поддерживает широкий набор функций разработки
 приложений, включая модель приложения (application model), ресурсы (resources),
 элементы управления (controls, графику (graphics), компоновка (layout), привязку
