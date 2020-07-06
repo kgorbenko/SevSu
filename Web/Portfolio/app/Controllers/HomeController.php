@@ -25,4 +25,8 @@ class HomeController
     public function interests() {
         ViewRenderer::render("Views/Home/Interests.php", "My interests");
     }
+
+    public function learning() {
+        ViewRenderer::render("Views/Home/Learning.php", "Learning");
+    }
 }
