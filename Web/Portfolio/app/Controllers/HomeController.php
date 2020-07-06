@@ -41,4 +41,8 @@ class HomeController
     public function test() {
         ViewRenderer::render("Views/Home/Test.php", "Test");
     }
+
+    public function history() {
+        ViewRenderer::render("Views/Home/History.php", "History");
+    }
 }
