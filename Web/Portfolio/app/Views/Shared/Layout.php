@@ -3,6 +3,8 @@
 <html lang="en">
     <head>
         <title><?=$title?></title>
+        <meta content="width=device-width" name="viewport" />
+        <meta content="no-cache" http-equiv="Cache-Control" />
     </head>
     <body>
         <nav>
@@ -19,7 +21,27 @@
                 <li><span id="time"></span><br/><span id="date"></span></li>
             </ul>
         </nav>
-        <h1>Layout is here!</h1>
+        <img src="../client-side/images/portrait.jpg" class="portrait" alt="Portrait picture in on the back. Don't mind it" />
+
         <?php include($viewName); ?>
+
+        <footer class="full-width">
+            <section>
+                <header><h2>Footer</h2></header>
+                <p>Some useful links here</p>
+                <ul>
+                    <li>Link</li>
+                    <li>Another link</li>
+                </ul>
+                <p>
+                    And some info as well: Nunc eget viverra neque, non ullamcorper odio. Integer dolor sem, ultrices eu
+                    tempus dapibus, sagittis ac lacus. Duis rutrum turpis eu lectus imperdiet, ac
+                    sagittis orci faucibus. Vestibulum volutpat fringilla turpis vehicula lobortis.
+                    Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam posuere
+                    tempor enim, et tempus tellus commodo mattis. Sed sollicitudin mauris vitae
+                    vestibulum malesuada.
+                </p>
+            </section>
+        </footer>
     </body>
 </html>
