@@ -1,3 +1,5 @@
+<link href="../client-side/bundles/about.bundle.css" rel="stylesheet" type="text/css" />
+
 <header>
     <h1>Autobiography</h1>
 </header>
@@ -20,3 +22,5 @@
         ?>
     </div>
 </section>
+
+<script src="../client-side/bundles/about.bundle.js"></script>

@@ -1,3 +1,5 @@
+<link href="../client-side/bundles/photos.bundle.css" rel="stylesheet" type="text/css" />
+
 <header>
     <h1>Photoalbum</h1>
 </header>
@@ -6,12 +8,14 @@
 <div id="lightbox">
     <div class="lightbox-content">
         <div class="image-wrapper">
-            <img src="file:///D:/Learning/Web/Portfolio/images/lion-king.jpg"/>
+            <img src="" />
         </div>
         <div>
             <div class="lightbox-button lightbox-arrow-left">&lt;</div>
             <div class="lightbox-button lightbox-arrow-right">&gt;</div>
         </div>
     </div>
-    <div class="lightbox-button lightbox-close">×</div>
+    <div class="lightbox-close">×</div>
 </div>
+
+<script src="../client-side/bundles/photos.bundle.js"></script>

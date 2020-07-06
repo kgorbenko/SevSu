@@ -1,3 +1,5 @@
+<link href="../client-side/bundles/test.bundle.css" rel="stylesheet" type="text/css" />
+
 <section>
     <header>
         <h1>Engeneering graphics test</h1>
@@ -6,24 +8,26 @@
     <form action="someaction" method="POST">
         <ol>
             <li>
-                <p>123</p>
-                <label class="inline" for="1">123</label>
-                <input checked="true" id="1" name="question1" type="radio" value="1" />
-                <br/>
-                <label class="inline" for="2">123</label>
-                <input id="2" name="question1" type="radio" value="2" />
-                <br/>
+                <label>От чего зависит величина стрелок размерной линии?</label>
+                <div class="radio-holder">
+                    <label>От длины размерной линии</label>
+                    <input id="1" name="question1" type="radio" value="1" />
+                </div>
+                <div class="radio-holder">
+                    <label>От толщины линии контура изображения</label>
+                    <input id="2" name="question1" type="radio" value="2" />
+                </div>
             </li>
             <li>
-                <label for="select-input">123</label>
-                <select id="select-input" name="question2">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                <label for="select-input">Какое назначение имеет тонкая сплошная линия?</label>
+                <select id="select-input" name="question2" class="field-long">
+                    <option value="1">Линии разграничения вида и разреза.</option>
+                    <option value="2">Линии сечений.</option>
+                    <option value="3">Линии штриховки.</option>
                 </select>
             </li>
             <li>
-                <label for="question3">nfhfgh</label>
+                <label for="question3">Какие размеры являются рабочими?</label>
                 <textarea class="field-long" id="question3" name="question3"></textarea>
             </li>
             <li>
@@ -53,3 +57,4 @@
     </form>
 </section>
 
+<script src="../client-side/bundles/test.bundle.js"></script>

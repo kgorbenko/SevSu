@@ -1,4 +1,6 @@
 @import "shared";
+@import "~tooltipster/dist/css/tooltipster.bundle.min.css";
+@import "~tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css";
 
 $elementMargin: 5px;
 $invalidInputColor: #cb2431;
@@ -8,14 +10,32 @@ form {
         margin: 10px auto;
         max-width: 400px;
         font-weight: 100;
+        padding: 2px;
 
         li {
             display: block;
             list-style: none;
             padding: 0 5px;
 
+            .radio-holder {
+
+                label {
+                    display: inline-block;
+                    font-weight: normal;
+                }
+
+                input[type=radio] {
+                    display: inline-block;
+
+                    &:focus {
+                        box-shadow: 1px 1px 1px 2px #308DE0;
+                    }
+                }
+            }
+
             label {
                 display: block;
+                font-weight: bold;
                 text-align: center;
                 margin: $elementMargin 0;
                 padding: 5px;
@@ -27,6 +47,7 @@ form {
             }
 
             %form-item {
+                box-sizing: border-box;
                 border: solid 1px #dedede;
                 border-radius: $defaultBorderRadius;
                 outline: none;
@@ -44,8 +65,6 @@ form {
 
             select {
                 @extend %form-item;
-
-                width: 100%;
             }
 
             textarea {
@@ -72,12 +91,8 @@ form {
                 }
             }
 
-            .inline {
-                display: inline-block;
-            }
-
             .field-long {
-                width: 100%;
+                width: 99%;
             }
         }
     }

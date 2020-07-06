@@ -1,3 +1,5 @@
+<link href="../client-side/bundles/contact.bundle.css" rel="stylesheet" type="text/css" />
+
 <section>
     <header>
         <h1>Mail Me!</h1>
@@ -37,3 +39,4 @@
     </form>
 </section>
 
+<script src="../client-side/bundles/contact.bundle.js"></script>

@@ -1,3 +1,14 @@
+%lightbox-control {
+    font-size: 60px;
+    line-height: 40px;
+    color: white;
+    cursor: pointer;
+
+    &:hover {
+        text-shadow: 0 0 10px white;
+    }
+}
+
 #lightbox {
     position: fixed;
     z-index: 1;
@@ -28,10 +39,7 @@
         }
 
         .lightbox-button {
-            font-size: 60px;
-            line-height: 40px;
-            color: white;
-            cursor: pointer;
+            @extend %lightbox-control;
 
             &.lightbox-arrow-left {
                 float: left;
@@ -40,15 +48,11 @@
             &.lightbox-arrow-right {
                 float: right;
             }
-
-            &:hover {
-                text-shadow: 0 0 10px white;
-            }
         }
     }
 
     .lightbox-close {
-        @extend .lightbox-button;
+        @extend %lightbox-control;
 
         position: fixed;
         top: 5%;

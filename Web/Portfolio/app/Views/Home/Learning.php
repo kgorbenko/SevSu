@@ -1,3 +1,5 @@
+<link href="../client-side/bundles/learning.bundle.css" rel="stylesheet" type="text/css" />
+
 <section>
     <header>
         <h1>Disciplines</h1>
@@ -55,3 +57,4 @@
     </table>
 </section>
 
+<script src="../client-side/bundles/learning.bundle.js"></script>

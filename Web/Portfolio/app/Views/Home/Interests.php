@@ -1,3 +1,5 @@
+<link href="../client-side/bundles/interests.bundle.css" rel="stylesheet" type="text/css" />
+
 <header>
     <h1>My interests</h1>
 </header>
@@ -41,3 +43,5 @@
         </div>
     </div>
 </div>
+
+<script src="../client-side/bundles/interests.bundle.js"></script>
