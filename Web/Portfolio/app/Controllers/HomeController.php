@@ -29,4 +29,8 @@ class HomeController
     public function learning() {
         ViewRenderer::render("Views/Home/Learning.php", "Learning");
     }
+
+    public function photos() {
+        ViewRenderer::render("Views/Home/Photos.php", "Photo album");
+    }
 }
