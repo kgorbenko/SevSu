@@ -37,4 +37,8 @@ class HomeController
     public function contact() {
         ViewRenderer::render("Views/Home/Contact.php", "Contact me");
     }
+
+    public function test() {
+        ViewRenderer::render("Views/Home/Test.php", "Test");
+    }
 }
