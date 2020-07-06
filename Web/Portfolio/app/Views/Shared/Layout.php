@@ -23,7 +23,9 @@
         </nav>
         <img src="../client-side/images/portrait.jpg" class="portrait" alt="Portrait picture in on the back. Don't mind it" />
 
-        <?php include($viewName); ?>
+        <div class="main-content">
+            <?php include($viewName); ?>
+        </div>
 
         <footer class="full-width">
             <section>

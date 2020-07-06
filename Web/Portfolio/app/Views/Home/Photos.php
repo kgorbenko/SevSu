@@ -1,9 +1,8 @@
-<div class="main-content">
-    <header>
-        <h1>Photoalbum</h1>
-    </header>
-    <div class="photo-wrapper full-width"></div>
-</div>
+<header>
+    <h1>Photoalbum</h1>
+</header>
+<div class="photo-wrapper full-width"></div>
+
 <div id="lightbox">
     <div class="lightbox-content">
         <div class="image-wrapper">
