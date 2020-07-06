@@ -4,7 +4,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 #
-Web/Portfolio/js/*
+Web/Portfolio/app/client-side/bundles/*
 Web/Portfolio/haml/*.html
 D3 practice/bundles/*
 
