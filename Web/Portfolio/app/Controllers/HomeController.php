@@ -33,4 +33,8 @@ class HomeController
     public function photos() {
         ViewRenderer::render("Views/Home/Photos.php", "Photo album");
     }
+
+    public function contact() {
+        ViewRenderer::render("Views/Home/Contact.php", "Contact me");
+    }
 }
