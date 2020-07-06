@@ -21,4 +21,8 @@ class HomeController
         $viewModel = new AboutViewModel($photos);
         ViewRenderer::render("Views/Home/About.php", "About me", $viewModel);
     }
+
+    public function interests() {
+        ViewRenderer::render("Views/Home/Interests.php", "My interests");
+    }
 }
