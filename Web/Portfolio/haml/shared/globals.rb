@@ -16,14 +16,4 @@ Integer sed ex vel erat dictum finibus sit amet id mi. Duis lorem neque,
 faucibus ut laoreet eu, sodales in orci. Nam mattis mauris sit amet lectus
 condimentum, in maximus massa ultrices. Fusce pharetra accumsan dui sed bibendum."
     end
-    def about_page_photos()
-        [
-            { src: "../images/bridge.jpg", alt: "Bridge" },
-            { src: "../images/green.jpeg", alt: "Greens" },
-            { src: "../images/statue.jpg", alt: "Statue" },
-            { src: "../images/cock.jpg", alt:"Cock" },
-            { src: "../images/city.jpg", alt:"City" },
-            { src: "../images/fire.jpg", alt:"Fire" }
-        ]
-    end
 end
