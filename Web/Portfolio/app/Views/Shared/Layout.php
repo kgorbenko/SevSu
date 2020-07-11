@@ -15,7 +15,7 @@
                 <li><a href="/Home/Interests">My interests</a></li>
                 <li><a href="/Home/Learning">Learning</a></li>
                 <li><a href="/Home/Photos">Photos</a></li>
-                <li><a href="/Home/Contact">Contact</a></li>
+                <li><a href="/Contact/Index">Contact</a></li>
                 <li><a href="/Home/Test">Test</a></li>
                 <li><a href="/Home/History">History</a></li>
                 <li><span id="time"></span><br/><span id="date"></span></li>
