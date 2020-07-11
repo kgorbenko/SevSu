@@ -5,7 +5,7 @@
         <h1>Disciplines</h1>
     </header>
     <p>Institute</p>
-    <p>Kafedra</p>
+    <p>Department</p>
     <table>
         <tr>
             <td colspan="9">Disciplines by semesters</td>
@@ -25,7 +25,7 @@
             <th scope="row">Second</th>
             <td>Math</td>
             <td>AIP</td>
-            <td>PHysics</td>
+            <td>Physics</td>
             <td>Philosophy</td>
             <td>Rights</td>
             <td>Economics</td>

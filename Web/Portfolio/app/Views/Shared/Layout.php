@@ -9,7 +9,7 @@
     <body>
         <nav>
             <ul>
-                <li><span>Web lab1</span></li>
+                <li><span>Web</span></li>
                 <li><a href="/Home/Index">Home</a></li>
                 <li><a href="/Home/About">About</a></li>
                 <li><a href="/Home/Interests">My interests</a></li>
