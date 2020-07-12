@@ -1,4 +1,4 @@
-import { createElementWithClass, createElementWithInnerHTML, createElementWithId } from '../utils/dom';
+import { createElementWithClass, createElementWithInnerHTML, createElementWithId } from '../../utils/dom';
 import { formatDate } from '../clock/clock';
 
 const datepickerId = 'datepicker';

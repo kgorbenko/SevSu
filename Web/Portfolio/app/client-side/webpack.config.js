@@ -4,14 +4,15 @@ const miniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
     mode: 'none',
     entry: {
-        index: './src/pages/index.ts',
-        about: './src/pages/about.ts',
-        interests: './src/pages/interests.ts',
-        learning: './src/pages/learning.ts',
-        photos: './src/pages/photos.ts',
-        contact: './src/pages/contact.ts',
-        test: './src/pages/test.ts',
-        history: './src/pages/history.ts'
+        layout: './src/shared/layout/layout.ts',
+        index: './src/home/index.ts',
+        about: './src/home/about.ts',
+        interests: './src/home/interests.ts',
+        learning: './src/home/learning.ts',
+        photos: './src/home/photos.ts',
+        contact: './src/home/contact.ts',
+        test: './src/home/test.ts',
+        history: './src/home/history.ts'
     },
     module: {
         rules: [

@@ -1,9 +1,9 @@
 import * as $ from 'jquery';
 
-import { getGlobalHistory, getSessionHistory, visitPage } from '../storage/storage';
-import { updateClockOnInterval } from "../clock/clock";
+import { getGlobalHistory, getSessionHistory, visitPage } from '../shared/components/storage/storage';
+import { updateClockOnInterval } from "../shared/components/clock/clock";
 
-import '../scss/history.scss';
+import './history.scss';
 
 $(() => {
     updateClockOnInterval(document.getElementById('date'), document.getElementById('time'), 1000);

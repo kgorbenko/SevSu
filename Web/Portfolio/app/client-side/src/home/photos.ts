@@ -1,12 +1,12 @@
 import * as $ from 'jquery';
 
-import { updateClockOnInterval } from '../clock/clock';
-import { createElement } from '../utils/dom';
-import addLightbox from '../lightbox/lightbox';
-import { visitPage } from '../storage/storage';
+import { updateClockOnInterval } from '../shared/components/clock/clock';
+import { createElement } from '../shared/utils/dom';
+import addLightbox from '../shared/components/lightbox/lightbox';
+import { visitPage } from '../shared/components/storage/storage';
 
-import '../scss/photos.scss';
-import '../lightbox/lightbox.scss';
+import './photos.scss';
+import '../shared/components/lightbox/lightbox.scss';
 
 $(() => {
     visitPage('photos');

@@ -5,6 +5,7 @@
         <title><?=$title?></title>
         <meta content="width=device-width" name="viewport" />
         <meta content="no-cache" http-equiv="Cache-Control" />
+        <link href="../client-side/bundles/layout.bundle.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
         <nav>
@@ -45,5 +46,6 @@
                 </p>
             </section>
         </footer>
+        <script src="../client-side/bundles/layout.bundle.js" >
     </body>
 </html>

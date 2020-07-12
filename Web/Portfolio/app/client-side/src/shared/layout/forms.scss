@@ -1,9 +1,9 @@
-@import "shared";
-@import "~tooltipster/dist/css/tooltipster.bundle.min.css";
-@import "~tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css";
+@import "../../../node_modules/tooltipster/dist/css/tooltipster.bundle.min.css";
+@import "../../../node_modules/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css";
 
 $elementMargin: 5px;
 $invalidInputColor: #cb2431;
+$defaultBorderRadius: 5px;
 
 form {
     ol {

@@ -1,9 +1,9 @@
 import * as $ from 'jquery';
 
-import { updateClockOnInterval } from '../clock/clock';
-import { visitPage } from '../storage/storage';
+import { updateClockOnInterval } from '../shared/components/clock/clock';
+import { visitPage } from '../shared/components/storage/storage';
 
-import '../scss/learning.scss';
+import './learning.scss';
 
 $(() => {
     visitPage('learning');

@@ -1,27 +1,21 @@
 import * as $ from 'jquery';
 
-import { updateClockOnInterval } from '../clock/clock';
-import { FormComponent, NameValidator, FieldFilledValidator, PhoneNumberValidator, DetailedAnswerValidator, setFieldsForValidation } from '../forms/forms';
-import { visitPage } from '../storage/storage';
+import { updateClockOnInterval } from '../shared/components/clock/clock';
+import { FormComponent, NameValidator, FieldFilledValidator, PhoneNumberValidator, setFieldsForValidation, DateValidator } from '../shared/components/forms/forms';
+import datepicker from '../shared/components/datepicker/datepicker';
+import { visitPage } from '../shared/components/storage/storage';
 
-import '../scss/test.scss';
-import '../datepicker/datepicker.scss';
+import './contact.scss';
+import '../shared/components/datepicker/datepicker.scss';
 
 $(() => {
-    visitPage('test');
+    visitPage('contact');
     updateClockOnInterval(document.getElementById('date'), document.getElementById('time'), 1000);
+    datepicker();
     setFieldsForValidation(fields, document.forms.item(0));
 });
 
 const fields: FormComponent[] = [
-    new FormComponent(
-        'question3',
-        [
-            new FieldFilledValidator(),
-            new DetailedAnswerValidator()
-        ],
-        'Field should be filled and should contain less than 30 words.'
-    ),
     new FormComponent(
         'full-name-input',
         [
@@ -50,4 +44,11 @@ const fields: FormComponent[] = [
         ],
         'Message field should be filled.'
     ),
+    new FormComponent(
+        'datepicker-input',
+        [
+            new DateValidator()
+        ],
+        'Click on field to choose date.'
+    )
 ];

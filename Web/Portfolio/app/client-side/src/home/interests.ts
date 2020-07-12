@@ -1,11 +1,11 @@
 import * as $ from 'jquery';
 
-import { updateClockOnInterval } from '../clock/clock';
-import { visitPage } from '../storage/storage';
-import modal from '../modal/modal';
+import { updateClockOnInterval } from '../shared/components/clock/clock';
+import { visitPage } from '../shared/components/storage/storage';
+import modal from '../shared/components/modal/modal';
 
-import '../scss/interests.scss';
-import '../modal/modal.scss';
+import './interests.scss';
+import '../shared/components/modal/modal.scss';
 
 $(() => {
     visitPage('interests');
