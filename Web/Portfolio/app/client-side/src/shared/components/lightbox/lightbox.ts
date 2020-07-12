@@ -9,15 +9,16 @@ const lightboxNextArrow = () => $('.lightbox-arrow-right');
 let currentPhoto;
 let photos;
 
-export default (lightboxPhotosWrapper: Element, photosPaths: string[]) => {
+export default (photosPaths: string[]) => {
     photos = photosPaths;
-    lightboxPhotosWrapper.addEventListener('click', (event) => expandLightbox(event));
+    $('.photo-wrapper img').on('click', (event) => expandLightbox(event));
 
-    window.onclick = (event) => {
-        if (event.target === document.getElementById('lightbox')) {
+    lightbox().on('click', (event) => {
+        if (event.target !== document.querySelector('.lightbox-content') &&
+        event.target !== lightboxNextArrow().get(0) && event.target !== lightboxPrevArrow().get(0)) {
             collapseLightbox();
         }
-    }
+    })
 }
 
 const expandLightbox = (event) => {
