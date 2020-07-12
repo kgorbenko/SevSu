@@ -5,7 +5,7 @@
         <h1>Mail Me!</h1>
     </header>
     <p>All fields are required! Hover over fields to see the additional requirements.</p>
-    <form action="" method="POST">
+    <form action="Contact" method="POST">
         <ol>
             <li>
                 <label for="full-name-input">Full Name</label>
