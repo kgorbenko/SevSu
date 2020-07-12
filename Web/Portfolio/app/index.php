@@ -1,4 +1,6 @@
 <?php
 include "Core/Router.php";
 
-Router::route();
+$request = $_REQUEST;
+$requestMethod = $_SERVER["REQUEST_METHOD"];
+Router::route($request, $requestMethod);
