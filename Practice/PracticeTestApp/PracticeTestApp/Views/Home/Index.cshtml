@@ -5,6 +5,11 @@
     <title>title</title>
 </head>
 <body>
-<h1>@Model.Message</h1>
+
+<span data-bind="text: person().name"></span>
+<br>
+<span data-bind="text: person().age"></span>
+
+<script src="~/static/home/index.bundle.js"></script>
 </body>
 </html>

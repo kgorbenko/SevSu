@@ -1,6 +1,8 @@
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using PracticeTestApp.Filters;
 
@@ -19,10 +21,10 @@ namespace PracticeTestApp {
                 app.UseDeveloperExceptionPage();
             }
 
-            // app.UseStaticFiles(new StaticFileOptions {
-            //                        FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "ClientApp", "bundles")),
-            //                        RequestPath = "/static"
-            //                    });
+            app.UseStaticFiles(new StaticFileOptions {
+                                   FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "ClientApp", "bundles")),
+                                   RequestPath = "/static"
+                               });
             app.UseRouting();
             app.UseEndpoints(endpoints => {
                                  endpoints.MapControllerRoute(name: "default",

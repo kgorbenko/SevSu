@@ -371,4 +371,301 @@ services.AddMvc(options => options.Filters.Add(typeof(InvalidModelStateFilter)))
     \label{fig:binder-error}
 \end{figure}
 
+\section{Клиентское приложение на KnockoutJS}
+
+\subsection{Создание проекта приложения}
+
+\begin{lstlisting}
+cd .\PracticeTestApp\PracticeTestApp\
+md ClientApp
+npm install
+\end{lstlisting}
+
+В папке появится файл \code{package.json}, который описывает проект и его
+зависимости. Добавим в него следующую конфигурацию, включающую фреймворк
+\code{KnockoutJS} и его типизацию для языка \code{TypeScript}. Кроме того,
+добавим в проект \code{Webpack} для сборки клиентских бандлов:
+
+\begin{lstlisting}
+{
+    "name": "practicetestapp",
+    "version": "1.0.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/astro6703/Learning/Practice"
+    },
+    "description": "test app for production practicing purposes",
+    "license": "",
+    ...
+    ...
+  "devDependencies": {
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-config": "^7.5.0",
+    "@types/knockout": "^3.4.67",
+    ...
+  },
+  "dependencies": {
+    "bootstrap": "^4.5.0",
+    "knockout": "^3.5.1"
+  }
+\end{lstlisting}
+
+Для работы языка \code{TypeScript} и \code{Webpack} нужно задать конфигурации:
+
+\begin{lstlisting}
+//tsconfig.json
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es2015",
+    "lib": ["esnext", "dom"],
+    "sourceMap": true,
+    "removeComments": true,
+    "outDir": "./tsc/",
+
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": [
+    "./src/**/*"
+  ]
+}
+//webpack.config.js
+const path = require('path');
+const miniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+    entry: {
+        'home/index': './src/home/index.ts'
+    },
+    module: {
+        rules: [
+            { test: /\.tsx?$/, loader: 'ts-loader', exclude: /node_modules/ },
+            { test: /\.s[ac]ss$/i, use: [ miniCssExtractPlugin.loader, 'css-loader', 'resolve-url-loader', 'sass-loader' ] },
+            { test: /\.(png|jpe?g|gif)/i, loader: 'file-loader', options: { name: '[path][name].[ext]', outputPath: 'images' } },
+        ],
+    },
+    mode: 'development',
+    devtool: 'source-map',
+    resolve: {
+        extensions: [ '.ts' ],
+    },
+    output: {
+        path: path.resolve(__dirname, 'bundles'),
+        filename: '[name].bundle.js',
+    },
+    plugins: [
+        new miniCssExtractPlugin({ filename: "[name].bundle.css" }),
+    ]
+};
+\end{lstlisting}
+
+В файлы, задаваемые в секции \code{entry} конфига \code{Webpack}, будем писать
+программный код.
+
+Для того, чтобы собрать приложение, нужно выполнить следующие команды:
+
+\begin{lstlisting}
+npm install
+npx webpack --config ./webpack.config.js
+\end{lstlisting}
+
+\subsection{Паттерн MVVM}
+
+Паттерн MVVM был создан в Microsoft и использовался при построении архитектуры
+WPF приложений. Он позволяет отделить логику приложения от представления. MVVM
+состоит из 3 компонентов: View (представление), ViewModel (модель
+представления), Model(модель).
+
+\begin{itemize}
+    \item Модель описывает используемые в приложении данные.
+    \item Представление определяет визуальный интерфейс.
+    \item Модель представления связывает модель и представление через механизм
+          привязки данных. Изменение свойства в модели представления должно
+          приводить к такому же изменению в представлении и наоборот.
+\end{itemize}
+
+Фреймворк \code{KnockoutJS} создан как реализация паттерна MVVM.
+
+\subsection{KnockoutJS}
+\subsubsection{\code{observable} объекты}
+
+Чтобы синхронизировать данные между представлением и моделью представления,
+\code{KnockoutJS} использует механизм биндингов, работающий на паттерне
+\code{Observable}: привязки элемента представления к элементу модели
+представления с подпиской на изменения друг друга. Когда изменяется один из этих
+элементов, он автоматически оповещает всех его подписчиков и передает данные о
+всех изменениях.
+
+Это реализуется с помощью объекта \code{observable}. Он создается вызовом
+\code{ko.observable}. \code{Observable} объекты - функции. Вызов функции без
+параметров - чтение, с параметром - запись. Реализовано через функции, а не
+свойства объектов из-за необходимости поддерживать Internet Explorer 6.
+
+Для массивов объектов существует \code{observableArray}. Массивы можно хранить и в
+обычных \code{observable}, но тогда в случае, когда нужно изменить содержание массива
+(например, добавить новый элемент), придется делать это следующим образом:
+
+\begin{lstlisting}
+this.items = ko.observable();
+this.items().push(item);
+\end{lstlisting}
+
+В этом случае изменится не \code{observable} объект, а объект, который он обрамляет и
+оповещения подписчиков не произойдет. В случае с \code{observableArray} этот же код
+будет выглядеть следующим образом: 
+
+\begin{lstlisting}
+this.items = ko.observableArray();
+this.items.push(item);
+\end{lstlisting}
+
+Для того, чтобы это было возможным, \code{observableArray} реализует стандартные
+методы работы над массивами: \code{push}, \code{pop}, \code{shift},
+\code{unshift}, \code{sort}, \code{reverse} и \code{splice}.
+
+Для создаения вычислимых объектов существуют \code{computed} объекты. Они создаются вызовом
+\code{ko.computed} и передачей ему функции вычисления значения этого объекта. Все зависимости
+этой функции от объектов \code{observable} при изменении будут перезапускать вычисление
+этого объекта:
+
+\begin{lstlisting}
+this.composite = ko.computed(() => this.first() + this.second());
+\end{lstlisting}
+
+В этом случае \code{composite} будет вычислен каждый раз, когда \code{first} и \code{second}
+будут изменены.
+
+Также, на изменения отдельных объектов можно подписаться вручную. Это делается с помощью вызова
+функции \code{subscribe} у \code{observable} объекта. Она принимает функцию, которая будет вызвана
+с новым значением каждый раз, когда \code{observable} объект изменится:
+
+\begin{lstlisting}
+const location = ko.observable();
+colation.subscribe(newLocation => webService.getLocationDetails(newLocation));
+\end{lstlisting}
+
+\subsubsection{Привязка данных}
+Для создания привязки \code{KnockoutJS} использует спецификацию HTML5 с использованием атрибутов data-*
+и объявляет свой атрибут \code{data-bind}. Этот атрибут можно указать у объектов в DOM, чтобы привязать
+его свойства к свойствам модели представления:
+
+\begin{lstlisting}
+//index.ts
+import * as ko from 'knockout';
+
+class IndexViewModel {
+    public name: KnockoutObservable<string>;
+    public message: KnockoutObservable<string>
+
+    constructor() {
+        this.name = ko.observable('');
+        this.message = ko.pureComputed(() => `Hello, ${this.name() || 'visitor'}, how are you?`)
+    }
+}
+
+ko.applyBindings(new IndexViewModel());
+
+//Index.cshtml
+<body>
+
+<label for="name">Please, enter your name:</label>
+<input id="name" type="text" data-bind="value: name" />
+<br>
+<span data-bind="text: message"></span>
+
+<script src="~/static/home/index.bundle.js"></script>
+\end{lstlisting}
+
+В этом случае происходит привязка свойства \code{value} HTML инпута к объекту в
+модели представления. Сообщение \code{message} из модели представления
+привязывается к тексту этемента DOM и изменяется каждый раз, когда изменяется
+значение в текстовом поле name (рисунок \ref{fig:binding12}).
+
+\begin{figure}[H]
+    \centering
+    \subfloat[Пустое текстовое поле]{\includegraphics[width=.4\linewidth]{binding1}}
+    \hspace{.15\linewidth}
+    \subfloat[Текстовое поле заполнено]{\includegraphics[width=.4\linewidth]{binding2}}
+    \caption{Пример привязки элементов представления к свойствам модели представления}
+    \label{fig:binding12}
+\end{figure}
+
+Value-биндинг - встроенный в \code{KnockoutJS}, использовать просто любые атрибуты в качестве биндингов
+нельзя, не расширив \code{KnockoutJS} с помощью обработчика биндингов.
+
+Можно создавать биндинги вложенных свойств:
+
+\begin{lstlisting}
+//index.ts
+import * as ko from 'knockout';
+
+interface Person {
+    name: string;
+    age: number;
+}
+
+class IndexViewModel {
+    public person: KnockoutObservable<Person>;
+
+    constructor() {
+        const person = { name: 'Dude', age: 25 };
+        this.person = ko.observable(person);
+    }
+}
+
+ko.applyBindings(new IndexViewModel());
+
+//Index.cshtml
+<span data-bind="text: person().name"></span>
+<br>
+<span data-bind="text: person().age"></span>
+
+<script src="~/static/home/index.bundle.js"></script>
+\end{lstlisting}
+
+Результат привязки изображен на рисунке \code{fig:binding3}:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.4\linewidth]{binding3}
+    \caption{Пример привязки элементов представления к вложенным свойствам модели представления}
+    \label{fig:binding3}
+\end{figure}
+
+\section*{ВЫВОДЫ}
+В ходе практики были изучены open-source фреймворки ASP.NET Core и KnockoutJS для
+веб-разработки, которые отлично работают вместе.
+
+ASP.NET Core - кросс-платформенный фреймворк, написанный на языке C\# и
+реализующий паттерн MVC, но позволяющий отойти от него с помощью гибкой
+конфигурации роутинга. Возможно создание SPA-приложений из-за широкой
+поддержки веб-сервисов. В базовой конфигурации позволяет обрабатывать
+HTTP запросы любых методов с легким получением параметров из адреса и
+из body запроса, встроена валидация получаемой из параметров модели,
+легко создавать API. С дополнительными пакетами доступны средства для
+реализации логирования, авторизации, аутентификации и работы с базами
+данных.
+
+KnockoutJS - фреймворк для фронтенд разработки, реализующий паттерн
+MVVM и с помощью привязки (бандинга) представления к модели представления
+предоставляющий широкие возможности для создания интерактивных приложений.
+Сильно конфигурируемый и глубоко расширяемый: есть возможность расширения
+привязываемых объектов и создания собственных биндингов. Существует
+возможность создания компонентов.
+
+Код, написанный в ходе практики расположен в репозитории по ссылке:
+https://github.com/astro6703/Learning/tree/practice/Practice
+
 \end{document}
