@@ -2,14 +2,13 @@
 
 include "Views/ViewRenderer.php";
 include "ViewModels/Home/AboutViewModel.php";
-include "Model/Repositories/PhotosRepository.php";
 
 class HomeController
 {
     private $photosRepository;
 
-    public function __construct() {
-        $this->photosRepository = new PhotosRepository();
+    public function __construct(IContainer $container) {
+        $this->photosRepository = $container->resolve("IPhotosRepository");
     }
 
     public function index() {
@@ -17,7 +16,7 @@ class HomeController
     }
 
     public function about() {
-        $viewModel = new AboutViewModel($this->photosRepository->getAllPhotos());
+        $viewModel = new AboutViewModel($this->photosRepository->getAll());
         ViewRenderer::render("Views/Home/About.php", "About me", $viewModel);
     }
 

@@ -1,9 +1,9 @@
 <?php
 
+include "IPhotosRepository.php";
 
-class PhotosRepository
-{
-    function getAllPhotos() {
+class PhotosRepository implements IPhotosRepository {
+    function getAll() {
         return array(
             "Bridge" => "../client-side/images/bridge.jpg",
             "Greens" => "../client-side/images/green.jpeg",

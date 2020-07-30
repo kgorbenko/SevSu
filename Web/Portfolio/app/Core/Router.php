@@ -1,5 +1,7 @@
 <?php
 
+include "Container.php";
+
 class Router
 {
     protected static $notFoundStatusCode = 404;
@@ -10,8 +12,7 @@ class Router
         "POST" => "Post"
     );
 
-    static function route($request, $requestMethod)
-    {
+    static function route($request, $requestMethod) {
         $controllerName = self::getControllerName($request);
         $actionName = self::getActionName($request, $requestMethod);
 
@@ -29,7 +30,8 @@ class Router
         }
 
         $controllerClassName = ucfirst($controllerName) . 'Controller';
-        $controller = new $controllerClassName;
+        $container = Container::getInstance();
+        $controller = new $controllerClassName($container);
 
         if (method_exists($controller, $actionName)) {
             $controller->$actionName();
