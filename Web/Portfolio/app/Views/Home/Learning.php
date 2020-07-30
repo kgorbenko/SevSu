@@ -57,4 +57,4 @@
     </table>
 </section>
 
-<script src="../client-side/bundles/home/earning.bundle.js"></script>
+<script src="../client-side/bundles/home/learning.bundle.js"></script>
