@@ -1,12 +1,10 @@
 <?php
 
 include "Container.php";
+include "ResponseCodes.php";
 
 class Router
 {
-    protected static $notFoundStatusCode = 404;
-    protected static $notAllowedMethodStatusCode = 405;
-
     protected static $actionPrefixesByMethod = array(
         "GET" => "",
         "POST" => "Post"
@@ -17,7 +15,7 @@ class Router
         $actionName = self::getActionName($request, $requestMethod);
 
         if ($requestMethod != "GET" && $requestMethod != "POST") {
-            http_response_code(self::$notAllowedMethodStatusCode);
+            http_response_code(ResponseCodes::$notAllowedMethodStatusCode);
             die();
         }
 
@@ -25,7 +23,7 @@ class Router
         if (file_exists($controllerFileName)) {
             include $controllerFileName;
         } else {
-            http_response_code(self::$notFoundStatusCode);
+            http_response_code(ResponseCodes::$notFoundStatusCode);
             die();
         }
 
@@ -36,7 +34,7 @@ class Router
         if (method_exists($controller, $actionName)) {
             $controller->$actionName();
         } else {
-            http_response_code(self::$notFoundStatusCode);
+            http_response_code(ResponseCodes::$notFoundStatusCode);
             die();
         }
     }
