@@ -15,6 +15,10 @@ class Router
         $controllerName = self::getControllerName($request);
         $actionName = self::getActionName($request, $requestMethod);
 
+        if ($requestMethod != "GET" && $requestMethod != "POST") {
+            http_response_code(self::$notAllowedMethodStatusCode);
+            die();
+        }
 
         $controllerFileName = "Controllers/" . $controllerName . 'Controller.php';
         if (file_exists($controllerFileName)) {
