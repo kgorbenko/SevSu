@@ -1,4 +1,4 @@
-<link href="../client-side/bundles/learning.bundle.css" rel="stylesheet" type="text/css" />
+<link href="../client-side/bundles/home/learning.bundle.css" rel="stylesheet" type="text/css" />
 
 <section>
     <header>
@@ -57,4 +57,4 @@
     </table>
 </section>
 
-<script src="../client-side/bundles/learning.bundle.js"></script>
+<script src="../client-side/bundles/home/earning.bundle.js"></script>

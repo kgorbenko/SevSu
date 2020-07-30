@@ -1,4 +1,4 @@
-<link href="../client-side/bundles/about.bundle.css" rel="stylesheet" type="text/css" />
+<link href="../client-side/bundles/home/about.bundle.css" rel="stylesheet" type="text/css" />
 
 <header>
     <h1>Autobiography</h1>
@@ -23,4 +23,4 @@
     </div>
 </section>
 
-<script src="../client-side/bundles/about.bundle.js"></script>
+<script src="../client-side/bundles/home/about.bundle.js"></script>

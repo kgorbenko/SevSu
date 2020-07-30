@@ -1,4 +1,4 @@
-<link href="../client-side/bundles/contact.bundle.css" rel="stylesheet" type="text/css" />
+<link href="../client-side/bundles/contact/index.bundle.css" rel="stylesheet" type="text/css" />
 
 <section>
     <header>
@@ -39,4 +39,4 @@
     </form>
 </section>
 
-<script src="../client-side/bundles/contact.bundle.js"></script>
+<script src="../client-side/bundles/contact/index.bundle.js"></script>

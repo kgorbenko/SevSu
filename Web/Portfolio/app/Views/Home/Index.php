@@ -1,4 +1,4 @@
-<link href="../client-side/bundles/index.bundle.css" rel="stylesheet" type="text/css" />
+<link href="../client-side/bundles/home/index.bundle.css" rel="stylesheet" type="text/css" />
 
 <header><h1>Portfolio</h1></header>
 <section>
@@ -9,4 +9,4 @@
     <header><h2>NEXT CHAPTER</h2></header>
 </section>
 
-<script src="../client-side/bundles/index.bundle.js"></script>
+<script src="../client-side/bundles/home/index.bundle.js"></script>

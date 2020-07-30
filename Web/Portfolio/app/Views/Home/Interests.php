@@ -1,4 +1,4 @@
-<link href="../client-side/bundles/interests.bundle.css" rel="stylesheet" type="text/css" />
+<link href="../client-side/bundles/home/interests.bundle.css" rel="stylesheet" type="text/css" />
 
 <header>
     <h1>My interests</h1>
@@ -44,4 +44,4 @@
     </div>
 </div>
 
-<script src="../client-side/bundles/interests.bundle.js"></script>
+<script src="../client-side/bundles/home/interests.bundle.js"></script>

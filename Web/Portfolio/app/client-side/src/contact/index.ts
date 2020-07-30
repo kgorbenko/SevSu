@@ -5,7 +5,7 @@ import { FormComponent, NameValidator, FieldFilledValidator, PhoneNumberValidato
 import datepicker from '../shared/components/datepicker/datepicker';
 import { visitPage } from '../shared/components/storage/storage';
 
-import './contact.scss';
+import './index.scss';
 import '../shared/components/datepicker/datepicker.scss';
 
 $(() => {

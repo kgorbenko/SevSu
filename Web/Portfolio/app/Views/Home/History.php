@@ -1,4 +1,4 @@
-<link href="../client-side/bundles/history.bundle.css" rel="stylesheet" type="text/css" />
+<link href="../client-side/bundles/home/history.bundle.css" rel="stylesheet" type="text/css" />
 
 <header>
     <h1>History</h1>
@@ -88,4 +88,4 @@
     </table>
 </section>
 
-<script src="../client-side/bundles/history.bundle.js"></script>
+<script src="../client-side/bundles/home/history.bundle.js"></script>

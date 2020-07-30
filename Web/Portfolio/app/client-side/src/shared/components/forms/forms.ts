@@ -39,7 +39,7 @@ export class DetailedAnswerValidator implements FormValidator {
 export class DateValidator implements FormValidator {
     errorMessage = 'Date was not in correct format';
     validate = (value: string) : Boolean => {
-        const pattern = /^\d{1,2}\.\d{1,2}\.\d{4}, [а-яА-Я]+$/;
+        const pattern = /^\d{1,2}\.\d{1,2}\.\d{4}, [а-яА-Яa-zA-Z]+$/;
         return pattern.test(value);
     };
 }

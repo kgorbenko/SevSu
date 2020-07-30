@@ -1,4 +1,4 @@
-<link href="../client-side/bundles/photos.bundle.css" rel="stylesheet" type="text/css" />
+<link href="../client-side/bundles/home/photos.bundle.css" rel="stylesheet" type="text/css" />
 
 <header>
     <h1>Photoalbum</h1>
@@ -18,4 +18,4 @@
     <div class="lightbox-close">×</div>
 </div>
 
-<script src="../client-side/bundles/photos.bundle.js"></script>
+<script src="../client-side/bundles/home/photos.bundle.js"></script>

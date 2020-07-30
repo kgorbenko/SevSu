@@ -1,4 +1,4 @@
-<link href="../client-side/bundles/test.bundle.css" rel="stylesheet" type="text/css" />
+<link href="../client-side/bundles/home/test.bundle.css" rel="stylesheet" type="text/css" />
 
 <section>
     <header>
@@ -57,4 +57,4 @@
     </form>
 </section>
 
-<script src="../client-side/bundles/test.bundle.js"></script>
+<script src="../client-side/bundles/home/test.bundle.js"></script>
