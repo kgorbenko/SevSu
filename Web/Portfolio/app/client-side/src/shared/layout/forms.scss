@@ -1,0 +1,99 @@
+@import "../../../node_modules/tooltipster/dist/css/tooltipster.bundle.min.css";
+@import "../../../node_modules/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css";
+
+$elementMargin: 5px;
+$invalidInputColor: #cb2431;
+$defaultBorderRadius: 5px;
+
+form {
+    ol {
+        margin: 10px auto;
+        max-width: 400px;
+        font-weight: 100;
+        padding: 2px;
+
+        li {
+            display: block;
+            list-style: none;
+            padding: 0 5px;
+
+            .radio-holder {
+
+                label {
+                    display: inline-block;
+                    font-weight: normal;
+                }
+
+                input[type=radio] {
+                    display: inline-block;
+
+                    &:focus {
+                        box-shadow: 1px 1px 1px 2px #308DE0;
+                    }
+                }
+            }
+
+            label {
+                display: block;
+                font-weight: bold;
+                text-align: center;
+                margin: $elementMargin 0;
+                padding: 5px;
+            }
+
+            .error-messages {
+                color: $invalidInputColor;
+                margin-bottom: 5px;
+            }
+
+            %form-item {
+                box-sizing: border-box;
+                border: solid 1px #dedede;
+                border-radius: $defaultBorderRadius;
+                outline: none;
+                margin: $elementMargin 0;
+                padding: 5px;
+
+                &:focus {
+                    box-shadow: 0 0 0 2px #308DE0;
+                }
+
+                &.validation-failed {
+                    box-shadow: 0 0 0 2px $invalidInputColor;
+                }
+            }
+
+            select {
+                @extend %form-item;
+            }
+
+            textarea {
+                @extend %form-item;
+
+                height: 100px;
+                resize: vertical;
+            }
+
+            input {
+                @extend %form-item;
+
+                &[type=submit] {
+                    color: white;
+                    background: #4B99AD;
+                    border: none;
+                    border-radius: $defaultBorderRadius;
+                    padding: 7px 15px;
+
+                    &:hover {
+                        background: #4691A4;
+                        box-shadow: none;
+                    }
+                }
+            }
+
+            .field-long {
+                width: 99%;
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+#interests {
+    .interests {
+        list-style: none;
+        display: none;
+    }
+
+    .contents {
+        display: block;
+        color: black;
+        text-decoration: underline;
+
+        &.contents:hover {
+            color: #bfbfbf;
+            cursor: pointer;
+        }
+    }
+}

@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "lib": ["esnext", "dom"],
+    "module": "es2015",
+    "sourceMap": true,
+    "outDir": "../js",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+  },
+  "files": [
+    "./home/photos.ts",
+    "./home/interests.ts",
+    "./home/contact.ts",
+    "./home/test.ts",
+    "./home/index.ts",
+    "./home/about.ts",
+    "./home/learning.ts"
+  ]
+}
