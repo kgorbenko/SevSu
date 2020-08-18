@@ -24,7 +24,7 @@
             </li>
             <li>
                 <label for="message-input">Your Message</label>
-                <textarea class="field-long" id="message-input" name="field4"></textarea>
+                <textarea class="field-long" id="message-input" name="message"></textarea>
             </li>
             <li>
                 <label for="datepicker-input">Date</label>

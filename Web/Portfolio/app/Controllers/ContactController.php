@@ -1,6 +1,7 @@
 <?php
 
 include "Views/ViewRenderer.php";
+include "Validators/ContactRequestValidator.php";
 
 class ContactController
 {
@@ -11,6 +12,8 @@ class ContactController
     }
 
     public function contactPost() {
+        $validator = new ContactRequestValidator($_POST);
+        $validator->validate();
         ViewRenderer::render("Views/Contact/Contact.php", "Contact me", $_POST);
     }
 }
