@@ -6,13 +6,7 @@
     </header>
     <p>All fields are required! Hover over fields to see the additional requirements.</p>
 
-    <?php if (!$viewModel->isValid) {
-        echo("<ul>");
-        foreach (ViewHelper::normalizeErrors($viewModel->errors) as $error) {
-            echo("<li>$error</li>");
-        }
-        echo("</ul>");
-    }?>
+    <?php ViewHelper::writeValidationErrorsList($viewModel->errors); ?>
 
     <form action="Contact" method="POST">
         <ol>

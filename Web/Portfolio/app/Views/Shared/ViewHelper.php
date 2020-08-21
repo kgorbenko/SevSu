@@ -12,4 +12,12 @@ class ViewHelper {
 
         return $result;
     }
+
+    public static function writeValidationErrorsList($errors) {
+        echo("<ul>");
+        foreach (ViewHelper::normalizeErrors($errors) as $error) {
+            echo("<li>$error</li>");
+        }
+        echo("</ul>");
+    }
 }
