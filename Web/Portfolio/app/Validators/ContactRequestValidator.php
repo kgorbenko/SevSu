@@ -1,16 +1,12 @@
 <?php
 
+include "BaseRequestValidator.php";
 include "Valitron/Validator.php";
 include "ValidationResult.php";
 
-class ContactRequestValidator {
-    private array $post;
-
+class ContactRequestValidator extends BaseRequestValidator {
     public function __construct($post) {
-        if (empty($post)) {
-            throw new InvalidArgumentException('$post');
-        }
-        $this->post = $post;
+        parent::__construct($post);
     }
 
     public function validate() {
