@@ -1,9 +1,10 @@
 <?php
 
-include "Validator.php";
+include "Valitron/Validator.php";
+include "ValidationResult.php";
 
 class ContactRequestValidator {
-    private $post;
+    private array $post;
 
     public function __construct($post) {
         if (empty($post)) {
@@ -13,15 +14,16 @@ class ContactRequestValidator {
     }
 
     public function validate() {
-        $validation = new Validation();
-        $validation->name('full-name')->value($this->post['full-name'])->pattern('text')->required();
-        $validation->name('email')->value($this->post['email'])->pattern('email')->required();
-        $validation->name('phone')->value($this->post['phone'])->pattern('tel')->required();
-        $validation->name('message')->value($this->post['message'])->pattern('text');
-        $validation->name('date')->value($this->post['date'])->pattern('date_full_day')->required();
+        $v = new Validator($this->post);
+        $v->rule('required', ['Name', 'Email', 'Phone', 'Message', 'Date']);
+        $v->rule('regex', 'Name', '/[A-Za-z]+ [A-Za-z]+ [A-Za-z]+/');
+        $v->rule('email', 'Email');
+        $v->rule('regex', 'Phone', '/^[+][7|3]\d{9,11}$/    ');
+        $v->rule('dateFormat', 'Date', 'd.m.Y');
 
-        if (!$validation->isSuccess()) {
-            http_response_code(ResponseCodes::$badRequestStatusCode);
-        }
+        $isValid = $v->validate();
+        $errors = $v->errors();
+
+        return new ValidationResult($isValid, $errors);
     }
 }
