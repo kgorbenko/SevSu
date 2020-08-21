@@ -2,7 +2,9 @@
 
 include "Views/ViewRenderer.php";
 include "Validators/TestRequestValidator.php";
+include "Validators/TestRequestVerification.php";
 include "ViewModels/Shared/ValidationViewModel.php";
+include "ViewModels/Test/SuccessfulTestViewModel.php";
 
 class TestController {
     public function __construct(IContainer $container) {}
@@ -17,7 +19,9 @@ class TestController {
         $validationResult = $validator->validate();
 
         if ($validationResult->isValid) {
-            ViewRenderer::render("Views/Test/Success.php", "Test");
+            $testVerification = new TestRequestVerification($_POST);
+            $viewModel = new SuccessfulTestViewModel($testVerification->verify());
+            ViewRenderer::render("Views/Test/Success.php", "Test", $viewModel);
         }
 
         $viewModel = new ValidationViewModel($validationResult->isValid, $validationResult->errors);
