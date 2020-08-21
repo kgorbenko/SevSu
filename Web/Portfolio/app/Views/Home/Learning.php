@@ -4,8 +4,8 @@
     <header>
         <h1>Disciplines</h1>
     </header>
-    <p>Institute</p>
-    <p>Department</p>
+    <h2>Институт информационных технологий и управления в технических системах</h2>
+    <h2>Информационные системы и технологии</h2>
     <table>
         <tr>
             <td colspan="9">Disciplines by semesters</td>
