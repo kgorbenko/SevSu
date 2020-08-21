@@ -1,27 +1,26 @@
 <?php
 
 include "Views/ViewRenderer.php";
-include "Validators/ContactRequestValidator.php";
+include "Validators/TestRequestValidator.php";
 include "ViewModels/Shared/ValidationViewModel.php";
 
-class ContactController
-{
+class TestController {
     public function __construct(IContainer $container) {}
 
     public function index() {
         $viewModel = new ValidationViewModel(true, array());
-        ViewRenderer::render("Views/Contact/Index.php", "Contact me", $viewModel);
+        ViewRenderer::render("Views/Test/Index.php", "Test", $viewModel);
     }
 
-    public function contactPost() {
-        $validator = new ContactRequestValidator($_POST);
+    public function testPost() {
+        $validator = new TestRequestValidator($_POST);
         $validationResult = $validator->validate();
 
         if ($validationResult->isValid) {
-            ViewRenderer::render("Views/Contact/Contact.php", "Contact me");
+            ViewRenderer::render("Views/Test/Success.php", "Test");
         }
 
         $viewModel = new ValidationViewModel($validationResult->isValid, $validationResult->errors);
-        ViewRenderer::render("Views/Contact/Index.php", "Contact me", $viewModel);
+        ViewRenderer::render("Views/Test/Index.php", "Test", $viewModel);
     }
 }

@@ -10,10 +10,11 @@ module.exports = {
         "home/interests": './src/home/interests.ts',
         "home/learning": './src/home/learning.ts',
         "home/photos": './src/home/photos.ts',
-        "home/test": './src/home/test.ts',
         "home/history": './src/home/history.ts',
         "contact/index": './src/contact/index.ts',
-        "contact/contact": "./src/contact/contact.ts"
+        "contact/contact": "./src/contact/contact.ts",
+        "test/index": "./src/test/index.ts",
+        "test/success": "./src/test/success.ts"
     },
     module: {
         rules: [

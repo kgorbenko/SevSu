@@ -4,7 +4,7 @@ import { updateClockOnInterval } from '../shared/components/clock/clock';
 import { FormComponent, NameValidator, FieldFilledValidator, PhoneNumberValidator, DetailedAnswerValidator, setFieldsForValidation } from '../shared/components/forms/forms';
 import { visitPage } from '../shared/components/storage/storage';
 
-import './test.scss';
+import './index.scss';
 import '../shared/components/datepicker/datepicker.scss';
 
 $(() => {

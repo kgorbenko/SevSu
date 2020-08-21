@@ -1,7 +1,7 @@
 <?php
 
 
-class IndexViewModel {
+class ValidationViewModel {
     public bool $isValid;
     public array $errors;
 
