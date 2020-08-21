@@ -18,7 +18,7 @@ class ContactRequestValidator {
         $v->rule('required', ['Name', 'Email', 'Phone', 'Message', 'Date']);
         $v->rule('regex', 'Name', '/[A-Za-z]+ [A-Za-z]+ [A-Za-z]+/');
         $v->rule('email', 'Email');
-        $v->rule('regex', 'Phone', '/^[+][7|3]\d{9,11}$/    ');
+        $v->rule('regex', 'Phone', '/^[+][7|3]\d{9,11}$/');
         $v->rule('dateFormat', 'Date', 'd.m.Y');
 
         $isValid = $v->validate();
