@@ -5,7 +5,7 @@ include "ResponseCodes.php";
 
 class Router
 {
-    protected static $actionPrefixesByMethod = array(
+    protected static $actionPostfixesByMethod = array(
         "GET" => "",
         "POST" => "Post"
     );
@@ -47,9 +47,9 @@ class Router
 
     private static function getActionName($request, $method) {
         if (!array_key_exists("action", $request)) {
-            return "Index" . self::$actionPrefixesByMethod[$method];
+            return "Index" . self::$actionPostfixesByMethod[$method];
         }
 
-        return $request["action"] . self::$actionPrefixesByMethod[$method];
+        return $request["action"] . self::$actionPostfixesByMethod[$method];
     }
 }
