@@ -1,0 +1,724 @@
+\documentclass[a4paper,14pt]{extarticle}
+\usepackage{../../tex-shared/report-layout}
+
+\renewcommand{\mylabnumber}{8}
+\renewcommand{\mylabtitle}{Исследование архитектуры MVC приложения и
+возможностей обработки данных HTML-форм на стороне сервера с использованием
+языка PHP}
+\renewcommand{\mysubject}{Веб-технологии}
+\renewcommand{\mylecturer}{Овчинников А.Л.}
+
+\begin{document}
+\input{../../tex-shared/title-page.tex}
+
+\section{Цель работы}
+Изучить  основы синтаксиса PHP и принципы функционирования MVC приложения на
+стороне сервера. Приобрести практические навыки использования языка PHP для
+генерации HTML-кода и обработки HTML-форм в MVC приложении.
+
+\section{Ход работы}
+\subsection{Реализация маршрутизации}
+
+Для реализации MVC архитектуры создадим маршрутизацию вида\\
+\code{site/controller/action}, для этого используем \code{UrlRewrite} модуль и
+создадим входную точку приложения index.php.
+
+.htaccess:
+\begin{lstlisting}
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/(.*) index.php?controller=$1&action=$2 [QSA]
+\end{lstlisting}
+
+index.php:
+\begin{lstlisting}
+<?php
+include "Core/Router.php";
+
+$request = $_REQUEST;
+$requestMethod = $_SERVER["REQUEST_METHOD"];
+Router::route($request, $requestMethod);
+\end{lstlisting}
+
+Теперь реализуем роутер, с разной мршрутизацией для \code{GET} и \code{POST}
+запросов.
+
+Core/Router.php
+\begin{lstlisting}
+class Router
+{
+    protected static $actionPrefixesByMethod = array(
+        "GET" => "",
+        "POST" => "Post"
+    );
+
+    static function route($request, $requestMethod) {
+        $controllerName = self::getControllerName($request);
+        $actionName = self::getActionName($request, $requestMethod);
+
+        if ($requestMethod != "GET" && $requestMethod != "POST") {
+            http_response_code(ResponseCodes::$notAllowedMethodStatusCode);
+            die();
+        }
+
+        $controllerFileName = "Controllers/" . $controllerName . 'Controller.php';
+        if (file_exists($controllerFileName)) {
+            include $controllerFileName;
+        } else {
+            http_response_code(ResponseCodes::$notFoundStatusCode);
+            die();
+        }
+
+        $controllerClassName = ucfirst($controllerName) . 'Controller';
+        $container = Container::getInstance();
+        $controller = new $controllerClassName($container);
+
+        if (method_exists($controller, $actionName)) {
+            $controller->$actionName();
+        } else {
+            http_response_code(ResponseCodes::$notFoundStatusCode);
+            die();
+        }
+    }
+
+    private static function getControllerName($request) {
+        return array_key_exists("controller", $request)
+            ? $request["controller"]
+            : "Home";
+    }
+
+    private static function getActionName($request, $method) {
+        if (!array_key_exists("action", $request)) {
+            return "Index" . self::$actionPrefixesByMethod[$method];
+        }
+
+        return $request["action"] . self::$actionPrefixesByMethod[$method];
+    }
+}
+\end{lstlisting}
+
+Данный класс, учитывая имена контроллера и экшена из строки параметров,
+создает экземпляр соответствующего контроллера и вызывает соответствующий экшен,
+если они существуют. Иначе, он возвращает 404 ответ.
+
+\subsection{Реализация MVC}
+Архитектура MVC состоит из контроллеров, моделей и представлений. Создадим
+первый контроллер:
+
+Controllers/HomeContoller.php:
+\begin{lstlisting}
+class HomeController
+{
+    private $photosRepository;
+
+    public function __construct(IContainer $container) {
+        $this->photosRepository = $container->resolve("IPhotosRepository");
+    }
+
+    public function index() {
+        ViewRenderer::render("Views/Home/Index.php", "Homepage");
+    }
+
+    public function about() {
+        $viewModel = new AboutViewModel($this->photosRepository->getAll());
+        ViewRenderer::render("Views/Home/About.php", "About me", $viewModel);
+    }
+
+    public function interests() {
+        ViewRenderer::render("Views/Home/Interests.php", "My interests");
+    }
+
+    public function learning() {
+        ViewRenderer::render("Views/Home/Learning.php", "Learning");
+    }
+
+    public function photos() {
+        ViewRenderer::render("Views/Home/Photos.php", "Photo album");
+    }
+
+    public function history() {
+        ViewRenderer::render("Views/Home/History.php", "History");
+    }
+}
+\end{lstlisting}
+
+ViewRenderer.php:
+\begin{lstlisting}
+class ViewRenderer
+{
+    static function render($viewName, $title, $viewModel = NULL, $layout = 'Layout.php')
+    {
+        include "Views/Shared/".$layout;
+    }
+}
+\end{lstlisting}
+
+Views/Shared/Layout.php:
+\begin{lstlisting}
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title><?=$title?></title>
+        <meta content="width=device-width" name="viewport" />
+        <meta content="no-cache" http-equiv="Cache-Control" />
+        <link href="../client-side/bundles/layout.bundle.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><span>Web</span></li>
+                <li><a href="/Home/Index">Home</a></li>
+                <li><a href="/Home/About">About</a></li>
+                <li><a href="/Home/Interests">My interests</a></li>
+                <li><a href="/Home/Learning">Learning</a></li>
+                <li><a href="/Home/Photos">Photos</a></li>
+                <li><a href="/Contact/Index">Contact</a></li>
+                <li><a href="/Test/Index">Test</a></li>
+                <li><a href="/Home/History">History</a></li>
+                <li><span id="time"></span><br/><span id="date"></span></li>
+            </ul>
+        </nav>
+        <img src="../client-side/images/portrait.jpg" class="portrait" alt="Portrait picture in on the back. Don't mind it" />
+
+        <div class="main-content">
+            <?php include($viewName); ?>
+        </div>
+
+        <footer class="full-width">
+            <section>
+                <header><h2>Footer</h2></header>
+                <p>Some useful links here</p>
+                <ul>
+                    <li>Link</li>
+                    <li>Another link</li>
+                </ul>
+                <p>
+                    And some info as well: Nunc eget viverra neque, non ullamcorper odio. Integer dolor sem, ultrices eu
+                    tempus dapibus, sagittis ac lacus. Duis rutrum turpis eu lectus imperdiet, ac
+                    sagittis orci faucibus. Vestibulum volutpat fringilla turpis vehicula lobortis.
+                    Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam posuere
+                    tempor enim, et tempus tellus commodo mattis. Sed sollicitudin mauris vitae
+                    vestibulum malesuada.
+                </p>
+            </section>
+        </footer>
+        <script src="../client-side/bundles/layout.bundle.js" >
+    </body>
+</html>
+\end{lstlisting}
+
+Views/Home/Index.php
+\begin{lstlisting}
+<link href="../client-side/bundles/home/index.bundle.css" rel="stylesheet" type="text/css" />
+
+<header><h1>Portfolio</h1></header>
+<section>
+    <header><h2>About me</h2></header>
+    <p><i>Gorbenko Kirill Nikolaevich.</i></p>
+</section>
+<section>
+    <header><h2>NEXT CHAPTER</h2></header>
+</section>
+
+<script src="../client-side/bundles/home/index.bundle.js"></script>
+\end{lstlisting}
+
+Views/Home/About.php:
+\begin{lstlisting}
+<link href="../client-side/bundles/home/about.bundle.css" rel="stylesheet" type="text/css" />
+
+<header>
+    <h1>Autobiography</h1>
+</header>
+<section>
+    <header>
+        <h1>Section 1</h1>
+    </header>
+    <p>There should be some authobiography</p>
+    <ol>
+        <li>19 years old</li>
+        <li>My parents's son.</li>
+        <li>Dunno</li>
+    </ol>
+    <p>Photos:</p>
+    <div class="photo-wrapper full-width">
+        <?php
+            foreach ($viewModel->photos as $photoName => $path) {
+                echo("<img src='$path' alt='$photoName' />");
+            }
+        ?>
+    </div>
+</section>
+
+<script src="../client-side/bundles/home/about.bundle.js"></script>
+\end{lstlisting}
+
+Views/Home/Interests.php:
+\begin{lstlisting}
+<link href="../client-side/bundles/home/interests.bundle.css" rel="stylesheet" type="text/css" />
+
+<header>
+    <h1>My interests</h1>
+</header>
+<section>
+    <header>
+        <h2>Contents</h2>
+    </header>
+    <button class="modal-button" id="dialog">Modal</button>
+    <ul id="interests">
+        <li class="contents" id="Hobbies">My hobbies</li>
+        <li class="interests" id="Hobbies-expand">
+            <h2>My hobbies</h2>
+            <p>My hobbies are supposed to be here</p>
+        </li>
+        <li class="contents" id="Books">My books</li>
+        <li class="interests" id="Books-expand">
+            <h2>My books</h2>
+            <p>My books are supposed to be here</p>
+        </li>
+        <li class="contents" id="Music">My music</li>
+        <li class="interests" id="Music-expand">
+            <h2>My music</h2>
+            <p>My music is supposed to be here</p>
+        </li>
+        <li class="contents" id="Films">My films</li>
+        <li class="interests" id="Films-expand">
+            <h2>My films</h2>
+            <p>My films are supposed to be here</p>
+        </li>
+    </ul>
+</section>
+
+<div class="modal">
+    <div class="modal-window">
+        <div>
+            <p class="modal-message"></p>
+        </div>
+        <div class="modal-navigation">
+            <button class="modal-button modal-confirm-button"></button>
+            <button class="modal-button modal-cancel-button"></button>
+        </div>
+    </div>
+</div>
+
+<script src="../client-side/bundles/home/interests.bundle.js"></script>
+\end{lstlisting}
+
+Views/Home/Learning.php:
+\begin{lstlisting}
+<link href="../client-side/bundles/home/learning.bundle.css" rel="stylesheet" type="text/css" />
+
+<section>
+    <header>
+        <h1>Disciplines</h1>
+    </header>
+    <h2>Институт информационных технологий и управления в технических системах</h2>
+    <h2>Информационные системы и технологии</h2>
+    <table>
+        <tr>
+            <td colspan="9">Disciplines by semesters</td>
+        </tr>
+        <tr>
+            <th scope="row">First</th>
+            <td>Math</td>
+            <td>AIP</td>
+            <td>Info</td>
+            <td>Hitory</td>
+            <td>Physycs</td>
+            <td>Ecology</td>
+            <td>Descrete Math</td>
+            <td>English</td>
+        </tr>
+        <tr>
+            <th scope="row">Second</th>
+            <td>Math</td>
+            <td>AIP</td>
+            <td>Physics</td>
+            <td>Philosophy</td>
+            <td>Rights</td>
+            <td>Economics</td>
+            <td>BZD</td>
+            <td>English</td>
+        </tr>
+        <tr>
+            <th scope="row">Third</th>
+            <td>Architecture</td>
+            <td>Math</td>
+            <td>Discrete math</td>
+            <td>OOP</td>
+            <td>TEC</td>
+            <td>Economics</td>
+            <td>Graphics</td>
+            <td>English</td>
+        </tr>
+        <tr>
+            <th scope="row">Fourth</th>
+            <td>Electronics</td>
+            <td>Algorithms</td>
+            <td>Probability</td>
+            <td>English</td>
+            <td>System analysis</td>
+            <td>Databases</td>
+            <td>TSPP</td>
+            <td>OS</td>
+        </tr>
+    </table>
+</section>
+
+<script src="../client-side/bundles/home/learning.bundle.js"></script>
+\end{lstlisting}
+
+Views/Home/Photos.php:
+\begin{lstlisting}
+<link href="../client-side/bundles/home/photos.bundle.css" rel="stylesheet" type="text/css" />
+
+<header>
+    <h1>Photoalbum</h1>
+</header>
+<div class="photo-wrapper full-width"></div>
+
+<div id="lightbox">
+    <div class="lightbox-content">
+        <div class="image-wrapper">
+            <img src="" />
+        </div>
+        <div>
+            <div class="lightbox-button lightbox-arrow-left">&lt;</div>
+            <div class="lightbox-button lightbox-arrow-right">&gt;</div>
+        </div>
+    </div>
+    <div class="lightbox-close">×</div>
+</div>
+
+<script src="../client-side/bundles/home/photos.bundle.js"></script>
+\end{lstlisting}
+
+Views/Home/History.php:
+\begin{lstlisting}
+<link href="../client-side/bundles/home/history.bundle.css" rel="stylesheet" type="text/css" />
+
+<header>
+    <h1>History</h1>
+</header>
+<section>
+    <header>
+        <h2>Session history</h2>
+    </header>
+    <table class="session-history">
+        <tr>
+            <th colspan="2">Session history</th>
+        </tr>
+        <tr>
+            <td>Home page</td>
+            <td class="home-page"></td>
+        </tr>
+        <tr>
+            <td>About me</td>
+            <td class="about-page"></td>
+        </tr>
+        <tr>
+            <td>My interests</td>
+            <td class="interests-page"></td>
+        </tr>
+        <tr>
+            <td>Learning</td>
+            <td class="learning-page"></td>
+        </tr>
+        <tr>
+            <td>Photo</td>
+            <td class="photos-page"></td>
+        </tr>
+        <tr>
+            <td>Contact</td>
+            <td class="contact-page"></td>
+        </tr>
+        <tr>
+            <td>Test</td>
+            <td class="test-page"></td>
+        </tr>
+        <tr>
+            <td>History</td>
+            <td class="history-page"></td>
+        </tr>
+    </table>
+</section>
+<section>
+    <header>
+        <h2>Day History</h2>
+    </header>
+    <table class="global-history">
+        <tr>
+            <th colspan="2">All-time history</th>
+        </tr>
+        <tr>
+            <td>Home page</td>
+            <td class="home-page"></td>
+        </tr>
+        <tr>
+            <td>About me</td>
+            <td class="about-page"></td>
+        </tr>
+        <tr>
+            <td>My interests</td>
+            <td class="interests-page"></td>
+        </tr>
+        <tr>
+            <td>Learning</td>
+            <td class="learning-page"></td>
+        </tr>
+        <tr>
+            <td>Photo</td>
+            <td class="photos-page"></td>
+        </tr>
+        <tr>
+            <td>Contact</td>
+            <td class="contact-page"></td>
+        </tr>
+        <tr>
+            <td>Test</td>
+            <td class="test-page"></td>
+        </tr>
+        <tr>
+            <td>History</td>
+            <td class="history-page"></td>
+        </tr>
+    </table>
+</section>
+
+<script src="../client-side/bundles/home/history.bundle.js"></script>
+\end{lstlisting}
+
+\subsection{Реализация валидации форм}
+Создадим контроллер с экшеном, отрисовывающим форму.
+
+Controllers/ContactController.php:
+\begin{lstlisting}
+class ContactController
+{
+    public function __construct(IContainer $container) {}
+
+    public function index() {
+        $viewModel = new ValidationViewModel(true, array());
+        ViewRenderer::render("Views/Contact/Index.php", "Contact me", $viewModel);
+    }
+
+    public function contactPost() {
+        $validator = new ContactRequestValidator($_POST);
+        $validationResult = $validator->validate();
+
+        if ($validationResult->isValid) {
+            ViewRenderer::render("Views/Contact/Success.php", "Contact me");
+            return;
+        }
+
+        $viewModel = new ValidationViewModel($validationResult->isValid, $validationResult->errors);
+        ViewRenderer::render("Views/Contact/Index.php", "Contact me", $viewModel);
+    }
+}
+\end{lstlisting}
+
+Views/Contact/Index.php:
+\begin{lstlisting}
+<link href="../client-side/bundles/contact/index.bundle.css" rel="stylesheet" type="text/css" />
+
+<section>
+    <header>
+        <h1>Mail Me!</h1>
+    </header>
+    <p>All fields are required! Hover over fields to see the additional requirements.</p>
+
+    <?php ViewHelper::writeValidationErrorsList($viewModel->errors); ?>
+
+    <form action="Contact" method="POST">
+        <ol>
+            <li>
+                <label for="full-name-input">Full Name</label>
+                <input class="field-long" id="full-name-input" name="Name" type="text" />
+                <br/>
+            </li>
+            <li>
+                <label for="email-input">Email</label>
+                <input class="field-long" id="email-input" name="Email" type="email" />
+                <br/>
+            </li>
+            <li>
+                <label for="phone-input">Phone number</label>
+                <input class="field-long" id="phone-input" name="Phone" type="text" />
+                <br/>
+            </li>
+            <li>
+                <label for="message-input">Your Message</label>
+                <textarea class="field-long" id="message-input" name="Message"></textarea>
+            </li>
+            <li>
+                <label for="datepicker-input">Date</label>
+                <input class="field-long" id="datepicker-input" name="Date" type="text" />
+                <br/>
+            </li>
+            <li>
+                <input type="submit" value="Submit" />
+                <br/>
+            </li>
+        </ol>
+    </form>
+</section>
+
+<script src="../client-side/bundles/contact/index.bundle.js"></script>
+\end{lstlisting}
+
+Views/Contact/Success.php
+\begin{lstlisting}
+<link href="../client-side/bundles/contact/success.bundle.css" rel="stylesheet" type="text/css" />
+
+<h1>Thank you for your appeal!</h1>
+
+<h2>I will try to contact you back as soon as I can!</h2>
+
+<script src="../client-side/bundles/contact/success.bundle.js"></script>
+\end{lstlisting}
+
+Реализуем валидацию объекта \code{\textdollar\_POST} с помощью библиотеки \code{Valitron}.
+
+Validators/BaseRequestValidator.php:
+\begin{lstlisting}
+abstract class BaseRequestValidator {
+    protected array $post;
+
+    public function __construct($post) {
+        if (empty($post)) {
+            http_response_code(ResponseCodes::$badRequestStatusCode);
+            die();
+        }
+        $this->post = $post;
+    }
+}
+\end{lstlisting}
+
+Validators/ContactRequestValidator.php:
+\begin{lstlisting}
+class ContactRequestValidator extends BaseRequestValidator {
+    public function __construct($post) {
+        parent::__construct($post);
+    }
+
+    public function validate() {
+        $v = new Validator($this->post);
+        $v->rule('required', ['Name', 'Email', 'Phone', 'Message', 'Date']);
+        $v->rule('regex', 'Name', '/[A-Za-z]+ [A-Za-z]+ [A-Za-z]+/');
+        $v->rule('email', 'Email');
+        $v->rule('regex', 'Phone', '/^[+][7|3]\d{9,11}$/');
+        $v->rule('dateFormat', 'Date', 'd.m.Y');
+
+        $isValid = $v->validate();
+        $errors = $v->errors();
+
+        return new ValidationResult($isValid, $errors);
+    }
+}
+\end{lstlisting}
+
+Validators/ValidationResult.php:
+\begin{lstlisting}
+class ValidationResult {
+    public bool $isValid;
+    public array $errors;
+
+    public function __construct(bool $isValid, array $errors) {
+        $this->isValid = $isValid;
+        $this->errors = $errors;
+    }
+}
+\end{lstlisting}
+
+Создадим контроллер, обрабатывающий тест:
+
+Controllers/TestController.php:
+\begin{lstlisting}
+class TestController {
+    public function __construct(IContainer $container) {}
+
+    public function index() {
+        $viewModel = new ValidationViewModel(true, array());
+        ViewRenderer::render("Views/Test/Index.php", "Test", $viewModel);
+    }
+
+    public function testPost() {
+        $validator = new TestRequestValidator($_POST);
+        $validationResult = $validator->validate();
+
+        if ($validationResult->isValid) {
+            $testVerification = new TestRequestVerification($_POST);
+            $viewModel = new SuccessfulTestViewModel($testVerification->verify());
+            ViewRenderer::render("Views/Test/Success.php", "Test", $viewModel);
+            return;
+        }
+
+        $viewModel = new ValidationViewModel($validationResult->isValid, $validationResult->errors);
+        ViewRenderer::render("Views/Test/Index.php", "Test", $viewModel);
+    }
+}
+\end{lstlisting}
+
+Validators/TestRequestValidator.php:
+\begin{lstlisting}
+class TestRequestValidator extends BaseRequestValidator {
+    public function __construct($post) {
+        parent::__construct($post);
+    }
+
+    public function validate() {
+        $v = new Validator($this->post);
+        $v->rule('required', ['Question1', 'Question2', 'Question3', 'Name', 'Email' ]);
+        $v->rule('integer', 'Question1')->rule('in', 'Question1', [ 1, 2 ]);
+        $v->rule('integer', 'Question2')->rule('in', 'Question2', [ 1, 2, 3 ]);
+        $v->rule('regex', 'Name', '/[A-Za-z]+ [A-Za-z]+ [A-Za-z]+/');
+        $v->rule('email', 'Email');
+
+        $isValid = $v->validate();
+        $errors = $v->errors();
+
+        return new ValidationResult($isValid, $errors);
+    }
+}
+\end{lstlisting}
+
+Validators/TestRequestVerification.php:
+\begin{lstlisting}
+class TestRequestVerification {
+    private array $post;
+
+    public function __construct($post) {
+        if (empty($post)) {
+            throw new InvalidArgumentException("$post");
+        }
+        $this->post = $post;
+    }
+
+    public function verify() {
+        $correctAnswers = array(
+            'Question1' => '1',
+            'Question2' => '2',
+            'Question3' => 'Correct answer'
+        );
+
+        $areAnswersCorrect = true;
+        foreach ($correctAnswers as $question => $answer) {
+            if ($this->post[$question] != $answer) {
+                $areAnswersCorrect = false;
+            }
+        }
+
+        return $areAnswersCorrect;
+    }
+}
+\end{lstlisting}
+
+\section*{Выводы}
+В ходе лабораторной работы было выполнено создание серверной части сайта на PHP
+с использованием архитектуры MVC. Для создания удобочитаемых URL использован
+\code{UrlRewrite} модуль PHP сервера. Для маршрутизации создан роутер. Валидация
+параметров формы осуществлется с помощью библиотеки \code{Valitron}.
+
+\end{document}
