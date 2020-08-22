@@ -22,6 +22,7 @@ class TestController {
             $testVerification = new TestRequestVerification($_POST);
             $viewModel = new SuccessfulTestViewModel($testVerification->verify());
             ViewRenderer::render("Views/Test/Success.php", "Test", $viewModel);
+            return;
         }
 
         $viewModel = new ValidationViewModel($validationResult->isValid, $validationResult->errors);

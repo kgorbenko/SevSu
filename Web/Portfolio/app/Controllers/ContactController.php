@@ -19,6 +19,7 @@ class ContactController
 
         if ($validationResult->isValid) {
             ViewRenderer::render("Views/Contact/Success.php", "Contact me");
+            return;
         }
 
         $viewModel = new ValidationViewModel($validationResult->isValid, $validationResult->errors);
