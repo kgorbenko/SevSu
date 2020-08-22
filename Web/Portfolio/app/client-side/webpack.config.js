@@ -12,7 +12,7 @@ module.exports = {
         "home/photos": './src/home/photos.ts',
         "home/history": './src/home/history.ts',
         "contact/index": './src/contact/index.ts',
-        "contact/contact": "./src/contact/contact.ts",
+        "contact/success": "./src/contact/success.ts",
         "test/index": "./src/test/index.ts",
         "test/success": "./src/test/success.ts"
     },
