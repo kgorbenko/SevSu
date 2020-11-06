@@ -14,7 +14,12 @@ module.exports = {
         "contact/index": './src/contact/index.ts',
         "contact/success": "./src/contact/success.ts",
         "test/index": "./src/test/index.ts",
-        "test/success": "./src/test/success.ts"
+        "test/success": "./src/test/success.ts",
+        "test/answers": "./src/test/answers.ts",
+        "guest-book/index": "./src/guest-book/index.ts",
+        "guest-book/import": "./src/guest-book/import.ts",
+        "blog/index": "./src/blog/index.ts",
+        "blog/post": "./src/blog/post.ts"
     },
     module: {
         rules: [
